@@ -50,19 +50,21 @@ export function Hero() {
             <span>9 AM – 9 PM</span>
           </p>
           <h1 id="hero-title" className="mt-4 text-paper">
-            <span className="display block text-display-1">Book a room.</span>
+            <span className="display block text-display-1">Got a band?</span>
             <span className="display block text-display-1">
               Play it <Highlight className="font-dirt">loud.</Highlight>
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-paper">
-            Three independently bookable rehearsal rooms, each with the standard backline included — mixer, amps, drum
-            kit, mics and vocal speakers. <strong>{rate} per hour, per room.</strong>
+            Three rehearsal rooms. The backline&apos;s ready — all you need to bring is your band.
+          </p>
+          <p className="mt-3 text-lg text-paper">
+            <strong>{rate} per hour, per room.</strong>
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link to="/book" className="btn btn-primary">
-              Book a room <ArrowRight aria-hidden="true" className="size-5" />
+              Book your jam <ArrowRight aria-hidden="true" className="size-5" />
             </Link>
             <Link to="/rates" className="btn btn-ghost">
               See rates
