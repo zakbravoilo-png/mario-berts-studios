@@ -31,7 +31,7 @@ export function TicketStub({ reference, title, fields, status, footnote, classNa
     >
       <div className="flex-1 p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <p className="eyebrow text-ink">Mario Bert&apos;s Studios · admit one</p>
+          <p className="eyebrow text-ink">Manoy Bart&apos;s Studio · admit one</p>
           {status}
         </div>
         <h3 className="display mt-2 text-display-3 text-rust">{title}</h3>

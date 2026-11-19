@@ -1,4 +1,4 @@
-# Mario Bert's Studios — prototype
+# Manoy Bart's Studio — website prototype
 
 Website, customer portal and admin portal for a music rehearsal studio:
 rehearsal room booking, one-on-one lessons, live gig streaming inquiries and a
@@ -122,3 +122,15 @@ personal account, run `npx wrangler whoami` to confirm the account, then
 `public/_redirects` file containing `/* /index.html 200` for SPA routing.
 
 No secrets are needed for the prototype.
+
+### Renaming the repo and Worker (optional)
+
+The site is now called **Manoy Bart's Studio**, but the GitHub repo and the
+Cloudflare Worker are still named `mario-berts-studios`, so the live URL is
+unchanged. To rename them (all done by you, in your personal accounts):
+
+1. GitHub → repo Settings → rename to `manoy-barts-studio`, then run
+   `git remote set-url origin <new URL>` locally.
+2. Cloudflare → the Worker → Settings → rename it to `manoy-barts-studio`, and
+   change `"name"` in `wrangler.jsonc` to match in the same push, or Workers
+   Builds will fail. The `*.workers.dev` URL changes with the name.

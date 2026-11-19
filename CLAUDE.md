@@ -1,4 +1,4 @@
-# CLAUDE.md --- Mario Bert's Studios
+# CLAUDE.md --- Manoy Bart's Studio
 
 Read `docs/MANOY-BERTS-CLAUDE-HANDOFF.md` in full before making product,
 design, or architecture decisions. Design references are in
@@ -7,8 +7,9 @@ design, or architecture decisions. Design references are in
 ## Working rules
 
 -   Treat the handoff document as the source of truth.
--   This is an independent fictional prototype, not a verified real
-    business.
+-   Manoy Bart's Studio is a real business; its name is used with the
+    owner's permission (2026-11-19). Treat everything else as
+    unconfirmed demo content until the studio confirms it.
 -   Preserve confirmed prices, service scope, operating hours,
     cancellation rules, and shared inventory quantities exactly.
 -   All dates and times use **Asia/Manila**.

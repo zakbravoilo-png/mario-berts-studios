@@ -3,7 +3,7 @@ import { useEffect, type ReactNode } from 'react'
 /** Low-grunge heading for portal/admin pages. Also sets the document title. */
 export function PortalHeader({ title, description, actions, eyebrow }: { title: string; description?: ReactNode; actions?: ReactNode; eyebrow?: string }) {
   useEffect(() => {
-    document.title = `${title} — Mario Bert's Studios (prototype)`
+    document.title = `${title} — Manoy Bart's Studio (prototype)`
   }, [title])
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">

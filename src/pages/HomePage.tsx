@@ -11,7 +11,7 @@ import { FinalCta } from './home/FinalCta'
 
 export function HomePage() {
   useEffect(() => {
-    document.title = "Mario Bert's Studios — Rehearsal rooms, lessons & streaming (prototype)"
+    document.title = "Manoy Bart's Studio — Rehearsal rooms, lessons & streaming (prototype)"
   }, [])
   return (
     <>

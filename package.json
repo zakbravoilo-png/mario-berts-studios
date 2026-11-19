@@ -1,9 +1,9 @@
 {
-  "name": "mario-berts-studios",
+  "name": "manoy-barts-studio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Mario Bert's Studios — fictional rehearsal studio prototype (mock data only)",
+  "description": "Manoy Bart's Studio — rehearsal studio website prototype (mock data only)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

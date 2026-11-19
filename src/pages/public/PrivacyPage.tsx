@@ -16,7 +16,7 @@ export function PrivacyPage() {
   return (
     <>
       <PageHeader eyebrow="Privacy" title="Privacy notice." photo="room3">
-        How Mario Bert&apos;s Studios collects, uses and protects your personal information.
+        How Manoy Bart&apos;s Studio collects, uses and protects your personal information.
       </PageHeader>
       <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <Callout tone="warning" title="Draft — not yet in force">
@@ -28,7 +28,7 @@ export function PrivacyPage() {
         <div className="mt-10 space-y-10 text-paper/90 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:tracking-wide [&_h2]:text-paper [&_li]:mt-1.5 [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:marker:text-rust-light">
           <Section title="1. Who we are">
             <p>
-              Mario Bert&apos;s Studios (“the studio”, “we”) runs rehearsal rooms, music lessons, live gig streaming and a
+              Manoy Bart&apos;s Studio (“the studio”, “we”) runs rehearsal rooms, music lessons, live gig streaming and a
               small shop at {c.address}. We decide how your personal information is used, so we are responsible for it
               under the Data Privacy Act of 2012 (Republic Act No. 10173) and its rules.
             </p>

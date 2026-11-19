@@ -26,7 +26,7 @@ interface ReceiptProps {
 export function Receipt({ title = 'Receipt', lines, total, after = [], footer, barcodeValue, className = '' }: ReceiptProps) {
   return (
     <div className={`receipt ${className}`}>
-      <p className="text-center text-xs font-bold tracking-[0.25em]">Mario Bert&apos;s Studios</p>
+      <p className="text-center text-xs font-bold tracking-[0.25em]">Manoy Bart&apos;s Studio</p>
       <p className="mt-1 text-center text-xs tracking-[0.2em]">{title}</p>
       <div className="receipt-rule my-3" />
       <table className="w-full text-sm">

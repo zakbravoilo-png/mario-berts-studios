@@ -13,7 +13,7 @@ export function RouteError() {
   const [reloading] = useState(() => stale && reloadForNewVersion())
 
   useEffect(() => {
-    document.title = "Something went wrong — Mario Bert's Studios"
+    document.title = "Something went wrong — Manoy Bart's Studio"
   }, [])
 
   if (reloading) {

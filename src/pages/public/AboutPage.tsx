@@ -12,7 +12,7 @@ export function AboutPage() {
           <TapeLabel rotate={-2}>Placeholder — to be written by studio</TapeLabel>
           <div className="mt-6 space-y-4 text-lg text-paper/90">
             <p>
-              Mario Bert&apos;s Studios offers rehearsal rooms, one-on-one music lessons and live gig streaming. The
+              Manoy Bart&apos;s Studio offers rehearsal rooms, one-on-one music lessons and live gig streaming. The
               studio&apos;s story, history and people will be written here by the studio.
             </p>
             <p className="text-muted">

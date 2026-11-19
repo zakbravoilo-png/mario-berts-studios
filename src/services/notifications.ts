@@ -13,7 +13,7 @@ import { formatPHP } from '../utils/money'
 import { BALANCE_COLLECTION } from '../data/settings'
 import { formatDate, formatRange } from '../utils/time'
 
-const STUDIO = "Mario Bert's Studios"
+const STUDIO = "Manoy Bart's Studio"
 
 function when(startAt: string, endAt: string) {
   return `${formatDate(startAt)}, ${formatRange(startAt, endAt)}`

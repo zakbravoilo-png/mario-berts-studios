@@ -1,12 +1,13 @@
-# Mario Bert's Studios --- Claude Project Handoff
+# Manoy Bart's Studio --- Claude Project Handoff
 
 **Document purpose:** Give Claude / Claude Code the product context, UX
 requirements, implementation plan, and deployment expectations needed to
 create a first-draft website and web portal.
 
-**Project type:** Independent fictional UX and vibe-coding project.
-Treat Mario Bert's Studios as a fictional/local-business concept for
-this prototype, not as a verified real business.
+**Project type:** UX and vibe-coding prototype for a real local business.
+Manoy Bart's Studio is the real studio's name, used with the owner's
+permission (confirmed by the user on 2026-11-19). Content is still demo
+data unless the studio has confirmed it.
 
 **Primary outcome:** Build a polished, responsive public website plus a
 functional-looking customer booking portal and admin portal. Start with
@@ -57,10 +58,12 @@ Prepare the project for these steps and explain them.
 
 ### Name
 
-**Mario Bert's Studios** (renamed by the user on 2026-11-16 from
-"Manoy Bert's Studios"; the GitHub repo and package are
-`mario-berts-studios`; the local folder is still
-`D:Projectsmanoy-berts-studios`).
+**Manoy Bart's Studio**: the business's real name, used with the owner's
+permission (user, 2026-11-19). Earlier working names were "Manoy Bert's
+Studios" and then "Mario Bert's Studios" (2026-11-16 to 2026-11-19). The
+package is now `manoy-barts-studio`; the GitHub repo and Cloudflare Worker
+are still `mario-berts-studios` until the user renames them; the local
+folder is `D:/Projects/manoy-berts-studios`.
 
 ### Concept
 
@@ -1186,7 +1189,7 @@ prototype unless necessary:
 
 These override earlier sections where they conflict.
 
--   **Name:** Mario Bert's Studios.
+-   **Name:** Manoy Bart's Studio (real name, owner's permission 2026-11-19).
 -   **Contact:** address L40 Blk 2 Dama De Noche St., Don Francisco
     Village, Jaro, Iloilo City 5000; phone 0921 265 1898; email
     mario.bertstudios@gmail.com; preferred channel Facebook Messenger

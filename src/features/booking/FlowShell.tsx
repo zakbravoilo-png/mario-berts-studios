@@ -28,7 +28,7 @@ export function FlowShell({
   const headingRef = useRef<HTMLHeadingElement>(null)
   const first = useRef(true)
   useEffect(() => {
-    document.title = `${title} — Mario Bert's Studios (prototype)`
+    document.title = `${title} — Manoy Bart's Studio (prototype)`
   }, [title])
   useEffect(() => {
     if (first.current) {

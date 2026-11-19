@@ -1,6 +1,8 @@
 // Cloudflare Workers — static assets only (no server code yet).
 // Deploy from the PERSONAL Cloudflare account (see README → Deploy). Not deployed by Claude.
 {
+  // Worker name kept from the old working name so Workers Builds keeps deploying to the same Worker.
+  // To rename it to manoy-barts-studio, change it here AND in the Cloudflare dashboard together (see README).
   "name": "mario-berts-studios",
   // "account_id": "<personal-account-id>",  // set this before any `wrangler deploy` so it can't go to a work account
   "compatibility_date": "2026-11-01",
