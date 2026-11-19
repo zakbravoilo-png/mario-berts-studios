@@ -11,7 +11,7 @@ export function RoomsSection() {
         {/* Photo stack */}
         <div className="relative order-2 pb-24 lg:order-1 lg:self-center">
           <div className="relative -rotate-2 drop-shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
-            <DuotoneImage photo="roomWarm" torn={21} className="aspect-square w-full" sizes="(min-width: 1024px) 45vw, 100vw" />
+            <DuotoneImage photo="room2" torn={21} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 45vw, 100vw" />
             <Tape className="-top-3 left-1/3" rotate={4} />
           </div>
           <div className="absolute right-0 bottom-0 w-[42%] rotate-[5deg] drop-shadow-[8px_8px_0_rgba(0,0,0,0.5)] sm:-right-4">

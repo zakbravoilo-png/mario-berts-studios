@@ -7,7 +7,13 @@ import sharp from 'sharp'
 const SRC = 'photo-sources'
 const OUT = 'public/images'
 // Widths generated per photo. The hero background gets a wider version.
-const WIDTHS = { 'room-bw-wide': [960, 1920] }
+const WIDTHS = {
+  'room-bw-wide': [960, 1920],
+  // Real room photos: shown full-colour and large on /rooms, so keep a sharper size.
+  'room-1': [640, 1200, 1600],
+  'room-2': [640, 1200, 1600],
+  'room-3': [640, 1200, 1600],
+}
 const DEFAULT_WIDTHS = [640, 1200]
 
 await mkdir(OUT, { recursive: true })

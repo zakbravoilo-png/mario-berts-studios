@@ -14,6 +14,10 @@ export interface Photo {
 }
 
 export const photos = {
+  // The studio's own rooms (supplied 2026-11-19). Shown in true colour wherever a customer picks a room.
+  room1: { name: 'room-1', widths: [640, 1200, 1600], ratio: 16 / 9, alt: 'Room 1: beige walls with black foam panels, a drum kit on a rug, two vocal mics, bass and guitar amps, and two speakers on stands' },
+  room2: { name: 'room-2', widths: [640, 1200, 1600], ratio: 16 / 9, alt: 'Room 2: red and white striped walls, a drum kit on a patterned rug, a small guitar amp, a fan and two speakers on stands' },
+  room3: { name: 'room-3', widths: [640, 1200, 1600], ratio: 16 / 9, alt: 'Room 3: purple padded walls, a drum kit on a carpeted riser, a guitar amp on a case, a wall fan and two speakers on stands' },
   roomBwWide: { name: 'room-bw-wide', widths: [960, 1920], ratio: 16 / 9, alt: 'Empty rehearsal room with a drum kit, two vocal mics on stands and amplifiers' },
   roomWarm: { name: 'room-warm', widths: [640, 1200], ratio: 1, alt: 'Rehearsal room with drum kit, microphones and amp stacks under warm light' },
   bandRehearsal: { name: 'band-rehearsal', widths: [640, 1200], ratio: 4 / 3, alt: 'A band rehearsing: bassist, drummer and guitarist singing into a mic' },

@@ -11,8 +11,10 @@ interface DuotoneImageProps {
    * mono  = grayscale, off-white highlights, ink shadows (default)
    * rust  = rust highlights — use sparingly, red is an accent
    * natural = original colour, slightly muted
+   * photo   = true colour, no filter at all (use with halftone/grain off) so customers
+   *           see what a room really looks like
    */
-  tone?: 'mono' | 'rust' | 'natural'
+  tone?: 'mono' | 'rust' | 'natural' | 'photo'
   /** Halftone dot screen over the photo. */
   halftone?: boolean | 'coarse'
   /** Grain on the photo. */
@@ -45,13 +47,13 @@ export function DuotoneImage({
   const toneVars =
     tone === 'rust'
       ? { ['--duo-hi' as string]: 'var(--color-rust)' }
-      : tone === 'natural'
+      : tone === 'natural' || tone === 'photo'
         ? undefined
         : { ['--duo-hi' as string]: 'var(--color-paper)' }
 
   return (
     <figure
-      className={`m-0 ${tone === 'natural' ? 'relative overflow-hidden bg-ink' : 'duotone'} ${className}`}
+      className={`m-0 ${tone === 'natural' || tone === 'photo' ? 'relative overflow-hidden bg-ink' : 'duotone'} ${className}`}
       style={{ ...toneVars, clipPath }}
     >
       <img
@@ -61,7 +63,13 @@ export function DuotoneImage({
         alt={alt ?? p.alt}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        className={tone === 'natural' ? 'absolute inset-0 h-full w-full object-cover saturate-[0.7] contrast-[1.1]' : undefined}
+        className={
+          tone === 'natural'
+            ? 'absolute inset-0 h-full w-full object-cover saturate-[0.7] contrast-[1.1]'
+            : tone === 'photo'
+              ? 'absolute inset-0 h-full w-full object-cover'
+              : undefined
+        }
       />
       {halftone && (
         <div

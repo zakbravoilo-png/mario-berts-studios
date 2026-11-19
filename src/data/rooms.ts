@@ -16,7 +16,7 @@ export const includedEquipment: RoomIncludedEquipment[] = [
 ]
 
 const roomDescription = 'Placeholder — room description to be written by studio.'
-const roomPhotos = ['roomWarm', 'roomBwWide', 'bandRehearsal'] as const
+const roomPhotos = ['room1', 'room2', 'room3'] as const
 
 export const rooms: Room[] = ([1, 2, 3] as const).map((n) => ({
   id: `room-${n}`,
