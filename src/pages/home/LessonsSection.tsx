@@ -35,7 +35,7 @@ export function LessonsSection() {
               ))}
             </ul>
 
-            <dl className="mt-10 grid max-w-lg grid-cols-2 border-2 border-ink">
+            <dl className="mt-10 grid max-w-lg grid-cols-2 overflow-hidden border-2 border-ink">
               <div className="border-r-2 border-ink p-4">
                 <dt className="eyebrow text-ink/80">Beginner</dt>
                 <dd className="m-0 mt-1 font-mono text-2xl font-bold text-ink">

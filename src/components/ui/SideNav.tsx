@@ -36,9 +36,9 @@ export function SideNav({ groups, ariaLabel, density = 'comfortable', onNavigate
                   end={it.end}
                   onClick={onNavigate}
                   className={({ isActive }) =>
-                    `relative flex items-center gap-3 px-3 no-underline transition-colors ${row} ${
+                    `relative flex items-center gap-3 rounded-md px-3 no-underline transition-colors ${row} ${
                       isActive
-                        ? 'bg-ink font-semibold text-paper before:absolute before:inset-y-1 before:left-0 before:w-1 before:bg-rust'
+                        ? 'bg-ink font-semibold text-paper before:absolute before:inset-y-1 before:left-0 before:w-1 before:rounded-full before:bg-rust'
                         : 'text-paper/85 hover:bg-ink/60 hover:text-paper'
                     }`
                   }

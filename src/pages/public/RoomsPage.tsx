@@ -21,7 +21,7 @@ export function RoomsPage() {
           <section key={room.id} aria-labelledby={`${room.id}-title`} className="grid items-center gap-10 lg:grid-cols-2">
             <div className={`relative ${i % 2 ? 'lg:order-2' : ''}`}>
               <div className={`relative drop-shadow-[10px_10px_0_rgba(0,0,0,0.5)] ${i % 2 ? 'rotate-1' : '-rotate-1'}`}>
-                {room.photo && <DuotoneImage photo={room.photo as PhotoKey} tone="photo" halftone={false} grain={false} className="aspect-video w-full" sizes="(min-width: 1024px) 50vw, 100vw" />}
+                {room.photo && <DuotoneImage photo={room.photo as PhotoKey} tone="photo" halftone={false} grain={false} className="aspect-video w-full rounded-xl" sizes="(min-width: 1024px) 50vw, 100vw" />}
                 <Tape className="-top-3 left-10" rotate={-6} />
               </div>
             </div>

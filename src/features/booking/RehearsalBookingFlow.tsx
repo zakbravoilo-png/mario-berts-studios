@@ -238,7 +238,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
             const free = isRoomFree(room.id, { startAt, endAt: addMinutes(startAt, s.settings.slotMinutes) }, ctx)
             const sel = d.roomId === room.id
             return (
-              <label key={room.id} className={`block cursor-pointer border-2 bg-ink ${sel ? 'border-paper' : 'border-slate'} ${free ? 'hover:border-paper' : 'cursor-not-allowed opacity-60'}`}>
+              <label key={room.id} className={`block cursor-pointer overflow-hidden border-2 bg-ink ${sel ? 'border-paper' : 'border-slate'} ${free ? 'hover:border-paper' : 'cursor-not-allowed opacity-60'}`}>
                 <input type="radio" name="room" className="sr-only" checked={sel} disabled={!free} onChange={() => setRoom(room.id)} aria-label={`${room.name}${free ? '' : ' — taken at this time'}`} />
                 {room.photo && <DuotoneImage photo={room.photo as PhotoKey} alt="" tone="photo" halftone={false} grain={false} className="aspect-video w-full" sizes="(min-width: 768px) 30vw, 100vw" />}
                 <span className="block p-4">

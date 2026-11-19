@@ -66,8 +66,12 @@
   --tracking-wide: 0.04em;
   --tracking-wider: 0.12em;
 
-  --radius-sm: 2px;
-  --radius-md: 4px;
+  /* Softened corners (user, 2026-11-19): friendlier boxes on site and admin.
+     Torn paper, tape, tickets and receipts stay ragged — they're paper, not boxes. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
 
   --shadow-hard: 6px 6px 0 0 #141519;
   --shadow-hard-rust: 6px 6px 0 0 #a63726;

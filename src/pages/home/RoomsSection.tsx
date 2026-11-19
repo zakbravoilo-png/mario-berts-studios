@@ -40,7 +40,7 @@ export function RoomsSection() {
           </div>
 
           {/* Included kit. Plain panels — no texture behind text. */}
-          <ul className="relative mt-5 grid grid-cols-2 gap-px border border-slate bg-slate sm:grid-cols-3">
+          <ul className="relative mt-5 grid grid-cols-2 gap-px overflow-hidden border border-slate bg-slate sm:grid-cols-3">
             {includedEquipment.map((e) => (
               <li key={e.id} className="bg-ink p-4">
                 <span className="display block text-[2.6rem] leading-none text-paper">{e.quantity}</span>
