@@ -62,6 +62,7 @@ export const router = createBrowserRouter([
     errorElement: <RouteError />,
     children: [
       { index: true, lazy: async () => ({ Component: (await import('../pages/admin/AdminOverview')).AdminOverview }) },
+      { path: 'book', lazy: async () => ({ Component: (await import('../pages/admin/AdminBookPage')).AdminBookPage }) },
       { path: 'bookings', lazy: async () => ({ Component: (await import('../pages/admin/AdminBookings')).AdminBookings }) },
       { path: 'bookings/:ref', lazy: async () => ({ Component: (await import('../pages/admin/AdminBookingDetail')).AdminBookingDetail }) },
       { path: 'rooms', lazy: async () => ({ Component: (await import('../pages/admin/AdminRooms')).AdminRooms }) },

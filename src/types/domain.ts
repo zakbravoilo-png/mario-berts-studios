@@ -92,6 +92,11 @@ export interface Payment {
   status: PaymentStatus
   submittedAt: string | null
   verifiedAt: string | null
+  /**
+   * Manual GCash refund owed to the customer (studio cancelled before the booking day).
+   * The studio sends it from its own GCash and marks it sent here.
+   */
+  refund?: { amount: Peso; status: 'due' | 'sent'; sentAt: string | null; reference: string | null }
 }
 
 export type RehearsalStatus =
@@ -121,6 +126,9 @@ export interface RehearsalBooking {
   status: RehearsalStatus
   createdAt: string
   cancelledAt?: string
+  /** Who cancelled: the customer (self-service) or the studio (admin). */
+  cancelledBy?: 'customer' | 'studio'
+  cancelReason?: string
   adminNote?: string
 }
 
@@ -217,6 +225,7 @@ export type NotificationEvent =
   | 'booking_confirmed'
   | 'booking_cancelled'
   | 'booking_rejected'
+  | 'refund_sent'
   | 'lesson_requested'
   | 'lesson_confirmed'
   | 'lesson_declined'

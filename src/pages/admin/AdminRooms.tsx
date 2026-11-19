@@ -35,7 +35,7 @@ export function AdminRooms() {
       </div>
       <p className="mb-2 font-semibold">{formatDate(date, true)}</p>
       <div className="border border-slate p-3">
-        <ScheduleGrid date={date} ctx={ctx} now={now} caption={`Room schedule for ${formatDate(date, true)}`} renderDetail={(c) => c.occupants.map((o) => o.reference).join(', ')} />
+        <ScheduleGrid date={date} ctx={ctx} now={now} caption={`Room schedule for ${formatDate(date, true)}`} renderDetail={(c) => c.occupants.map((o) => o.reference).join(', ')} linkFor={(o) => (o.kind === 'rehearsal' ? `/admin/bookings/${o.reference}` : '/admin/lessons')} />
       </div>
       <h2 className="mt-8 text-lg font-semibold">Everything on this day</h2>
       <div className="mt-3">

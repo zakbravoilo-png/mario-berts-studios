@@ -9,6 +9,7 @@ import { Callout } from '../../components/ui/Callout'
 import { PriceReceipt } from '../../features/booking/ExampleReceipt'
 import { priceFromBooking } from '../../features/booking/pricing'
 import { AdminButton, adminInput } from '../../features/admin/adminUi'
+import { CancelPanel } from '../../features/admin/CancelPanel'
 import { roomName } from '../../data/rooms'
 import { equipmentLabel } from '../../data/rentalEquipment'
 import { formatPHP } from '../../utils/money'
@@ -77,6 +78,8 @@ export function AdminBookingDetail() {
             <p className="mt-3 text-xs text-muted">Rejection policy is to be confirmed by the studio; this is a demo action only.</p>
           </section>
           {msg && <Callout tone={msg.ok ? 'success' : 'error'} title={msg.text} />}
+
+          <CancelPanel booking={b} />
 
           <section aria-labelledby="gear-title" className="border border-slate p-4">
             <h2 id="gear-title" className="font-semibold">Extra gear held</h2>

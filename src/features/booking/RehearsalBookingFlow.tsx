@@ -14,7 +14,7 @@ import { CustomerFields } from './CustomerFields'
 import { emptyCustomer, validateCustomer, type CustomerErrors, type CustomerForm } from './customerSchema'
 import { SentMessages } from './SentMessages'
 import { useSessionDraft } from './useSessionDraft'
-import { useCurrentCustomer } from '../../services/accounts'
+import { findCustomerByPhone, useCurrentCustomer } from '../../services/accounts'
 import { useNow } from './useNow'
 import { ReservationTicket } from './ReservationTicket'
 import { DuotoneImage } from '../../components/grunge'
@@ -42,8 +42,10 @@ interface Draft {
   bookingId: string | null
 }
 
-export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'guest' }) {
+export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'guest' | 'admin' }) {
   const guest = mode === 'guest'
+  /** Studio staff booking on behalf of a customer. */
+  const admin = mode === 'admin'
   const s = useDemoState()
   const me = useCurrentCustomer()
   const ctx = useMemo(() => availabilityContext(s), [s])
@@ -57,7 +59,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
       startMin: null,
       hours: 1,
       equipment: {},
-      details: guest || !me ? emptyCustomer() : { name: me.name, email: me.email, phone: me.phone, bandName: me.bandName ?? '', notes: '' },
+      details: guest || admin || !me ? emptyCustomer() : { name: me.name, email: me.email, phone: me.phone, bandName: me.bandName ?? '', notes: '' },
       gcashRef: '',
       proofFileName: null,
       bookingId: null,
@@ -65,7 +67,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
     // eslint-disable-next-line react-hooks/exhaustive-deps -- initial values only
     [],
   )
-  const [d, update, clear] = useSessionDraft<Draft>(guest ? 'guest-rehearsal-draft' : 'rehearsal-draft', initial)
+  const [d, update, clear] = useSessionDraft<Draft>(admin ? 'admin-rehearsal-draft' : guest ? 'guest-rehearsal-draft' : 'rehearsal-draft', initial)
   const [errors, setErrors] = useState<CustomerErrors>({})
   const [stepError, setStepError] = useState<string | null>(null)
   const [submitErrors, setSubmitErrors] = useState<string[]>([])
@@ -156,7 +158,8 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
         notes: d.details.notes?.trim() || undefined,
       },
       payment: withPayment ? { reference: d.gcashRef.trim(), proofFileName: d.proofFileName } : undefined,
-      customerId: guest || !me ? 'guest' : me.id,
+      // Admin: attach to the customer's account if their number has one, otherwise a guest booking.
+      customerId: admin ? (findCustomerByPhone(s.customers, d.details.phone)?.id ?? 'guest') : guest || !me ? 'guest' : me.id,
     })
     if (!r.ok) {
       setSubmitErrors(r.errors)
@@ -383,14 +386,18 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
         )}
         <ReservationTicket booking={booking} />
         <SentMessages reference={booking.reference} latestOnly />
-        {guest && (
-          <Callout tone="info" title={`Keep your reference: ${booking.reference}`}>
-            No account needed. To check, pay or cancel later, use <strong>Find my booking</strong> with this reference and your contact number.
+        {(guest || admin) && (
+          <Callout tone="info" title={admin ? `Give the customer this reference: ${booking.reference}` : `Keep your reference: ${booking.reference}`}>
+            {admin
+              ? booking.customerId === 'guest'
+                ? 'Saved as a guest booking. The customer can look it up with Find my booking using this reference and their contact number.'
+                : 'Linked to the customer’s account (matched by contact number) — it shows in their portal.'
+              : <>No account needed. To check, pay or cancel later, use <strong>Find my booking</strong> with this reference and your contact number.</>}
           </Callout>
         )}
         <div className="flex flex-wrap gap-4">
-          <Link to={guest ? `/my-booking?ref=${booking.reference}` : `/portal/reservations/${booking.reference}`} className="btn btn-primary">
-            View booking <ArrowRight aria-hidden="true" className="size-5" />
+          <Link to={admin ? `/admin/bookings/${booking.reference}` : guest ? `/my-booking?ref=${booking.reference}` : `/portal/reservations/${booking.reference}`} className="btn btn-primary">
+            {admin ? 'Open booking details' : 'View booking'} <ArrowRight aria-hidden="true" className="size-5" />
           </Link>
           <button type="button" className="btn btn-ghost" onClick={clear}>Book another room</button>
         </div>
@@ -428,7 +435,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
   return (
     <FlowShell
       title="Book a rehearsal room"
-      eyebrow={guest ? 'Rehearsal booking · no account needed · demo' : 'Rehearsal booking · demo'}
+      eyebrow={admin ? 'Booking for a customer · admin · demo' : guest ? 'Rehearsal booking · no account needed · demo' : 'Rehearsal booking · demo'}
       steps={STEPS}
       step={d.step}
       onStepClick={d.step < 6 ? go : undefined}

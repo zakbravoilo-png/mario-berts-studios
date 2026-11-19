@@ -1,5 +1,6 @@
 import { Check, Circle, GraduationCap, Lock, Minus } from 'lucide-react'
-import type { AvailabilityContext } from './availability'
+import { Link } from 'react-router'
+import type { AvailabilityContext, Occupant } from './availability'
 import { cellFor, daySlots, type Cell, type CellState } from './scheduleCells'
 import { formatMinutes, type DateKey } from '../../utils/time'
 
@@ -21,6 +22,7 @@ export function ScheduleGrid({
   selected,
   onSelect,
   renderDetail,
+  linkFor,
   caption,
 }: {
   date: DateKey
@@ -30,6 +32,8 @@ export function ScheduleGrid({
   onSelect?: (roomId: string, startMin: number) => void
   /** Admin: extra text inside occupied cells (customer/reference). */
   renderDetail?: (cell: Cell) => React.ReactNode
+  /** Admin: where an occupied cell should link to (booking or lesson details). */
+  linkFor?: (o: Occupant) => string
   caption: string
 }) {
   const slots = daySlots(ctx)
@@ -72,7 +76,15 @@ export function ScheduleGrid({
                 const a11y = `${room.name}, ${formatMinutes(m)}: ${label}`
                 return (
                   <td key={room.id} className="p-0">
-                    {onSelect && cell.state === 'free' ? (
+                    {linkFor && cell.occupants[0] ? (
+                      <Link
+                        to={linkFor(cell.occupants[0])}
+                        aria-label={`${a11y}, ${cell.occupants.map((o) => o.reference).join(', ')} — open details`}
+                        className={`block w-full border-2 no-underline transition-colors hover:border-paper focus-visible:border-paper ${ui.cls}`}
+                      >
+                        {body}
+                      </Link>
+                    ) : onSelect && cell.state === 'free' ? (
                       <button
                         type="button"
                         onClick={() => onSelect(room.id, m)}

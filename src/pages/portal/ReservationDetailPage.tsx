@@ -132,7 +132,18 @@ export function RehearsalDetail({ booking: b, back }: { booking: RehearsalBookin
             {b.status === 'awaiting_verification' && <p className="mt-4 text-sm text-paper/90">Submitted. The studio will verify it and confirm your booking (demo admin action).</p>}
             {b.status === 'confirmed' && <p className="mt-4 text-sm text-paper/90">Verified — your booking is confirmed.</p>}
             {b.status === 'rejected' && <p className="mt-4 text-sm text-paper/90">This booking was rejected in the demo admin.{b.adminNote ? ` Note: ${b.adminNote}` : ''} Rejection policy is to be confirmed by the studio.</p>}
-            {b.status === 'cancelled' && b.cancelledAt && <p className="mt-4 text-sm text-paper/90">Cancelled on {formatDate(b.cancelledAt)} at {formatTime(b.cancelledAt)}. The downpayment is non-refundable.</p>}
+            {b.status === 'cancelled' && b.cancelledAt && (
+              <p className="mt-4 text-sm text-paper/90">
+                Cancelled{b.cancelledBy === 'studio' ? ' by the studio' : ''} on {formatDate(b.cancelledAt)} at {formatTime(b.cancelledAt)}.{b.cancelReason ? ` Reason: ${b.cancelReason}.` : ''}{' '}
+                {b.payment.refund?.status === 'due'
+                  ? `Your ${formatPHP(b.payment.refund.amount)} downpayment will be returned via GCash.`
+                  : b.payment.refund?.status === 'sent'
+                    ? `Your ${formatPHP(b.payment.refund.amount)} downpayment was returned via GCash${b.payment.refund.reference ? ` (ref ${b.payment.refund.reference})` : ''}.`
+                    : b.payment.status === 'not_submitted'
+                      ? 'No downpayment was paid.'
+                      : 'The downpayment is non-refundable.'}
+              </p>
+            )}
           </section>
           {live && <CancelSection startAt={b.startAt} nonRefundable={b.downpaymentRequired} onCancel={() => { const r = cancelBooking(b.id); return r.ok ? null : r.errors }} />}
           <SentMessages reference={b.reference} />

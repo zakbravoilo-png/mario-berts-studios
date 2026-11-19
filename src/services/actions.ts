@@ -172,7 +172,54 @@ export function cancelBooking(bookingId: string): Result<null> {
   if (!b) return { ok: false, errors: ['Booking not found.'] }
   if (!['awaiting_payment', 'awaiting_verification', 'confirmed'].includes(b.status)) return { ok: false, errors: ['This booking can no longer be cancelled.'] }
   if (!canCustomerCancel(b.startAt)) return { ok: false, errors: ['Cancellation is only possible before the day of the booking.'] }
-  updateBooking(bookingId, (x) => ({ ...x, status: 'cancelled', cancelledAt: nowIso() }), 'booking_cancelled')
+  updateBooking(bookingId, (x) => ({ ...x, status: 'cancelled', cancelledAt: nowIso(), cancelledBy: 'customer' }), 'booking_cancelled')
+  return { ok: true, value: null }
+}
+
+export type AdminCancelOutcome = 'refund_due' | 'downpayment_kept' | 'nothing_paid'
+
+/**
+ * What happens to the downpayment if the studio cancels now (user rule, 2026-11-19):
+ * - on the booking day or later → the downpayment is kept;
+ * - before the booking day → the studio returns it manually via GCash;
+ * - nothing was paid yet → nothing to return.
+ */
+export function adminCancelOutcome(b: RehearsalBooking, now: number = Date.now()): AdminCancelOutcome {
+  const paid = b.payment.status === 'submitted' || b.payment.status === 'verified'
+  if (!paid) return 'nothing_paid'
+  return canCustomerCancel(b.startAt, now) ? 'refund_due' : 'downpayment_kept'
+}
+
+/** Studio (admin) cancellation — allowed any time before the booking has finished. */
+export function adminCancelBooking(bookingId: string, reason: string, now: number = Date.now()): Result<AdminCancelOutcome> {
+  const b = getState().bookings.find((x) => x.id === bookingId)
+  if (!b) return { ok: false, errors: ['Booking not found.'] }
+  if (!['awaiting_payment', 'awaiting_verification', 'confirmed'].includes(b.status)) return { ok: false, errors: ['Only active bookings can be cancelled.'] }
+  const outcome = adminCancelOutcome(b, now)
+  updateBooking(
+    bookingId,
+    (x) => ({
+      ...x,
+      status: 'cancelled',
+      cancelledAt: nowIso(),
+      cancelledBy: 'studio',
+      cancelReason: reason.trim() || undefined,
+      payment: outcome === 'refund_due' ? { ...x.payment, refund: { amount: x.downpaymentRequired, status: 'due', sentAt: null, reference: null } } : x.payment,
+    }),
+    'booking_cancelled',
+  )
+  return { ok: true, value: outcome }
+}
+
+/** The studio has returned the downpayment from its GCash. */
+export function adminMarkRefundSent(bookingId: string, gcashReference: string): Result<null> {
+  const b = getState().bookings.find((x) => x.id === bookingId)
+  if (!b?.payment.refund || b.payment.refund.status !== 'due') return { ok: false, errors: ['There is no refund waiting for this booking.'] }
+  updateBooking(
+    bookingId,
+    (x) => ({ ...x, payment: { ...x.payment, refund: { ...x.payment.refund!, status: 'sent', sentAt: nowIso(), reference: gcashReference.trim() || null } } }),
+    'refund_sent',
+  )
   return { ok: true, value: null }
 }
 

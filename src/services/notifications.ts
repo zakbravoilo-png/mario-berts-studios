@@ -47,12 +47,33 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
         subject: `Booking ${b.reference} confirmed`,
         email: `Hi ${b.customer.name},\n\nYour booking is CONFIRMED: ${head}.\nDownpayment ${formatPHP(b.downpaymentRequired)} verified. Remaining balance ${formatPHP(b.balance)} (how and when it's collected: to be confirmed by the studio).\n\n${gear}\n${policy}`,
       }
-    case 'booking_cancelled':
+    case 'booking_cancelled': {
+      const refund = b.payment.refund
+      const byStudio = b.cancelledBy === 'studio'
+      const paid = b.payment.status === 'submitted' || b.payment.status === 'verified'
+      const money = refund
+        ? `Your ${formatPHP(refund.amount)} downpayment will be returned to you via GCash.`
+        : !paid
+          ? 'No downpayment was received, so nothing is owed.'
+          : byStudio
+            ? 'As this is on the day of the booking, the downpayment is not refunded.'
+            : 'As stated when you booked, the downpayment is non-refundable.'
+      const why = byStudio && b.cancelReason ? ` Reason: ${b.cancelReason}` : ''
       return {
-        sms: `${STUDIO}: Booking ${b.reference} (${when(b.startAt, b.endAt)}) is cancelled. The downpayment is non-refundable.`,
+        sms: `${STUDIO}: Booking ${b.reference} (${when(b.startAt, b.endAt)}) is cancelled${byStudio ? ' by the studio' : ''}. ${money}`,
         subject: `Booking ${b.reference} cancelled`,
-        email: `Hi ${b.customer.name},\n\nYour booking ${head} has been cancelled. As stated when you booked, the downpayment is non-refundable.`,
+        email: `Hi ${b.customer.name},\n\nYour booking ${head} has been cancelled${byStudio ? ' by the studio' : ''}.${why}\n\n${money}`,
       }
+    }
+    case 'refund_sent': {
+      const amount = formatPHP(b.payment.refund?.amount ?? b.downpaymentRequired)
+      const ref = b.payment.refund?.reference
+      return {
+        sms: `${STUDIO}: We've returned your ${amount} downpayment for ${b.reference} via GCash${ref ? ` (ref ${ref})` : ''}.`,
+        subject: `Refund sent for ${b.reference}`,
+        email: `Hi ${b.customer.name},\n\nWe've returned your ${amount} downpayment for booking ${b.reference} to your GCash${ref ? ` (GCash ref ${ref})` : ''}.`,
+      }
+    }
     case 'booking_rejected':
       return {
         sms: `${STUDIO}: Sorry — booking ${b.reference} could not be accepted.${b.adminNote ? ` Note: ${b.adminNote}` : ''} Please contact us.`,

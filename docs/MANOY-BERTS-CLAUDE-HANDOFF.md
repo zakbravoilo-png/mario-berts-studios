@@ -1211,6 +1211,17 @@ These override earlier sections where they conflict.
     items out of service and shop items out of stock. Bookings store the
     price and name at booking time, so later edits never change existing
     bookings. Removed rental items are hidden but kept for old bookings.
+-   **Studio cancellations (user, 2026-11-19):** admin can cancel a
+    booking from Booking details. On the booking day or later the
+    downpayment is kept; before the booking day the studio returns it
+    manually via GCash and marks the refund as sent (overview shows a
+    reminder). Unpaid bookings have nothing to return. Customer
+    self-cancellation is unchanged (before the day, non-refundable).
+-   **Admin booking for a customer:** admin overview has "Book a room",
+    the same flow; it links to the customer's account if the contact
+    number matches, otherwise it's a guest booking.
+-   **Admin schedule:** booked cells link to booking details; lesson
+    cells to lesson requests.
 -   **Booking confirmations by SMS and email:** every booking event
     produces an SMS to the contact number and an email if one was given.
     In the prototype these are **simulated** (demo outbox, admin
