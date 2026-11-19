@@ -58,8 +58,9 @@ Prepare the project for these steps and explain them.
 ### Name
 
 **Mario Bert's Studios** (renamed by the user on 2026-11-16 from
-"Manoy Bert's Studios"; the repo folder and package name stay
-`manoy-berts-studios`).
+"Manoy Bert's Studios"; the GitHub repo and package are
+`mario-berts-studios`; the local folder is still
+`D:Projectsmanoy-berts-studios`).
 
 ### Concept
 
@@ -910,7 +911,8 @@ a real API can replace the mock implementation.
 
 Suggested repository name:
 
-`manoy-berts-studios`
+`mario-berts-studios` (personal account `zakbravoilo-png`, private while photo
+rights are unconfirmed)
 
 Suggested structure:
 
@@ -980,7 +982,7 @@ also has work credentials. Mixing them up is the main setup risk.
     of:
     -   an SSH key for the personal account with a host alias in
         `~/.ssh/config`, so the remote is
-        `git@github-personal:<personal-user>/manoy-berts-studios.git`;
+        `git@github-personal:<personal-user>/mario-berts-studios.git`;
         or
     -   `gh auth login` for the personal account and `gh auth switch`
         when changing accounts. Check with `gh auth status` before
