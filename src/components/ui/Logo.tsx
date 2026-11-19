@@ -7,10 +7,10 @@ interface LogoProps {
 }
 
 /**
- * Studio logo: the mascot mark (from the studio's against-dark logo file, photo-sources/logo/mbs-logo-against-dark.svg;
- * the light-background version is public/brand/mbs-mark-light.svg)
- * plus the name set in the site's display type. The logo file's own lettering uses a desktop
- * font (Haettenschweiler) that browsers can't rely on, so the name is live text instead.
+ * Official Manoy Bart's Studio logo (supplied 2026-11-19, originals in photo-sources/logo/SVG/):
+ * the icon (Bart-logo-icon.svg) plus the "Manoy Bart's / Studio" lettering from the dark lockup
+ * (Dark 1.svg). The lettering is Haettenschweiler converted to outlines, so it looks the same on
+ * every device without loading the font. Both files are white artwork for dark backgrounds.
  */
 export function Logo({ to = '/', size = 'md', suffix }: LogoProps) {
   return (
@@ -18,16 +18,17 @@ export function Logo({ to = '/', size = 'md', suffix }: LogoProps) {
       <img
         src="/brand/mbs-mark.svg"
         alt=""
-        width={636}
-        height={656}
+        width={267}
+        height={271}
         className={`${size === 'md' ? 'relative z-10 -my-4 h-[4.75rem] translate-y-3' : 'h-9'} w-auto shrink-0 transition-transform group-hover:-rotate-6`}
       />
-      <span className="inline-flex items-end gap-1.5 whitespace-nowrap">
-        <span className={`display leading-none text-paper ${size === 'md' ? 'text-[1.9rem]' : 'text-2xl'}`}>
-          Manoy Bart&apos;s
-        </span>
-        <span className={`marker -rotate-6 leading-none text-rust-light ${size === 'md' ? 'text-lg' : 'text-base'}`}>studio</span>
-      </span>
+      <img
+        src="/brand/mbs-wordmark.svg"
+        alt=""
+        width={508}
+        height={196}
+        className={`${size === 'md' ? 'h-11' : 'h-9'} w-auto shrink-0`}
+      />
       {suffix && <span className="tape-label ml-2 self-center text-[0.65rem]">{suffix}</span>}
     </Link>
   )
