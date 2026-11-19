@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { createSeed } from './seed'
 import { rooms } from './rooms'
+import { stockFromCatalog } from './rentalEquipment'
 import { availableQty, rehearsalHolds, validateLessonRequest, validateRehearsalRequest, type AvailabilityContext } from '../features/booking/availability'
 import { addDays, manilaIso, todayManila } from '../utils/time'
 
 const NOW = Date.parse('2026-11-16T10:00:00+08:00')
 const s = createSeed(NOW)
-const ctx: AvailabilityContext = { rooms, bookings: s.bookings, lessons: s.lessons, instructors: s.instructors, settings: s.settings, stock: s.rentalStock }
+const ctx: AvailabilityContext = { rooms, bookings: s.bookings, lessons: s.lessons, instructors: s.instructors, settings: s.settings, stock: stockFromCatalog(s.rentals) }
 
 describe('demo seed', () => {
   it('contains no conflicting held bookings', () => {

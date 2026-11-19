@@ -8,7 +8,7 @@ import { useSyncExternalStore } from 'react'
 import type { DemoState } from './demoState'
 import { createSeed } from '../data/seed'
 import { seedProducts } from '../data/products'
-import { rentalEquipment } from '../data/rentalEquipment'
+import { rentalEquipment, stockFromCatalog } from '../data/rentalEquipment'
 import { rooms } from '../data/rooms'
 import type { AvailabilityContext } from '../features/booking/availability'
 import { STORAGE_PREFIX } from '../app/resetDemo'
@@ -56,9 +56,17 @@ function load(): DemoState {
         if (parsed && (parsed.version as number) === 2 && parsed.customer) {
           parsed.customers = [parsed.customer]
           delete parsed.customer
-          parsed.version = 3
+          ;(parsed as { version: number }).version = 3
         }
-        if (parsed && parsed.version === 3 && Array.isArray(parsed.bookings)) {
+        // v3 → v4: rental catalog becomes editable data; shop items get an out-of-stock flag.
+        if (parsed && (parsed.version as number) === 3) {
+          const old = (parsed as unknown as { rentalStock?: Record<string, number | null> }).rentalStock ?? {}
+          parsed.rentals = rentalEquipment.map((r) => ({ ...r, totalQuantity: old[r.id] ?? r.totalQuantity }))
+          delete (parsed as unknown as { rentalStock?: unknown }).rentalStock
+          parsed.products = parsed.products.map((x) => ({ ...x, outOfStock: x.outOfStock ?? false }))
+          parsed.version = 4
+        }
+        if (parsed && parsed.version === 4 && Array.isArray(parsed.bookings)) {
           parsed.notifications ??= []
           // Add catalog items introduced after this browser's data was saved.
           for (const p of seedProducts) if (!parsed.products.some((x) => x.id === p.id)) parsed.products = [...parsed.products, p]
@@ -129,13 +137,13 @@ export function availabilityContext(s: DemoState): AvailabilityContext {
     lessons: s.lessons,
     instructors: s.instructors,
     settings: s.settings,
-    stock: s.rentalStock,
+    stock: stockFromCatalog(s.rentals),
   }
 }
 
-/** Rental list with the store's (possibly adjusted) stock numbers. */
+/** The live rental catalog (includes removed items; filter on `active` for listings). */
 export function rentalsWithStock(s: DemoState) {
-  return rentalEquipment.map((r) => ({ ...r, totalQuantity: s.rentalStock[r.id] ?? r.totalQuantity }))
+  return s.rentals
 }
 
 /** Next reference like MBS-2611-0042 (prefix + Manila YYMM + sequence). */

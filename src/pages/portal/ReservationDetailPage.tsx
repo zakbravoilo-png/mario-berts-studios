@@ -10,7 +10,7 @@ import { LessonTicket, ReservationTicket } from '../../features/booking/Reservat
 import { PriceReceipt } from '../../features/booking/ExampleReceipt'
 import { PolicyNotice } from '../../features/booking/PolicyNotice'
 import { SentMessages } from '../../features/booking/SentMessages'
-import { priceRehearsal } from '../../features/booking/pricing'
+import { priceFromBooking } from '../../features/booking/pricing'
 import { PortalHeader } from '../../components/ui/PortalHeader'
 import { Callout } from '../../components/ui/Callout'
 import { StatusLabel } from '../../components/ui/StatusLabel'
@@ -91,7 +91,7 @@ export function RehearsalDetail({ booking: b, back }: { booking: RehearsalBookin
   const [ref, setRef] = useState('')
   const [file, setFile] = useState<string | null>(null)
   const [errors, setErrors] = useState<string[]>([])
-  const price = priceRehearsal(b.durationHours, b.selectedEquipment)
+  const price = priceFromBooking(b)
   const live = ['awaiting_payment', 'awaiting_verification', 'confirmed'].includes(b.status)
 
   function pay() {

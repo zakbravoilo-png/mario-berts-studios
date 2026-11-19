@@ -34,7 +34,9 @@ export function OrdersPage({ guest = false }: { guest?: boolean }) {
 
   function submit(e: FormEvent) {
     e.preventDefault()
-    const items = Object.entries(qty).filter(([, q]) => q > 0).map(([productId, quantity]) => ({ productId, quantity }))
+    const items = Object.entries(qty)
+      .filter(([id, q]) => q > 0 && !s.products.find((x) => x.id === id)?.outOfStock)
+      .map(([productId, quantity]) => ({ productId, quantity }))
     let customer = me ? { name: me.name, email: me.email, phone: me.phone } : null
     if (asGuest) {
       const ce = validateCustomer(contact)
@@ -68,9 +70,9 @@ export function OrdersPage({ guest = false }: { guest?: boolean }) {
                   <li key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
                     <span className="min-w-0">
                       <span className="block font-semibold">{p.name}{p.isDemo && <span className="demo-chip ml-1">Demo</span>}</span>
-                      <span className="text-sm text-muted">{p.brand ? `${p.brand} · ` : ''}{p.price === null ? 'Price TBD' : formatPHP(p.price)} · Stock {p.stock ?? 'TBD'}</span>
+                      <span className="text-sm text-muted">{p.brand ? `${p.brand} · ` : ''}{p.price === null ? 'Price TBD' : formatPHP(p.price)} · {p.outOfStock ? <strong className="text-paper">Out of stock</strong> : <>Stock {p.stock ?? 'TBD'}</>}</span>
                     </span>
-                    <QtyStepper label={p.name} value={qty[p.id] ?? 0} max={20} onChange={(n) => setQty({ ...qty, [p.id]: n })} />
+                    <QtyStepper label={p.name} value={p.outOfStock ? 0 : qty[p.id] ?? 0} max={p.outOfStock ? 0 : p.stock ?? 20} onChange={(n) => setQty({ ...qty, [p.id]: n })} />
                   </li>
                 ))}
               </ul>

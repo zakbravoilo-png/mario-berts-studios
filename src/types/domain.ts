@@ -26,15 +26,9 @@ export interface Room {
 export type RentalCategory = 'cable' | 'guitar' | 'bass' | 'keys' | 'mic' | 'amp'
 export type PricingUnit = 'per_item' | 'per_kit'
 
-export type RentalEquipmentId =
-  | 'guitar-cable'
-  | 'electric-guitar'
-  | 'bass-guitar'
-  | 'acoustic-guitar'
-  | 'mic-kit'
-  | 'keyboard-kit'
-  | 'extra-guitar-amp'
-  | 'extra-bass-amp'
+/** Rental item id. Seed ids: guitar-cable, electric-guitar, bass-guitar, acoustic-guitar,
+ * mic-kit, keyboard-kit, extra-guitar-amp, extra-bass-amp. Admin can add more. */
+export type RentalEquipmentId = string
 
 export interface RentalEquipment {
   id: RentalEquipmentId
@@ -47,7 +41,10 @@ export interface RentalEquipment {
   totalQuantity: number | null
   pricingUnit: PricingUnit
   note?: string
+  /** false = removed by admin (kept so existing bookings still show it). */
   active: boolean
+  /** Temporarily unavailable (e.g. broken) — 0 available, still listed. */
+  outOfService: boolean
 }
 
 /** Stock held by one booking for its time range (derived; see availability.ts). */
@@ -75,7 +72,10 @@ export interface Customer extends CustomerDetails {
 export interface BookingEquipmentItem {
   itemId: RentalEquipmentId
   quantity: number
+  /** Price at the time of booking — later price edits don't change existing bookings. */
   unitPrice: Peso
+  /** Item name at the time of booking. */
+  label?: string
 }
 
 export type PaymentStatus = 'not_submitted' | 'submitted' | 'verified' | 'rejected'
@@ -194,7 +194,10 @@ export interface ShopProduct {
   stock: number | null
   /** true = sample listing invented for the prototype. */
   isDemo: boolean
+  /** false = hidden from the shop. */
   active: boolean
+  /** Shown as "Out of stock"; can't be added to an inquiry. */
+  outOfStock: boolean
 }
 
 export interface ShopInquiry {

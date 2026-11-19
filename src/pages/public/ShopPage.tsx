@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { ArrowRight, Package } from 'lucide-react'
+import { ArrowRight, Package, PackageX } from 'lucide-react'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { useTitle } from '../../components/ui/useTitle'
 import { Callout } from '../../components/ui/Callout'
@@ -30,7 +30,10 @@ export function ShopPage() {
                   <li key={p.id} className="card flex flex-col p-5">
                     <div className="flex items-start justify-between gap-3">
                       <Package aria-hidden="true" className="size-6 text-rust-light" />
-                      {p.isDemo && <span className="demo-chip">Demo</span>}
+                      <span className="flex gap-1.5">
+                        {p.isDemo && <span className="demo-chip">Demo</span>}
+                        {p.outOfStock && <span className="tape-label"><PackageX aria-hidden="true" className="size-3.5" />Out of stock</span>}
+                      </span>
                     </div>
                     <h3 className="mt-4 text-lg font-semibold">{p.name}</h3>
                     {p.brand && <p className="text-sm text-paper/90">{p.brand}</p>}
@@ -42,11 +45,11 @@ export function ShopPage() {
                       </div>
                       <div>
                         <dt className="text-muted">Stock</dt>
-                        <dd className="m-0 font-mono font-bold">{p.stock === null ? 'TBD' : p.stock}</dd>
+                        <dd className="m-0 font-mono font-bold">{p.outOfStock ? 'Out of stock' : p.stock === null ? 'TBD' : p.stock}</dd>
                       </div>
                     </dl>
                     <Link to={`/book/shop?product=${p.id}`} className="link mt-5 inline-flex items-center gap-2 font-semibold">
-                      Ask about this <ArrowRight aria-hidden="true" className="size-4" />
+                      {p.outOfStock ? 'Ask when it’s back' : 'Ask about this'} <ArrowRight aria-hidden="true" className="size-4" />
                     </Link>
                   </li>
                 ))}

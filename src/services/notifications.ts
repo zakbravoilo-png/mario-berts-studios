@@ -7,7 +7,7 @@
  */
 import type { LessonRequest, Notification, NotificationEvent, RehearsalBooking } from '../types/domain'
 import { roomName } from '../data/rooms'
-import { getRental } from '../data/rentalEquipment'
+import { equipmentLabel, rentalEquipment } from '../data/rentalEquipment'
 import { lessonLabel, levelLabel, studioContact } from '../data/services'
 import { formatPHP } from '../utils/money'
 import { formatDate, formatRange } from '../utils/time'
@@ -27,7 +27,7 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
   const head = `${b.reference} · ${roomName(b.roomId)} · ${when(b.startAt, b.endAt)}`
   const money = `Total ${formatPHP(b.total)}; 50% downpayment ${formatPHP(b.downpaymentRequired)} via GCash (non-refundable); balance ${formatPHP(b.balance)}.`
   const policy = 'You may cancel only before the day of the booking.'
-  const gear = b.selectedEquipment.length ? `Extra gear: ${b.selectedEquipment.map((e) => `${e.quantity}× ${getRental(e.itemId).shortName}`).join(', ')}.` : 'No extra gear.'
+  const gear = b.selectedEquipment.length ? `Extra gear: ${b.selectedEquipment.map((e) => `${e.quantity}× ${equipmentLabel(e, rentalEquipment, true)}`).join(', ')}.` : 'No extra gear.'
   switch (event) {
     case 'booking_received':
       return {

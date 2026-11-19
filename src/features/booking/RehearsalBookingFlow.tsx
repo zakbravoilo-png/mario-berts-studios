@@ -81,7 +81,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
   const selections = Object.entries(d.equipment)
     .filter(([, q]) => (q ?? 0) > 0)
     .map(([itemId, quantity]) => ({ itemId: itemId as RentalEquipmentId, quantity: quantity ?? 0 }))
-  const price = priceRehearsal(d.hours, selections, s.settings.roomRatePerHour, s.settings.downpaymentRate)
+  const price = priceRehearsal(d.hours, selections, s.settings.roomRatePerHour, s.settings.downpaymentRate, s.rentals)
   const booking = d.bookingId ? s.bookings.find((b) => b.id === d.bookingId) : undefined
 
   const go = (step: number) => {
@@ -301,7 +301,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
                   <p className="font-semibold">{r.name}</p>
                   <p className="text-sm text-muted">
                     <span className="font-mono text-paper">{formatPHP(r.unitPrice)}</span> {r.pricingUnit === 'per_kit' ? 'per kit' : 'each'} ·{' '}
-                    {free === 0 ? <strong className="text-paper">None free at this time</strong> : `${free} of ${r.totalQuantity ?? '?'} free`}
+                    {r.outOfService ? <strong className="text-paper">Out of service</strong> : free === 0 ? <strong className="text-paper">None free at this time</strong> : `${free} of ${r.totalQuantity ?? '?'} free`}
                   </p>
                 </div>
                 <QtyStepper label={r.shortName} value={q} max={free} onChange={(n) => update({ equipment: { ...d.equipment, [r.id]: n } })} />

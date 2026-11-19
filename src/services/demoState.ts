@@ -4,7 +4,7 @@ import type {
   Instructor,
   LessonRequest,
   RehearsalBooking,
-  RentalEquipmentId,
+  RentalEquipment,
   ShopInquiry,
   Notification,
   ShopProduct,
@@ -14,11 +14,11 @@ import type {
 /** The whole mock database. Persisted to localStorage in the browser only. */
 export interface DemoState {
   /** Bump when the seed shape/content changes; older saved state is replaced. */
-  version: 3
+  version: 4
   seededAt: string
   settings: BusinessSettings
-  /** Shared rental stock (admin can adjust in demo mode). */
-  rentalStock: Record<RentalEquipmentId, number | null>
+  /** Rental catalog — prices, stock, out-of-service and removal are admin-editable. */
+  rentals: RentalEquipment[]
   /** Customer accounts (demo sign-in by contact number + one-time code). */
   customers: Customer[]
   bookings: RehearsalBooking[]

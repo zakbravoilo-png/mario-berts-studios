@@ -58,7 +58,8 @@ export function createRehearsalBooking(input: NewRehearsal): Result<RehearsalBoo
   })
   if (issues.length) return { ok: false, errors: issues.map((i) => i.message) }
 
-  const price = priceRehearsal(input.hours, equipment, s.settings.roomRatePerHour, s.settings.downpaymentRate)
+  // Removed or out-of-service items can't be booked (validation already treats them as 0 stock).
+  const price = priceRehearsal(input.hours, equipment, s.settings.roomRatePerHour, s.settings.downpaymentRate, s.rentals)
   const { reference, counters } = nextReference(s, 'MBS')
   const id = newId('bk')
   const at = nowIso()
@@ -71,7 +72,10 @@ export function createRehearsalBooking(input: NewRehearsal): Result<RehearsalBoo
     startAt: input.startAt,
     endAt,
     durationHours: input.hours,
-    selectedEquipment: equipment.map((e) => ({ ...e, unitPrice: getRental(e.itemId).unitPrice })),
+    selectedEquipment: equipment.map((e) => {
+      const item = getRental(e.itemId, s.rentals)
+      return { ...e, unitPrice: item.unitPrice, label: item.name }
+    }),
     roomSubtotal: price.roomSubtotal,
     equipmentSubtotal: price.equipmentSubtotal,
     total: price.total,
@@ -274,8 +278,57 @@ export function setShopInquiryStatus(id: string, status: InquiryStatus) {
 
 // ── Admin configuration ──────────────────────────────────────────────────
 
-export function adminSetStock(itemId: RentalEquipmentId, quantity: number) {
-  setState((st) => ({ ...st, rentalStock: { ...st.rentalStock, [itemId]: Math.max(0, Math.floor(quantity)) } }))
+// ── Rental catalog (admin) ──
+
+export interface RentalInput {
+  name: string
+  unitPrice: number
+  totalQuantity: number
+  pricingUnit: 'per_item' | 'per_kit'
+}
+
+function checkRentalInput(v: Partial<RentalInput>): string[] {
+  const errors: string[] = []
+  if (v.name !== undefined && !v.name.trim()) errors.push('Name is required.')
+  if (v.unitPrice !== undefined && (!Number.isInteger(v.unitPrice) || v.unitPrice < 0)) errors.push('Price must be a whole number of pesos (0 or more).')
+  if (v.totalQuantity !== undefined && (!Number.isInteger(v.totalQuantity) || v.totalQuantity < 0)) errors.push('Stock must be a whole number (0 or more).')
+  return errors
+}
+
+/** Edit an item's name, price, stock or unit. Existing bookings keep the price they were booked at. */
+export function adminUpdateRental(id: RentalEquipmentId, patch: Partial<RentalInput>): Result<null> {
+  const errors = checkRentalInput(patch)
+  if (errors.length) return { ok: false, errors }
+  const clean = { ...patch, ...(patch.name !== undefined ? { name: patch.name.trim(), shortName: patch.name.trim() } : {}) }
+  setState((st) => ({ ...st, rentals: st.rentals.map((r) => (r.id === id ? { ...r, ...clean } : r)) }))
+  return { ok: true, value: null }
+}
+
+export function adminSetOutOfService(id: RentalEquipmentId, outOfService: boolean) {
+  setState((st) => ({ ...st, rentals: st.rentals.map((r) => (r.id === id ? { ...r, outOfService } : r)) }))
+}
+
+export function adminAddRental(v: RentalInput): Result<RentalEquipmentId> {
+  const errors = checkRentalInput(v)
+  if (errors.length) return { ok: false, errors }
+  const name = v.name.trim()
+  const s = getState()
+  if (s.rentals.some((r) => r.active && r.name.toLowerCase() === name.toLowerCase())) return { ok: false, errors: ['An item with that name already exists.'] }
+  const id = newId('rent')
+  setState((st) => ({
+    ...st,
+    rentals: [...st.rentals, { id, name, shortName: name, category: 'cable', unitPrice: v.unitPrice, totalQuantity: v.totalQuantity, pricingUnit: v.pricingUnit, active: true, outOfService: false }],
+  }))
+  return { ok: true, value: id }
+}
+
+/** Remove from the catalog. Kept (hidden) so existing bookings still show the item. */
+export function adminRemoveRental(id: RentalEquipmentId) {
+  setState((st) => ({ ...st, rentals: st.rentals.map((r) => (r.id === id ? { ...r, active: false } : r)) }))
+}
+
+export function adminRestoreRental(id: RentalEquipmentId) {
+  setState((st) => ({ ...st, rentals: st.rentals.map((r) => (r.id === id ? { ...r, active: true } : r)) }))
 }
 
 export function adminUpdateSettings(patch: Partial<BusinessSettings>) {
@@ -288,6 +341,34 @@ export function adminUpdateInstructor(inst: Instructor) {
 
 export function adminUpdateProduct(p: ShopProduct) {
   setState((st) => ({ ...st, products: st.products.map((x) => (x.id === p.id ? p : x)) }))
+}
+
+export function adminAddProduct(v: { name: string; brand: string; category: ShopProduct['category']; price: number | null; stock: number | null; description: string }): Result<string> {
+  if (!v.name.trim()) return { ok: false, errors: ['Name is required.'] }
+  if (v.price !== null && (!Number.isInteger(v.price) || v.price < 0)) return { ok: false, errors: ['Price must be a whole number of pesos, or blank for TBD.'] }
+  if (v.stock !== null && (!Number.isInteger(v.stock) || v.stock < 0)) return { ok: false, errors: ['Stock must be a whole number, or blank for TBD.'] }
+  const id = newId('prod')
+  const product: ShopProduct = {
+    id,
+    name: v.name.trim(),
+    brand: v.brand.trim() || null,
+    category: v.category,
+    description: v.description.trim(),
+    price: v.price,
+    stock: v.stock,
+    isDemo: false,
+    active: true,
+    outOfStock: v.stock === 0,
+  }
+  setState((st) => ({ ...st, products: [...st.products, product] }))
+  return { ok: true, value: id }
+}
+
+/** Delete a product. If inquiries mention it, hide it instead so they still make sense. */
+export function adminRemoveProduct(id: string): 'deleted' | 'hidden' {
+  const used = getState().shopInquiries.some((q) => q.items.some((i) => i.productId === id))
+  setState((st) => ({ ...st, products: used ? st.products.map((x) => (x.id === id ? { ...x, active: false } : x)) : st.products.filter((x) => x.id !== id) }))
+  return used ? 'hidden' : 'deleted'
 }
 
 /** Demo sign-up. One account per contact number. */

@@ -2,12 +2,13 @@ import { Link } from 'react-router'
 import { ArrowRight, Guitar, RadioTower } from 'lucide-react'
 import { DuotoneImage } from '../../components/grunge'
 import { shopCategories } from '../../data/services'
-import { seedProducts } from '../../data/products'
+import { useDemoState } from '../../services/demoStore'
 import { defaultSettings } from '../../data/settings'
 import { formatPHP } from '../../utils/money'
 
 /** Streaming + shop teasers. Clean cards, slate borders. */
 export function MoreSection() {
+  const { products } = useDemoState()
   return (
     <section aria-labelledby="more-title" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-24">
       <p className="eyebrow text-muted">06 — Also at the studio</p>
@@ -44,11 +45,12 @@ export function MoreSection() {
           <p className="mt-3 text-sm text-muted">Kuting-Kuting Music City Strings and drumsticks. Ask first — no online checkout.</p>
           <ul className="mt-6 divide-y divide-slate border-y border-slate">
             {shopCategories.map((c) => {
-              const p = seedProducts.find((x) => x.category === c.id)
+              const prices = products.filter((x) => x.active && x.category === c.id && x.price !== null).map((x) => x.price as number)
+              const low = prices.length ? Math.min(...prices) : null
               return (
                 <li key={c.id} className="flex items-center justify-between gap-4 py-4">
                   <span className="font-semibold">{c.label}</span>
-                  {p?.price != null ? <span className="shrink-0 font-mono text-lg font-bold">{formatPHP(p.price)}</span> : <span className="tbd-chip shrink-0 text-muted">Price TBD</span>}
+                  {low !== null ? <span className="shrink-0 font-mono text-lg font-bold">{prices.length > 1 ? 'from ' : ''}{formatPHP(low)}</span> : <span className="tbd-chip shrink-0 text-muted">Price TBD</span>}
                 </li>
               )
             })}

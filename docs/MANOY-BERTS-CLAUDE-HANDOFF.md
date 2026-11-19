@@ -1206,6 +1206,11 @@ These override earlier sections where they conflict.
     (booking, downpayment, balance, non-refundable, cancel-before-the-day)
     that replaces the acknowledgement checkbox. Automatic GCash
     (PayMongo/Xendit) is a later phase.
+-   **Editable catalog (user, 2026-11-19):** admin can change rental
+    item and shop item prices and stock, add and remove items, mark rental
+    items out of service and shop items out of stock. Bookings store the
+    price and name at booking time, so later edits never change existing
+    bookings. Removed rental items are hidden but kept for old bookings.
 -   **Booking confirmations by SMS and email:** every booking event
     produces an SMS to the contact number and an email if one was given.
     In the prototype these are **simulated** (demo outbox, admin

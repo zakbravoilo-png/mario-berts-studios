@@ -7,10 +7,10 @@ import { PortalHeader } from '../../components/ui/PortalHeader'
 import { StatusLabel } from '../../components/ui/StatusLabel'
 import { Callout } from '../../components/ui/Callout'
 import { PriceReceipt } from '../../features/booking/ExampleReceipt'
-import { priceRehearsal } from '../../features/booking/pricing'
+import { priceFromBooking } from '../../features/booking/pricing'
 import { AdminButton, adminInput } from '../../features/admin/adminUi'
 import { roomName } from '../../data/rooms'
-import { getRental } from '../../data/rentalEquipment'
+import { equipmentLabel } from '../../data/rentalEquipment'
 import { formatPHP } from '../../utils/money'
 import { formatDate, formatRange, formatTime } from '../../utils/time'
 
@@ -82,12 +82,12 @@ export function AdminBookingDetail() {
             <h2 id="gear-title" className="font-semibold">Extra gear held</h2>
             {b.selectedEquipment.length === 0 ? <p className="mt-2 text-sm text-muted">None</p> : (
               <ul className="mt-2 text-sm">
-                {b.selectedEquipment.map((e) => <li key={e.itemId}>{e.quantity} × {getRental(e.itemId).name}</li>)}
+                {b.selectedEquipment.map((e) => <li key={e.itemId}>{e.quantity} × {equipmentLabel(e, s.rentals)}</li>)}
               </ul>
             )}
           </section>
         </div>
-        <PriceReceipt price={priceRehearsal(b.durationHours, b.selectedEquipment)} title={b.reference} roomLabel={roomName(b.roomId)} />
+        <PriceReceipt price={priceFromBooking(b)} title={b.reference} roomLabel={roomName(b.roomId)} />
       </div>
     </>
   )

@@ -36,7 +36,7 @@ npm run dev        # http://localhost:5173
 | Customer sign-in | `/login` — contact number + one-time code (demo code shown on screen). Demo account: **0900 000 0000**. New numbers create an account. Guest bookings with the same number appear in the account. |
 | Customer portal | `/portal` (requires sign-in) — dashboard, bookings, reservations (ticket stubs), shop inquiries, profile |
 | Admin sign-in | `/admin/login` — email **mario.bertstudios@gmail.com** + demo password **demo-admin-2026** (shown on the page on purpose — never put a real password in this static site) |
-| Admin | `/admin` (requires admin sign-in) — bookings + payment review, room schedule, shared inventory, lessons, instructors, streaming, products, messages outbox, settings |
+| Admin | `/admin` (requires admin sign-in). **Shared inventory** and **Shop products** let the studio edit prices and stock, mark items out of service / out of stock, and add or remove items. Price changes apply to new bookings only; existing bookings keep the price they were booked at. — bookings + payment review, room schedule, shared inventory, lessons, instructors, streaming, products, messages outbox, settings |
 
 **Try the core journey:** book a room at `/book` → open `/admin/bookings`, verify
 the mock payment → look the booking up at `/my-booking` and see it confirmed,

@@ -57,7 +57,7 @@ function rehearsal(
     yymm: string
   },
 ): RehearsalBooking {
-  const equipment = (opts.equipment ?? []).map(([itemId, quantity]) => ({ itemId, quantity, unitPrice: getRental(itemId).unitPrice }))
+  const equipment = (opts.equipment ?? []).map(([itemId, quantity]) => ({ itemId, quantity, unitPrice: getRental(itemId).unitPrice, label: getRental(itemId).name }))
   const price = priceRehearsal(opts.hours, equipment)
   const startAt = manilaIso(opts.date, opts.start)
   const startH = Number(opts.start.slice(0, 2))
@@ -170,10 +170,10 @@ export function createSeed(now: number = Date.now(), settings: BusinessSettings 
   ]
 
   return {
-    version: 3,
+    version: 4,
     seededAt: toManilaIso(now),
     settings,
-    rentalStock: Object.fromEntries(rentalEquipment.map((r) => [r.id, r.totalQuantity])) as DemoState['rentalStock'],
+    rentals: rentalEquipment.map((r) => ({ ...r })),
     customers: [me],
     bookings,
     lessons,
