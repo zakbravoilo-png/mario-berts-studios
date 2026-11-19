@@ -1,0 +1,263 @@
+/*
+ * Grunge effects — all CSS/SVG, no texture images.
+ * Rule (handoff §8): never put texture behind form fields, tables, prices or small text.
+ * Texture classes below are decorative and are only used on display areas.
+ */
+
+@layer components {
+  /* ── Noise / grain ───────────────────────────────────────────────── */
+  .noise {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+    mix-blend-mode: overlay;
+  }
+  /* Heavier, coarser grain with dark specks — reads like photocopy toner. */
+  .noise--coarse {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3.2 0 0 0 1.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    mix-blend-mode: multiply;
+  }
+
+  /* Scuffed wall texture: big soft blotches of surface + slate on ink. */
+  .wall {
+    background-color: var(--color-ink);
+    background-image:
+      radial-gradient(ellipse 60% 40% at 15% 20%, rgb(39 42 51 / 0.95), transparent 70%),
+      radial-gradient(ellipse 50% 50% at 85% 70%, rgb(39 42 51 / 0.9), transparent 70%),
+      radial-gradient(ellipse 30% 25% at 70% 15%, rgb(100 101 107 / 0.18), transparent 70%),
+      radial-gradient(ellipse 25% 30% at 30% 85%, rgb(100 101 107 / 0.14), transparent 70%);
+  }
+
+  /* Paper band: off-white with faint fibre and creases. */
+  .paper-band {
+    background-color: var(--color-band);
+    color: var(--color-ink);
+    background-image:
+      linear-gradient(97deg, transparent 48%, rgb(20 21 25 / 0.035) 49%, transparent 51%),
+      linear-gradient(8deg, transparent 30%, rgb(20 21 25 / 0.03) 31%, transparent 33%),
+      radial-gradient(ellipse at 20% 30%, rgb(100 101 107 / 0.08), transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgb(100 101 107 / 0.07), transparent 55%);
+  }
+
+  /* Halftone dot field, used as a decorative overlay. */
+  .halftone {
+    background-image: radial-gradient(circle at center, currentColor 0 1.2px, transparent 1.6px);
+    background-size: 7px 7px;
+  }
+  .halftone-fade {
+    -webkit-mask-image: linear-gradient(135deg, #000 0%, transparent 75%);
+    mask-image: linear-gradient(135deg, #000 0%, transparent 75%);
+  }
+
+  /* ── Tape ───────────────────────────────────────────────────────── */
+  .tape {
+    position: absolute;
+    z-index: 3;
+    width: 7.5rem;
+    height: 1.9rem;
+    background: rgb(236 231 222 / 0.62);
+    box-shadow: 0 1px 2px rgb(20 21 25 / 0.35);
+    /* torn ends */
+    clip-path: polygon(
+      0% 8%, 4% 0%, 9% 10%, 13% 2%, 18% 0%, 82% 0%, 87% 9%, 92% 1%, 97% 7%, 100% 0%,
+      100% 92%, 96% 100%, 91% 90%, 86% 100%, 80% 96%, 20% 100%, 14% 92%, 9% 100%, 4% 91%, 0% 100%
+    );
+    pointer-events: none;
+  }
+  .tape::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0 9px, rgb(255 255 255 / 0.12) 9px 10px);
+  }
+
+  /* Tape label — readable text on a tape strip (status labels use this). */
+  .tape-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.2rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    clip-path: polygon(0 6%, 3% 0, 97% 4%, 100% 0, 99% 50%, 100% 100%, 96% 94%, 3% 100%, 0 95%, 1% 50%);
+  }
+  .tape-label--rust {
+    background: var(--color-rust);
+    color: var(--color-paper);
+  }
+
+  /* ── Highlight (marker swipe behind a word) ─────────────────────── */
+  .highlight {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.12em;
+    margin: 0 -0.04em;
+    color: var(--color-paper);
+    isolation: isolate;
+    text-transform: uppercase;
+  }
+  /* Emphasised words are set in capitals (user, 2026-11-16). */
+  .emph {
+    text-transform: uppercase;
+  }
+  .highlight::before {
+    content: '';
+    position: absolute;
+    inset: 0.08em -0.06em 0.02em -0.08em;
+    z-index: -1;
+    background: var(--color-rust);
+    clip-path: polygon(1% 12%, 18% 4%, 46% 9%, 72% 0%, 99% 6%, 97% 48%, 100% 93%, 70% 100%, 38% 94%, 12% 100%, 0% 90%, 3% 52%);
+    transform: rotate(-1.2deg);
+  }
+  .highlight--paper {
+    color: var(--color-ink);
+  }
+  .highlight--paper::before {
+    background: var(--color-paper);
+  }
+
+  /* ── Marker annotation ──────────────────────────────────────────── */
+  .marker {
+    font-family: var(--font-marker);
+    color: var(--color-paper);
+    line-height: 1.15;
+  }
+
+  /* ── Sticker ────────────────────────────────────────────────────── */
+  .sticker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border: 2px solid var(--color-paper);
+    box-shadow: 3px 3px 0 0 var(--color-slate);
+  }
+
+  /* ── Ticket stub ────────────────────────────────────────────────── */
+  .ticket {
+    --notch: 12px;
+    position: relative;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    /* Notches at the perforation line (left/right) */
+    -webkit-mask:
+      radial-gradient(circle var(--notch) at 0 var(--perf, 70%), #0000 98%, #000) 0 0 / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% var(--perf, 70%), #0000 98%, #000) 100% 0 / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle var(--notch) at 0 var(--perf, 70%), #0000 98%, #000) 0 0 / 51% 100% no-repeat,
+      radial-gradient(circle var(--notch) at 100% var(--perf, 70%), #0000 98%, #000) 100% 0 / 51% 100% no-repeat;
+  }
+  .ticket-perf {
+    border-top: 2px dashed rgb(20 21 25 / 0.45);
+  }
+
+  /* ── Receipt ────────────────────────────────────────────────────── */
+  .receipt {
+    position: relative;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    /* zig-zag tear top and bottom */
+    -webkit-mask:
+      conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 14px 51% repeat-x,
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 51% repeat-x;
+    mask:
+      conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 14px 51% repeat-x,
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 51% repeat-x;
+    padding: 1.75rem 1.25rem;
+  }
+  .receipt-rule {
+    border-top: 2px dashed rgb(20 21 25 / 0.5);
+  }
+
+  /* ── Photo treatment (duotone + halftone + grain) ───────────────── */
+  .duotone {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-ink);
+    isolation: isolate;
+  }
+  .duotone > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.3) brightness(0.92);
+  }
+  /* highlights → tint colour (off-white by default, rust as an accent) */
+  .duotone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--duo-hi, var(--color-paper));
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  /* shadows → ink */
+  .duotone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--duo-lo, var(--color-ink));
+    mix-blend-mode: lighten;
+    pointer-events: none;
+  }
+  /* Halftone screen over a photo: ink dots that show in the light areas. */
+  .halftone-screen {
+    background-image: radial-gradient(circle at center, var(--color-ink) 0 0.9px, transparent 1.5px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+  }
+  /* Coarser rotated screen for big backgrounds. */
+  .halftone-screen--coarse {
+    background-image: radial-gradient(circle at center, var(--color-ink) 0 1.4px, transparent 2.3px);
+    background-size: 6px 6px;
+  }
+
+  /* Slow, subtle jitter for one hero element; disabled by reduced-motion rule. */
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.75; }
+    94% { opacity: 1; }
+    97% { opacity: 0.85; }
+  }
+  .flicker {
+    animation: flicker 6s infinite;
+  }
+}
+
+/* Utilities (variant-able, e.g. sm:ticket-h) */
+@utility ticket-h {
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at var(--perf, 72%) 0, #0000 98%, #000) 0 0 / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--perf, 72%) 100%, #0000 98%, #000) 0 100% / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at var(--perf, 72%) 0, #0000 98%, #000) 0 0 / 100% 51% no-repeat,
+    radial-gradient(circle var(--notch) at var(--perf, 72%) 100%, #0000 98%, #000) 0 100% / 100% 51% no-repeat;
+}
+@utility perf-v {
+  border-top: 0;
+  border-left: 2px dashed rgb(20 21 25 / 0.45);
+}
+
+/* Grain confined to the edges of a block (dirty-paper vignette), keeping text areas clean. */
+@utility grain-edges {
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, #000 100%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, #000 100%);
+}

@@ -1,0 +1,32 @@
+# dependencies / build
+node_modules
+dist
+dist-ssr
+*.local
+.wrangler
+.vite
+coverage
+
+# env and secrets — never commit
+.env
+.env.*
+!.env.example
+.dev.vars*
+
+# third-party design references (inspiration only; do not publish)
+docs/design-references/
+
+# logs / editor / OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# original, full-size photos (web versions live in public/images)
+photo-sources/
+
+# local Claude/editor settings
+.claude/settings.local.json

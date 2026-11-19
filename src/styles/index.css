@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './grunge.css';
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-rust);
+    color: var(--color-paper);
+  }
+  a {
+    color: inherit;
+  }
+  /* Visible focus everywhere: rust-light ring has 5.8:1 on ink. */
+  :focus-visible {
+    outline: 3px solid var(--color-rust-light);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  /* On paper bands the ring switches to rust (5.9:1 on paper). */
+  .on-paper :focus-visible {
+    outline-color: var(--color-ink);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    padding: 0.6rem 1rem;
+    font-weight: 700;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-tight);
+    font-weight: 400;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /*
+   * Buttons — torn paper scraps. The scrap and its shadow are pseudo-elements
+   * clipped to a ragged polygon, so the element itself is never clipped and the
+   * focus outline stays fully visible.
+   */
+  .btn {
+    --btn-bg: var(--color-rust);
+    --btn-fg: var(--color-paper);
+    --btn-shadow: rgb(0 0 0 / 0.55);
+    --btn-tear: polygon(0% 2.55%, 1.56% 6.38%, 3.13% 4.54%, 4.69% 4.29%, 6.25% 4.62%, 7.81% 3.41%, 9.38% 5.42%, 10.94% 3.12%, 12.5% 3.49%, 14.06% 4.46%, 15.63% 5.78%, 17.19% 2.82%, 18.75% 3.38%, 20.31% 5.24%, 21.88% 5.82%, 23.44% 4.63%, 25% 5.99%, 26.56% 5.79%, 28.13% 2.24%, 29.69% 3.48%, 31.25% 2.11%, 32.81% 5.08%, 34.38% 3.69%, 35.94% 5.75%, 37.5% 4.69%, 39.06% 3.34%, 40.63% 3.71%, 42.19% 2.63%, 43.75% 3.19%, 45.31% 6.75%, 46.88% 5.1%, 48.44% 5.45%, 50% 3.87%, 51.56% 8.64%, 53.13% 7.95%, 54.69% 3.87%, 56.25% 1.68%, 57.81% 2.95%, 59.38% 3.81%, 60.94% 5.49%, 62.5% 4.86%, 64.06% 4.11%, 65.63% 3.72%, 67.19% 2.44%, 68.75% 4.9%, 70.31% 3.97%, 71.88% 3.9%, 73.44% 5.38%, 75% 5.32%, 76.56% 4.57%, 78.13% 4.65%, 79.69% 5.28%, 81.25% 3.55%, 82.81% 2.84%, 84.38% 7.43%, 85.94% 6.28%, 87.5% 6.09%, 89.06% 2.08%, 90.63% 5.08%, 92.19% 3.34%, 93.75% 3.2%, 95.31% 2.07%, 96.88% 2.96%, 98.44% 1.04%, 100% 1.1%, 98.77% 10%, 98.62% 20%, 99.92% 30%, 99.76% 40%, 99.43% 50%, 99.3% 60%, 98.97% 70%, 99.48% 80%, 99.5% 90%, 100% 94.33%, 98.44% 94.28%, 96.88% 94.26%, 95.31% 95.18%, 93.75% 95.3%, 92.19% 97.06%, 90.63% 94.05%, 89.06% 94.24%, 87.5% 94.88%, 85.94% 95.84%, 84.38% 93.94%, 82.81% 93.34%, 81.25% 95.47%, 79.69% 95.05%, 78.13% 93.64%, 76.56% 93.2%, 75% 95.14%, 73.44% 92.11%, 71.88% 94.45%, 70.31% 94.28%, 68.75% 93.06%, 67.19% 95.83%, 65.63% 94.25%, 64.06% 93.1%, 62.5% 95.9%, 60.94% 90.9%, 59.38% 92.67%, 57.81% 92.95%, 56.25% 94.69%, 54.69% 93.97%, 53.13% 94.3%, 51.56% 94.29%, 50% 95.66%, 48.44% 94.8%, 46.88% 93.81%, 45.31% 94.44%, 43.75% 92.49%, 42.19% 96.23%, 40.63% 94.51%, 39.06% 90.83%, 37.5% 92.93%, 35.94% 91.86%, 34.38% 93.33%, 32.81% 89.48%, 31.25% 96.46%, 29.69% 93.43%, 28.13% 95.01%, 26.56% 94.04%, 25% 93.2%, 23.44% 96.12%, 21.88% 92.41%, 20.31% 95.96%, 18.75% 93.12%, 17.19% 95.17%, 15.63% 95.81%, 14.06% 94.46%, 12.5% 95.52%, 10.94% 94.95%, 9.38% 92.81%, 7.81% 95.39%, 6.25% 92.52%, 4.69% 92.71%, 3.13% 94.76%, 1.56% 92.82%, 0% 94.97%, 0.1% 90%, 0.72% 80%, 0.6% 70%, 1.09% 60%, 0.23% 50%, 1.04% 40%, 0.24% 30%, 0.33% 20%, 0.29% 10%);
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 50px;
+    padding: 0.8rem 1.6rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.02em;
+    color: var(--btn-fg);
+    background: none;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    transform: rotate(-0.6deg);
+    transition: transform 120ms ease;
+  }
+  .btn::before,
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: var(--btn-tear);
+    transition: transform 120ms ease;
+  }
+  /* the paper scrap */
+  .btn::before {
+    z-index: -1;
+    background:
+      linear-gradient(100deg, transparent 40%, rgb(255 255 255 / 0.07) 50%, transparent 60%),
+      var(--btn-bg);
+  }
+  /* its shadow */
+  .btn::after {
+    z-index: -2;
+    background: var(--btn-shadow);
+    transform: translate(3px, 4px);
+  }
+  .btn:hover {
+    transform: rotate(0deg) translate(-1px, -1px);
+  }
+  .btn:hover::after {
+    transform: translate(4px, 6px);
+  }
+  .btn:active {
+    transform: rotate(-1deg) translate(2px, 2px);
+  }
+  .btn:active::after {
+    transform: translate(1px, 2px);
+  }
+
+  /* Primary: rust scrap — the one red accent per area. Paper text 5.3:1. */
+  .btn-primary {
+    --btn-bg: var(--color-rust);
+    --btn-fg: var(--color-paper);
+  }
+  /* Secondary: off-white paper scrap, ink text 14.8:1. */
+  .btn-ghost {
+    --btn-bg: var(--color-paper);
+    --btn-fg: var(--color-ink);
+    transform: rotate(1deg);
+  }
+  /* Dark scrap for use on paper bands. */
+  .btn-ink {
+    --btn-bg: var(--color-ink);
+    --btn-fg: var(--color-paper);
+    --btn-shadow: var(--color-slate);
+  }
+  .on-paper .btn {
+    --btn-shadow: rgb(20 21 25 / 0.75);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn:hover,
+    .btn:active {
+      transform: none;
+    }
+  }
+
+  /* Text link on dark. */
+  .link {
+    color: var(--color-rust-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+  .link:hover {
+    color: var(--color-paper);
+  }
+  /* rust text is only 3.6:1 on the band colour — links on light sections are ink + underline */
+  .on-paper .link {
+    color: var(--color-ink);
+  }
+  .on-paper .link:hover {
+    color: var(--color-charcoal);
+    text-decoration-thickness: 3px;
+  }
+
+  /* Card: ink and surface are close in value — always separate with a slate border. */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-slate);
+  }
+
+  /* Demo label chip (used on any invented content). */
+  .demo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.1rem 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .tbd-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.05rem 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border: 1px dashed currentColor;
+  }
+}

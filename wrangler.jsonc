@@ -1,0 +1,12 @@
+// Cloudflare Workers — static assets only (no server code yet).
+// Deploy from the PERSONAL Cloudflare account (see README → Deploy). Not deployed by Claude.
+{
+  "name": "mario-berts-studios",
+  // "account_id": "<personal-account-id>",  // set this before any `wrangler deploy` so it can't go to a work account
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for client-side routes like /portal or /admin/bookings
+    "not_found_handling": "single-page-application"
+  }
+}

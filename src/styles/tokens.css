@@ -1,0 +1,76 @@
+/*
+ * Design tokens — handoff §8.
+ *
+ * Palette v3 (user, 2026-11-16): greys and dark greys, a desaturated blue-grey
+ * surface, warm off-white, and rust as an ACCENT ONLY (primary buttons, highlight
+ * swipes, small marks) — never large rust areas.
+ *   ink #141519 · charcoal #1E1F24 · surface #272A33 · slate #64656B
+ *   rust #A63726 · paper (off-white) #ECE7DE
+ *   band #C6BFB2 — darker off-white for light section bands (user, 2026-11-16)
+ * Derived text tints: muted #A3A29D, rust-light #EE7360.
+ *
+ * Contrast rules (WCAG, measured for palette v3):
+ *   paper on ink/charcoal/surface ...... 14.8 / 13.4 / 11.6  body text OK
+ *   ink on paper / band ................ 14.8 / 10.0         text on light sections OK
+ *   rust on band ....................... 3.6                 NOT for text (fills only)
+ *   paper on rust ...................... 5.3                 button text OK
+ *   rust on paper ...................... 5.3                 small red marks on paper OK
+ *   muted on ink/charcoal/surface ...... 7.1 / 6.4 / 5.6     secondary text OK
+ *   rust-light on ink/charcoal/surface . 6.3 / 5.7 / 5.0     red text / links / focus OK
+ *   slate on dark ...................... NEVER text (borders only)
+ *   rust on dark ....................... 2.8 / 2.5 / 2.2     NEVER text
+ */
+@theme {
+  --color-*: initial;
+  --color-ink: #141519;
+  --color-charcoal: #1e1f24;
+  --color-surface: #272a33;
+  --color-slate: #64656b;
+  --color-rust: #a63726;
+  --color-paper: #ece7de;
+  --color-band: #c6bfb2;
+  --color-muted: #a3a29d;
+  --color-rust-light: #ee7360;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font-dirt: 'Rubik Dirt', 'Anton', 'Impact', sans-serif;
+  --font-marker: 'Permanent Marker', 'Comic Sans MS', cursive;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  /* Type scale. Display sizes are fluid; body sizes are fixed for legibility. */
+  --text-mega: clamp(3.75rem, 13vw, 11rem);
+  --text-mega--line-height: 0.86;
+  --text-display-1: clamp(3rem, 8vw, 6.5rem);
+  --text-display-1--line-height: 0.9;
+  --text-display-2: clamp(2.25rem, 5vw, 4rem);
+  --text-display-2--line-height: 0.95;
+  --text-display-3: clamp(1.75rem, 3vw, 2.5rem);
+  --text-display-3--line-height: 1;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.35rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.6rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.9rem;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 2.1rem;
+
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.12em;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  --shadow-hard: 6px 6px 0 0 #141519;
+  --shadow-hard-rust: 6px 6px 0 0 #a63726;
+
+  --breakpoint-xs: 26rem;
+}
