@@ -78,7 +78,7 @@ export function Hero() {
         {/* Taped, torn snapshot + price sticker */}
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative rotate-[3deg] drop-shadow-[10px_12px_0_rgba(0,0,0,0.55)]">
-            <DuotoneImage photo="bandRehearsal" torn={11} tone="natural" halftone={false} className="aspect-[4/3] w-full" />
+            <DuotoneImage photo="bandRehearsalStudio" torn={11} tone="natural" halftone={false} className="aspect-[4/3] w-full" />
             <Tape className="-top-3 left-6" rotate={-24} />
             <Tape className="-right-6 bottom-6" rotate={-62} />
           </div>

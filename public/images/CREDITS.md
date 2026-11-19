@@ -8,6 +8,7 @@ Their source, licence and model consent have **not** been recorded yet.
 | `room-1`, `room-2`, `room-3` | The studio's three rooms (beige, red stripes, purple) | Supplied 2026-11-19. Shown unfiltered on /rooms and in the booking room picker. Drum/amp/speaker maker logos visible. Room order (1 beige, 2 red, 3 purple) confirmed 2026-11-19. |
 | `room-bw-wide` | Empty rehearsal room, drum kit, mics, amps (B/W) | Hero background. Drum maker logo visible. |
 | `room-warm` | Same room, warm light | Drum maker logo visible. |
+| `band-rehearsal-studio` | Four-piece band rehearsing in a studio room | Supplied 2026-11-19. Homepage hero card. Identifiable people — consent needed. Drum/amp maker logos visible. |
 | `band-rehearsal` | Three people rehearsing | Identifiable people — consent needed. Amp/drum logos visible. |
 | `rehearsal-fisheye` | Guitarist, singer, drummer (fisheye) | Identifiable people — consent needed. |
 | `gear-guitars` | Guitars, bass and keyboard by a window | Instrument maker logos visible. |

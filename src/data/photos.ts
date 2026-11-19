@@ -20,6 +20,7 @@ export const photos = {
   room3: { name: 'room-3', widths: [640, 1200, 1600], ratio: 16 / 9, alt: 'Room 3: purple padded walls, a drum kit on a carpeted riser, a guitar amp on a case, a wall fan and two speakers on stands' },
   roomBwWide: { name: 'room-bw-wide', widths: [960, 1920], ratio: 16 / 9, alt: 'Empty rehearsal room with a drum kit, two vocal mics on stands and amplifiers' },
   roomWarm: { name: 'room-warm', widths: [640, 1200], ratio: 1, alt: 'Rehearsal room with drum kit, microphones and amp stacks under warm light' },
+  bandRehearsalStudio: { name: 'band-rehearsal-studio', widths: [640, 1200], ratio: 4 / 3, alt: 'A four-piece band rehearsing in one of the studio rooms: two guitarists, a bassist and a drummer, with mics and pedalboards on the floor' },
   bandRehearsal: { name: 'band-rehearsal', widths: [640, 1200], ratio: 4 / 3, alt: 'A band rehearsing: bassist, drummer and guitarist singing into a mic' },
   rehearsalFisheye: { name: 'rehearsal-fisheye', widths: [640, 1200], ratio: 3 / 4, alt: 'Fisheye view of a guitarist seated mid-rehearsal with the singer and drummer behind' },
   gearGuitars: { name: 'gear-guitars', widths: [640, 1200], ratio: 3 / 2, alt: 'Acoustic and electric guitars, a bass and a keyboard on stands in sunlight' },
