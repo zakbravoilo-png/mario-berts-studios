@@ -33,10 +33,14 @@
     border-radius: var(--radius-sm);
   }
   /*
-   * Soft corners on every bordered box, card, field and dialog. Zero specificity via
-   * :where() and in the base layer, so any rounded-* utility still wins.
+   * Soft corners on every bordered box, card, field and dialog. Class selectors beat
+   * the reset's square buttons; being in the base layer, any rounded-* utility still wins.
    */
-  :where(.border, .border-2, .border-4, .card, dialog) {
+  .border,
+  .border-2,
+  .border-4,
+  .card,
+  dialog {
     border-radius: var(--radius-lg);
   }
   :where(input:not([type='checkbox'], [type='radio'], [type='range'], [type='file']), select, textarea, .tbd-chip, .demo-chip) {
