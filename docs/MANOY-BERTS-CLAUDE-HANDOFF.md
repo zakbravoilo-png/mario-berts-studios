@@ -1192,6 +1192,13 @@ These override earlier sections where they conflict.
     bookings at `/my-booking` with reference + contact number (demo
     only; production needs a one-time-code check). The demo customer
     portal remains as the "signed-in" option.
+-   **Sign-in (demo, client-side only — not security):** customers
+    sign in with contact number + one-time code (code shown on screen;
+    new numbers create an account; guest bookings with the same number
+    appear in the account). Admin signs in with email
+    mario.bertstudios@gmail.com + a **published demo password** (user
+    asked for email + password, 2026-11-19). Never put a real password in
+    the static site; real protection needs a server or Cloudflare Access.
 -   **Booking confirmations by SMS and email:** every booking event
     produces an SMS to the contact number and an email if one was given.
     In the prototype these are **simulated** (demo outbox, admin

@@ -35,7 +35,7 @@ npm run dev        # http://localhost:5173
 | Book without an account | `/book` (rehearsal), `/book/lesson`, `/book/streaming`, `/book/shop`, `/my-booking` (look up by reference + contact number) |
 | Customer sign-in | `/login` — contact number + one-time code (demo code shown on screen). Demo account: **0900 000 0000**. New numbers create an account. Guest bookings with the same number appear in the account. |
 | Customer portal | `/portal` (requires sign-in) — dashboard, bookings, reservations (ticket stubs), shop inquiries, profile |
-| Admin sign-in | `/admin/login` — studio email (mario.bertstudios@gmail.com) + one-time code (shown on screen) |
+| Admin sign-in | `/admin/login` — email **mario.bertstudios@gmail.com** + demo password **demo-admin-2026** (shown on the page on purpose — never put a real password in this static site) |
 | Admin | `/admin` (requires admin sign-in) — bookings + payment review, room schedule, shared inventory, lessons, instructors, streaming, products, messages outbox, settings |
 
 **Try the core journey:** book a room at `/book` → open `/admin/bookings`, verify
@@ -67,7 +67,7 @@ Core logic lives in pure functions: `src/features/booking/availability.ts` and `
 | Data | `localStorage` via `src/services/demoStore.ts` | API (Cloudflare Worker + D1) |
 | Double-booking protection | Client-side checks, re-validated on submit | Server-side, transactional checks |
 | GCash | Placeholder panel, made-up reference, proof file name only | Studio's real GCash instructions; uploads to R2; admin verification |
-| Sign-in | Passwordless one-time code generated and checked **in the browser** and shown on screen; accounts stored locally. Not security. | Server-side auth (SMS/email codes sent for real); Cloudflare Access or similar in front of `/admin` |
+| Sign-in | Passwordless one-time code generated and checked **in the browser** and shown on screen; accounts stored locally. Not security. | Server-side auth (SMS codes sent for real for customers; real admin password or Cloudflare Access in front of `/admin`) |
 | Guest lookup | Reference + contact number | Add a one-time code check |
 | SMS / email confirmations | Generated into a demo outbox (`/admin/messages`) | Server-side sending via an SMS provider and an email provider (studio picks and pays) |
 | Instructors | "Demo Instructor 1…7" with demo schedules | Real names and schedules |

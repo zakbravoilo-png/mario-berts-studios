@@ -140,3 +140,22 @@ export function verifyCode(target: string, input: string): CheckResult {
   }
   return r
 }
+
+// ── admin email + password (demo) ────────────────────────────────────────
+
+/**
+ * DEMO admin password. It is shown on the sign-in page on purpose: anything
+ * checked in the browser ships in the public site code, so a real password must
+ * never be put here. Real admin protection needs a server (or Cloudflare Access).
+ */
+export const DEMO_ADMIN_PASSWORD = 'demo-admin-2026'
+export const ADMIN_LOCK_AFTER = 5
+export const ADMIN_LOCK_MS = 30_000
+
+export type AdminCheck = 'ok' | 'unknown_email' | 'wrong_password'
+
+/** Pure check — unit-tested. */
+export function checkAdminCredentials(email: string, password: string): AdminCheck {
+  if (!ADMIN_EMAILS.includes(email.trim().toLowerCase())) return 'unknown_email'
+  return password === DEMO_ADMIN_PASSWORD ? 'ok' : 'wrong_password'
+}

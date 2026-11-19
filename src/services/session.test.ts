@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { ADMIN_EMAILS, checkCode, CODE_TTL_MS, MAX_ATTEMPTS, newChallenge, normalizeTarget } from './session'
+import { ADMIN_EMAILS, checkAdminCredentials, checkCode, CODE_TTL_MS, DEMO_ADMIN_PASSWORD, MAX_ATTEMPTS, newChallenge, normalizeTarget } from './session'
 import { ownsRecord, findCustomerByPhone } from './accounts'
 import type { Customer } from '../types/domain'
 
@@ -45,5 +45,15 @@ describe('customer ownership', () => {
   })
   it('finds an account by contact number in any format', () => {
     expect(findCustomerByPhone([me], '+639171234567')?.id).toBe('c1')
+  })
+})
+
+describe('demo admin email + password', () => {
+  it('accepts the studio email (any case) with the demo password', () => {
+    expect(checkAdminCredentials(' Mario.BertStudios@gmail.com ', DEMO_ADMIN_PASSWORD)).toBe('ok')
+  })
+  it('rejects a wrong password or another email', () => {
+    expect(checkAdminCredentials('mario.bertstudios@gmail.com', 'nope')).toBe('wrong_password')
+    expect(checkAdminCredentials('someone@example.com', DEMO_ADMIN_PASSWORD)).toBe('unknown_email')
   })
 })
