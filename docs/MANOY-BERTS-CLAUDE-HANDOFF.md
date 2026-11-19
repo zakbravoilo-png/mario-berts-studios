@@ -1215,8 +1215,11 @@ These override earlier sections where they conflict.
     booking from Booking details. On the booking day or later the
     downpayment is kept; before the booking day the studio returns it
     manually via GCash and marks the refund as sent (overview shows a
-    reminder). Unpaid bookings have nothing to return. Customer
-    self-cancellation is unchanged (before the day, non-refundable).
+    reminder). Unpaid bookings have nothing to return.
+-   **Refund policy change (user, 2026-11-19):** the downpayment is no
+    longer non-refundable. Customer cancellations (only allowed before the
+    booking day) also get the downpayment back via a manual GCash refund.
+    This replaces the "non-refundable" rule in §3 and §5.
 -   **Admin booking for a customer:** admin overview has "Book a room",
     the same flow; it links to the customer's account if the contact
     number matches, otherwise it's a guest booking.

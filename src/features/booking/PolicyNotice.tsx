@@ -17,12 +17,10 @@ export function PolicyNotice({ downpaymentRate = defaultSettings.downpaymentRate
               A <strong>{pct}% downpayment via GCash</strong> is required when you book a rehearsal.
             </li>
             <li>
-              The downpayment is <strong>non-refundable</strong>.
+              Cancel <strong>before the day</strong> of your booking (Asia/Manila time) and your downpayment is{' '}
+              <strong>returned via GCash</strong>.
             </li>
-            <li>
-              You may cancel only <strong>before the day</strong> of your booking (Asia/Manila time). Cancelling on the day
-              itself or later is not possible.
-            </li>
+            <li>Cancelling on the booking day itself isn&apos;t possible; the downpayment is then kept.</li>
             <li>How and when the remaining {100 - pct}% is collected: to be confirmed by the studio.</li>
           </ul>
           {!compact && (

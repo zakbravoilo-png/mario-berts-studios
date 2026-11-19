@@ -467,14 +467,14 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
           </dl>
           {confirming === 'pay' ? (
             <ul className="mt-4 list-disc space-y-1 pl-5 marker:text-rust-light">
-              <li>The <strong>{formatPHP(price.downpayment)} downpayment is non-refundable.</strong></li>
-              <li>You can cancel only <strong>before the day</strong> of the booking.</li>
+              <li>Cancel <strong>before the day</strong> of the booking and the {formatPHP(price.downpayment)} downpayment is returned via GCash.</li>
+              <li>You can&apos;t cancel on the booking day itself; the downpayment is then kept.</li>
               <li>Your booking is confirmed once the studio checks your GCash payment.</li>
             </ul>
           ) : (
             <ul className="mt-4 list-disc space-y-1 pl-5 marker:text-rust-light">
               <li>The room is <strong>not held</strong> until you send the {formatPHP(price.downpayment)} downpayment reference from your booking page.</li>
-              <li>The downpayment will be non-refundable, and you can cancel only before the day of the booking.</li>
+              <li>Once paid, cancelling before the booking day gets the downpayment back; no cancellations on the day itself.</li>
             </ul>
           )}
         </ConfirmDialog>

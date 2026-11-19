@@ -61,7 +61,7 @@ export function CancelPanel({ booking: b }: { booking: RehearsalBooking }) {
             <p className="flex items-center gap-2"><CheckCircle2 aria-hidden="true" className="size-4 text-rust-light" /> Refund of {formatPHP(refund.amount)} sent{refund.sentAt ? ` on ${formatDate(refund.sentAt)}` : ''}{refund.reference ? ` (GCash ref ${refund.reference})` : ''}.</p>
           )}
           {!refund && b.cancelledBy === 'studio' && (b.payment.status === 'submitted' || b.payment.status === 'verified') && <p className="text-muted">Downpayment kept (cancelled on the booking day).</p>}
-          {!refund && b.cancelledBy === 'customer' && <p className="text-muted">Customer cancelled before the day — downpayment is non-refundable per the booking policy.</p>}
+          {!refund && b.cancelledBy === 'customer' && <p className="text-muted">Customer cancelled before paying — nothing to return.</p>}
         </div>
       ) : !active ? (
         <p className="mt-2 text-sm text-muted">This booking can&apos;t be cancelled ({b.status.replace(/_/g, ' ')}).</p>

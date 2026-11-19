@@ -16,7 +16,7 @@ export function PriceReceipt({ price, title = 'Booking summary', barcodeValue, r
         { label: 'Downpayment (50%) · GCash', amount: price.downpayment, emphasis: true },
         { label: 'Remaining balance', amount: price.balance },
       ]}
-      footer={<>Downpayment is non-refundable. Cancel only before the booking day.</>}
+      footer={<>Cancel before the booking day for a downpayment refund. No cancellations on the day.</>}
       barcodeValue={barcodeValue}
     />
   )

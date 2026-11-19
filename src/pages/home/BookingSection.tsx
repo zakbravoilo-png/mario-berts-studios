@@ -62,11 +62,10 @@ export function BookingSection() {
                       A <strong>{pct}% downpayment via GCash</strong> is required when you book.
                     </li>
                     <li>
-                      The downpayment is <strong>non-refundable</strong>.
+                      Cancel <strong>before the day</strong> of your booking (Asia/Manila time) and your downpayment is{' '}
+                      <strong>returned via GCash</strong>.
                     </li>
-                    <li>
-                      You may cancel only <strong>before the day</strong> of your booking (Asia/Manila time).
-                    </li>
+                    <li>Cancelling on the booking day itself isn&apos;t possible; the downpayment is then kept.</li>
                     <li>How and when the remaining {pct}% is collected: to be confirmed by the studio.</li>
                   </ul>
                   <p className="mt-3 text-xs text-muted">
@@ -106,7 +105,7 @@ export function BookingSection() {
                   { label: `Downpayment (${pct}%) · GCash`, amount: example.downpayment, emphasis: true },
                   { label: 'Remaining balance', amount: example.balance },
                 ]}
-                footer={<>Downpayment is non-refundable. Cancel only before the booking day.</>}
+                footer={<>Cancel before the booking day for a downpayment refund. No cancellations on the day.</>}
               />
             </div>
 

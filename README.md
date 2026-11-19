@@ -52,7 +52,7 @@ acoustic guitar and the extra bass amp are taken, and a lesson blocks Room 3 at 
 - Hours 9:00 AM – 9:00 PM, **Asia/Manila**; all times stored with `+08:00` and compared as instants (tests run with `TZ=UTC` to prove it).
 - 3 rooms, ₱250 per hour per room, standard kit included (never an add-on).
 - Optional rentals charged **once per booking** (not per hour), limited by **shared stock across all rooms** for overlapping times.
-- 50% GCash downpayment (non-refundable); cancel only **before the booking day**. Policy shown — and acknowledged — before submitting.
+- 50% GCash downpayment, checked manually by the studio. Cancel **before the booking day** (customer or studio) and the downpayment is returned manually via GCash; no customer cancellations on the day itself, and a studio cancellation on the day keeps the downpayment. Policy shown — and confirmed — before submitting.
 - Room overlap check covers rehearsals **and lessons**; adjacent bookings are allowed; no buffer invented.
 - Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free).
 - Booking statuses: awaiting payment → awaiting verification → confirmed → completed; cancelled; rejected (demo).

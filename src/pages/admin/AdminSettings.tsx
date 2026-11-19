@@ -18,7 +18,7 @@ export function AdminSettings() {
   const confirmed: [string, string][] = [
     ['Operating hours', `${st.openTime}–${st.closeTime} (Asia/Manila)`],
     ['Room rate', `${formatPHP(st.roomRatePerHour)} per hour, per room`],
-    ['Downpayment', `${Math.round(st.downpaymentRate * 100)}% via GCash, non-refundable`],
+    ['Downpayment', `${Math.round(st.downpaymentRate * 100)}% via GCash; returned manually if cancelled before the booking day, kept on the day`],
     ['Cancellation', 'Only before the day of the booking'],
     ['Live gig streaming', `${formatPHP(st.streamingRatePerHour)} per hour`],
     ['Lesson — beginner', `${formatPHPOrTbd(st.lessonPrices.beginner)} · ${st.lessonDurationMinutes.beginner} min`],

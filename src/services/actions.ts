@@ -166,13 +166,27 @@ export function adminRejectBooking(bookingId: string, note: string): Result<null
   return { ok: true, value: null }
 }
 
-/** Customer cancellation — only before the booking day (Asia/Manila). Downpayment is non-refundable. */
+/**
+ * Customer cancellation — only before the booking day (Asia/Manila). If a downpayment was
+ * paid, it is returned manually via GCash by the studio (user rule, 2026-11-19).
+ */
 export function cancelBooking(bookingId: string): Result<null> {
   const b = getState().bookings.find((x) => x.id === bookingId)
   if (!b) return { ok: false, errors: ['Booking not found.'] }
   if (!['awaiting_payment', 'awaiting_verification', 'confirmed'].includes(b.status)) return { ok: false, errors: ['This booking can no longer be cancelled.'] }
   if (!canCustomerCancel(b.startAt)) return { ok: false, errors: ['Cancellation is only possible before the day of the booking.'] }
-  updateBooking(bookingId, (x) => ({ ...x, status: 'cancelled', cancelledAt: nowIso(), cancelledBy: 'customer' }), 'booking_cancelled')
+  const paid = b.payment.status === 'submitted' || b.payment.status === 'verified'
+  updateBooking(
+    bookingId,
+    (x) => ({
+      ...x,
+      status: 'cancelled',
+      cancelledAt: nowIso(),
+      cancelledBy: 'customer',
+      payment: paid ? { ...x.payment, refund: { amount: x.downpaymentRequired, status: 'due', sentAt: null, reference: null } } : x.payment,
+    }),
+    'booking_cancelled',
+  )
   return { ok: true, value: null }
 }
 

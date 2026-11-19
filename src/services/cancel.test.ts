@@ -28,3 +28,24 @@ describe('studio cancellation and the downpayment', () => {
     expect(rehearsalNotifications('booking_cancelled', kept, '2026-11-16T10:00:00+08:00')[0]!.body).toMatch(/not refunded/)
   })
 })
+
+describe('customer cancellation before the day', () => {
+  it('creates a manual GCash refund when a downpayment was paid', async () => {
+    const { cancelBooking } = await import('./actions')
+    const { getState } = await import('./demoStore')
+    const target = getState().bookings.find((b) => b.id === 'bk-seed-4')! // confirmed, 2 days ahead, paid
+    expect(cancelBooking(target.id).ok).toBe(true)
+    const after = getState().bookings.find((b) => b.id === target.id)!
+    expect(after.status).toBe('cancelled')
+    expect(after.cancelledBy).toBe('customer')
+    expect(after.payment.refund).toMatchObject({ amount: target.downpaymentRequired, status: 'due' })
+  })
+
+  it('owes nothing when nothing was paid', async () => {
+    const { cancelBooking } = await import('./actions')
+    const { getState } = await import('./demoStore')
+    const unpaidId = getState().bookings.find((b) => b.status === 'awaiting_payment')!.id
+    expect(cancelBooking(unpaidId).ok).toBe(true)
+    expect(getState().bookings.find((b) => b.id === unpaidId)!.payment.refund).toBeUndefined()
+  })
+})

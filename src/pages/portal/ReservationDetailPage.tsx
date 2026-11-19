@@ -51,7 +51,7 @@ export function ReservationDetailPage() {
   )
 }
 
-function CancelSection({ startAt, onCancel, nonRefundable }: { startAt: string; onCancel: () => string[] | null; nonRefundable?: number }) {
+function CancelSection({ startAt, onCancel, refundAmount }: { startAt: string; onCancel: () => string[] | null; refundAmount?: number }) {
   const now = useNow()
   const [confirming, setConfirming] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -67,14 +67,14 @@ function CancelSection({ startAt, onCancel, nonRefundable }: { startAt: string; 
         <>
           <p className="mt-2 text-sm text-paper/90">
             You can cancel until the end of the day before ({formatDate(startAt)} is the booking day).
-            {nonRefundable !== undefined && <> The {formatPHP(nonRefundable)} downpayment is <strong>non-refundable</strong>.</>}
+            {refundAmount !== undefined && <> Your {formatPHP(refundAmount)} downpayment will be <strong>returned via GCash</strong>.</>}
           </p>
           <button type="button" className="btn btn-ghost mt-4" onClick={() => setConfirming(true)}>Cancel this booking…</button>
         </>
       ) : (
         <div className="mt-3 space-y-3">
           <Callout tone="warning" title="Cancel for good?">
-            {nonRefundable !== undefined ? <>The {formatPHP(nonRefundable)} downpayment will not be refunded. </> : null}This can&apos;t be undone in the demo.
+            {refundAmount !== undefined ? <>The studio will return your {formatPHP(refundAmount)} downpayment via GCash. </> : null}This can&apos;t be undone in the demo.
           </Callout>
           <div className="flex flex-wrap gap-3">
             <button type="button" className="btn btn-primary" onClick={() => setErrors(onCancel() ?? [])}>Yes, cancel</button>
@@ -141,11 +141,11 @@ export function RehearsalDetail({ booking: b, back }: { booking: RehearsalBookin
                     ? `Your ${formatPHP(b.payment.refund.amount)} downpayment was returned via GCash${b.payment.refund.reference ? ` (ref ${b.payment.refund.reference})` : ''}.`
                     : b.payment.status === 'not_submitted'
                       ? 'No downpayment was paid.'
-                      : 'The downpayment is non-refundable.'}
+                      : 'The downpayment is kept (cancelled on the booking day).'}
               </p>
             )}
           </section>
-          {live && <CancelSection startAt={b.startAt} nonRefundable={b.downpaymentRequired} onCancel={() => { const r = cancelBooking(b.id); return r.ok ? null : r.errors }} />}
+          {live && <CancelSection startAt={b.startAt} refundAmount={b.payment.status === 'submitted' || b.payment.status === 'verified' ? b.downpaymentRequired : undefined} onCancel={() => { const r = cancelBooking(b.id); return r.ok ? null : r.errors }} />}
           <SentMessages reference={b.reference} />
           <PolicyNotice compact />
         </div>

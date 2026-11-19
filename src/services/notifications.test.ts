@@ -23,9 +23,9 @@ describe('booking confirmations (simulated SMS + email)', () => {
     expect(msgs[0]!.body).toMatch(/not confirmed/i)
   })
 
-  it('mentions the non-refundable downpayment when payment is submitted', () => {
+  it('explains the refund-before-the-day rule when payment is submitted', () => {
     const [sms] = rehearsalNotifications('payment_submitted', booking, '2026-11-16T10:00:00+08:00')
-    expect(sms!.body).toContain('non-refundable')
+    expect(sms!.body).toMatch(/before the booking day/)
   })
 })
 

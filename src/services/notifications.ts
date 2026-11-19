@@ -25,7 +25,7 @@ function footer() {
 
 function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: string; subject: string; email: string } {
   const head = `${b.reference} · ${roomName(b.roomId)} · ${when(b.startAt, b.endAt)}`
-  const money = `Total ${formatPHP(b.total)}; 50% downpayment ${formatPHP(b.downpaymentRequired)} via GCash (non-refundable); balance ${formatPHP(b.balance)}.`
+  const money = `Total ${formatPHP(b.total)}; 50% downpayment ${formatPHP(b.downpaymentRequired)} via GCash (returned if you cancel before the booking day); balance ${formatPHP(b.balance)}.`
   const policy = 'You may cancel only before the day of the booking.'
   const gear = b.selectedEquipment.length ? `Extra gear: ${b.selectedEquipment.map((e) => `${e.quantity}× ${equipmentLabel(e, rentalEquipment, true)}`).join(', ')}.` : 'No extra gear.'
   switch (event) {
@@ -37,7 +37,7 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
       }
     case 'payment_submitted':
       return {
-        sms: `${STUDIO}: We got your GCash reference for ${head}. Awaiting verification — not confirmed yet. ${formatPHP(b.downpaymentRequired)} downpayment is non-refundable.`,
+        sms: `${STUDIO}: We got your GCash reference for ${head}. Awaiting verification — not confirmed yet. Cancel before the booking day and the ${formatPHP(b.downpaymentRequired)} downpayment is returned.`,
         subject: `Booking ${b.reference} received — awaiting payment verification`,
         email: `Hi ${b.customer.name},\n\nThanks! We received your booking ${head} and your GCash reference ${b.payment.reference ?? ''}.\nStatus: awaiting payment verification. We'll confirm once the downpayment is verified.\n\n${money}\n${gear}\n${policy}`,
       }
@@ -57,7 +57,7 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
           ? 'No downpayment was received, so nothing is owed.'
           : byStudio
             ? 'As this is on the day of the booking, the downpayment is not refunded.'
-            : 'As stated when you booked, the downpayment is non-refundable.'
+            : 'The downpayment is kept.'
       const why = byStudio && b.cancelReason ? ` Reason: ${b.cancelReason}` : ''
       return {
         sms: `${STUDIO}: Booking ${b.reference} (${when(b.startAt, b.endAt)}) is cancelled${byStudio ? ' by the studio' : ''}. ${money}`,
