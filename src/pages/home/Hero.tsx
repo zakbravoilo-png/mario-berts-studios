@@ -84,7 +84,7 @@ export function Hero() {
             <Tape className="-top-3 left-6" rotate={-24} />
             <Tape className="-right-6 bottom-6" rotate={-62} />
           </div>
-          <p className="marker absolute -bottom-10 left-2 -rotate-6 text-lg text-paper">turn it up</p>
+          <p className="marker absolute -bottom-10 left-2 -rotate-6 text-lg text-paper">turn it up!!!</p>
           <div className="absolute -top-10 right-2 grid size-28 -rotate-12 place-items-center rounded-full border-4 border-rust bg-paper text-ink shadow-[4px_4px_0_0_var(--color-ink)] sm:-right-4 sm:size-32">
             <p className="text-center leading-none">
               <span className="display block text-[2.1rem] sm:text-[2.4rem]">{rate}</span>
