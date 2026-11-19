@@ -1129,16 +1129,23 @@ prototype unless necessary:
     Dama De Noche St., Don Francisco Village, Jaro, Iloilo City,
     Philippines 5000; email mario.bertstudios@gmail.com; preferred
     contact is Facebook Messenger. Phone 0921 265 1898. Still open: the
-    Facebook/Messenger page link.
+    Facebook/Messenger page link — **decided 2026-11-19:** customers
+    contact the studio through its Facebook page manually for now; no
+    link on the site.
 2.  What are the exact booking slot increments and minimum/maximum
-    rehearsal durations?
+    rehearsal durations? **Answered:** whole hours, 1-hour minimum
+    (current behaviour). Maximum: until closing time.
 3.  Is there any setup/teardown buffer between bookings?
 4.  Is same-day booking allowed?
 5.  ~~Is acoustic guitar rental available, and how many units?~~
     **Answered:** yes, 1 unit.
 6.  Are extra microphone and cable always a single rental kit?
 7.  Is the keyboard and cable rental one kit?
-8.  Does the 50% downpayment rule apply to lessons and live gig
+8.  **Answered for lessons:** no downpayment — students pay the full
+    fee on the day, at the studio. Each lesson fee is split 70% to the
+    instructor and 30% to the studio (admin shows per-lesson splits
+    and instructor payout totals). Streaming still open.
+    Original question: does the 50% downpayment rule apply to lessons and live gig
     streaming, or only rehearsal reservations?
 9.  ~~When and how is the remaining 50% collected?~~ **Answered:**
     after the rehearsal, in cash at the studio or by GCash (checked

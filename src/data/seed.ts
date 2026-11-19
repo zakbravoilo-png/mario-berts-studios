@@ -137,6 +137,7 @@ export function createSeed(now: number = Date.now(), settings: BusinessSettings 
   const lessons: LessonRequest[] = [
     lesson(1, { customerId: 'cust-e', customer: other('Sample Student E', ''), lessonType: 'drums', level: 'beginner', instructorId: 'inst-1', roomId: 'room-3', date: d(1), start: '14:00', status: 'requested' }),
     lesson(2, { customerId: me.id, customer: me, lessonType: 'piano', level: 'intermediate', instructorId: 'inst-4', roomId: 'room-2', date: d(3), start: '10:00', status: 'confirmed' }),
+    lesson(4, { customerId: 'cust-e', customer: other('Sample Student E', ''), lessonType: 'drums', level: 'beginner', instructorId: 'inst-1', roomId: 'room-1', date: d(-3), start: '10:00', status: 'completed' }),
     lesson(3, { customerId: 'cust-f', customer: other('Sample Student F', ''), lessonType: 'keyboard', level: 'beginner', instructorId: 'inst-4', roomId: 'room-3', date: d(2), start: '11:00', status: 'requested' }),
   ]
 

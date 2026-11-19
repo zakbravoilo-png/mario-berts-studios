@@ -22,6 +22,8 @@ export function AdminSettings() {
     ['Remaining balance', 'Paid after the rehearsal, cash at the studio or GCash (checked manually)'],
     ['Cancellation', 'Only before the day of the booking'],
     ['Live gig streaming', `${formatPHP(st.streamingRatePerHour)} per hour`],
+    ['Lesson payment', 'Full fee on the day, at the studio; split 70% instructor / 30% studio'],
+    ['Rehearsal slot / minimum', `${st.slotMinutes} min / ${st.minBookingHours} hr`],
     ['Lesson — beginner', `${formatPHPOrTbd(st.lessonPrices.beginner)} · ${st.lessonDurationMinutes.beginner} min`],
     ['Lesson — intermediate', `${formatPHPOrTbd(st.lessonPrices.intermediate)} · ${st.lessonDurationMinutes.intermediate} min`],
   ]
@@ -39,7 +41,6 @@ export function AdminSettings() {
       <section aria-labelledby="demo-title" className="mt-6 border border-dashed border-slate p-4">
         <h2 id="demo-title" className="font-semibold">Demo assumptions (owner to confirm)</h2>
         <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
-          <div><dt className="text-muted">Rehearsal slot / minimum</dt><dd className="m-0">{st.slotMinutes} min / {st.minBookingHours} hr</dd></div>
           <div><dt className="text-muted">Lesson start increments</dt><dd className="m-0">{st.lessonSlotMinutes} min</dd></div>
           <div><dt className="text-muted">Turnaround buffer</dt><dd className="m-0">None (not specified)</dd></div>
           <div><dt className="text-muted">Same-day booking</dt><dd className="m-0">Allowed (not specified)</dd></div>

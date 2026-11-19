@@ -235,11 +235,11 @@ export function LessonBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'gues
           <div><dt className="text-muted">When</dt><dd className="m-0 font-semibold">{formatDate(range.startAt)}, {formatRange(range.startAt, range.endAt)}</dd></div>
           <div><dt className="text-muted">Instructor</dt><dd className="m-0">{instName(d.instructorId)} (demo)</dd></div>
           <div><dt className="text-muted">Room (assigned)</dt><dd className="m-0">{room ? roomName(room.id) : 'No room free — pick another time'}</dd></div>
-          <div><dt className="text-muted">Price</dt><dd className="m-0 font-mono font-bold">{formatPHPOrTbd(s.settings.lessonPrices[d.level])} per session</dd></div>
+          <div><dt className="text-muted">Price</dt><dd className="m-0 font-mono font-bold">{formatPHPOrTbd(s.settings.lessonPrices[d.level])} per session</dd><dd className="m-0 text-xs text-muted">Paid in full on the day</dd></div>
           <div><dt className="text-muted">Contact</dt><dd className="m-0">{d.details.name} · {[d.details.email, d.details.phone].filter(Boolean).join(' · ')}</dd></div>
         </dl>
         <Callout tone="info" title="Request, not a confirmed booking">
-          The studio will confirm your lesson. Payment terms for lessons (for example whether a downpayment applies) are to be confirmed by the studio — nothing is charged here.
+          The studio will confirm your lesson. You pay the full lesson fee on the day, at the studio. Nothing is paid online.
         </Callout>
         {submitErrors.length > 0 && (
           <Callout tone="error" title="This lesson can't be requested">

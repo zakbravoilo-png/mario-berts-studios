@@ -54,7 +54,7 @@ acoustic guitar and the extra bass amp are taken, and a lesson blocks Room 3 at 
 - Optional rentals charged **once per booking** (not per hour), limited by **shared stock across all rooms** for overlapping times.
 - 50% GCash downpayment, checked manually by the studio. Cancel **before the booking day** (customer or studio) and the downpayment is returned manually via GCash; no customer cancellations on the day itself, and a studio cancellation on the day keeps the downpayment. Policy shown — and confirmed — before submitting. The remaining 50% is paid after the rehearsal, in cash or by GCash.
 - Room overlap check covers rehearsals **and lessons**; adjacent bookings are allowed; no buffer invented.
-- Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free).
+- Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free). Students pay the full fee on the day; admin splits each fee 70% instructor / 30% studio and shows payout totals (`src/features/lessons/split.ts`).
 - Booking statuses: awaiting payment → awaiting verification → confirmed → completed; cancelled; rejected (demo).
 - Example from the brief is unit-tested: ₱970 total, ₱485 down, ₱485 balance.
 
@@ -83,12 +83,10 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 
 ## Still to confirm with the studio
 
-Booking slot size and min/max duration (demo: 1-hour slots, 1-hour minimum) ·
-turnaround buffer · same-day booking · whether mic and keyboard rentals are kits ·
-lesson payment and cancellation terms
-(demo applies "before the day") · whether stock/rooms are held while awaiting
+Turnaround buffer · same-day booking · whether mic and keyboard rentals are kits ·
+lesson cancellation terms (demo applies "before the day") · whether stock/rooms are held while awaiting
 verification or while a lesson is requested (demo: yes) · rescheduling · real
-instructors · streaming packages · string gauges, drumstick brand/size and stock · Messenger page link ·
+instructors · streaming packages · string gauges, drumstick brand/size and stock ·
 review of the draft privacy notice at `/privacy` (RA 10173) · rights to the photos in `public/images/` (see
 `public/images/CREDITS.md`).
 

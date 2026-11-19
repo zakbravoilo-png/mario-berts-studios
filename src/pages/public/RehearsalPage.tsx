@@ -45,8 +45,7 @@ export function RehearsalPage() {
           <SectionTitle eyebrow="How the price works">Room + gear, once</SectionTitle>
           <ul className="mt-6 list-disc space-y-2 pl-5 text-paper/90 marker:text-rust-light">
             <li>
-              Room: hours × {formatPHP(s.roomRatePerHour)}. Bookings use whole hours in this prototype (demo setting; slot
-              size to be confirmed by the studio).
+              Room: hours × {formatPHP(s.roomRatePerHour)}. Bookings are in whole hours, 1 hour minimum.
             </li>
             <li>Extra gear: each item&apos;s price is charged once per booking, not per hour.</li>
             <li>Downpayment: 50% of the total, via GCash, when you book. The other 50% is paid after your rehearsal, in cash at the studio or by GCash.</li>

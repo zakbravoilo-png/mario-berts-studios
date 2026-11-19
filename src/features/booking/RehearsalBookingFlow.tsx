@@ -224,7 +224,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
             caption={`Room availability for ${formatDate(d.date, true)}`}
           />
         </div>
-        <p className="mt-3 text-xs text-muted">Demo settings: 1-hour slots, 1-hour minimum, same-day booking allowed — all to be confirmed by the studio. Availability is mock data, not live.</p>
+        <p className="mt-3 text-xs text-muted">Bookings start on the hour, 1 hour minimum. Demo: same-day booking allowed (to be confirmed); availability is mock data, not live.</p>
       </>
     )
   } else if (d.step === 1 && startAt) {
@@ -284,7 +284,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
             )
           })}
         </div>
-        <p className="mt-3 text-xs text-muted">Minimum and maximum durations are demo settings, to be confirmed by the studio.</p>
+        <p className="mt-3 text-xs text-muted">1 hour minimum. Demo: the maximum is limited only by closing time.</p>
       </fieldset>
     )
   } else if (d.step === 3 && range) {

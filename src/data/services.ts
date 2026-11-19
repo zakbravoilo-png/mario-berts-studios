@@ -50,6 +50,7 @@ export const studioContact: {
   phone: '0921 265 1898',
   phoneHref: 'tel:+639212651898',
   email: 'mario.bertstudios@gmail.com',
+  // User (2026-11-19): contact through the Facebook page manually for now; no link on the site.
   messenger: { label: 'Facebook Messenger', url: null },
   socials: [],
 }

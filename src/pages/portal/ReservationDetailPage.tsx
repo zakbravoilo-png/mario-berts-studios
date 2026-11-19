@@ -165,7 +165,7 @@ export function LessonDetail({ lesson: l, instructorName, back }: { lesson: Less
       <PortalHeader title={`Lesson ${l.reference}`} eyebrow="Lesson request" />
       <LessonTicket lesson={l} instructorName={instructorName} />
       <div className="mt-8 max-w-2xl space-y-6">
-        {l.status === 'requested' && <Callout tone="info" title="Awaiting studio response">The studio will confirm this lesson (demo admin action). Payment terms for lessons are to be confirmed by the studio.</Callout>}
+        {l.status === 'requested' && <Callout tone="info" title="Awaiting studio response">The studio will confirm this lesson (demo admin action). You pay the full lesson fee on the day, at the studio. Nothing is paid online.</Callout>}
         {live && (
           <CancelSection
             startAt={l.startAt}

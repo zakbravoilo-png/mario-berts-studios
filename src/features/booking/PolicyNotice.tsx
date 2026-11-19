@@ -21,7 +21,7 @@ export function PolicyNotice({ downpaymentRate = defaultSettings.downpaymentRate
               <strong>returned via GCash</strong>.
             </li>
             <li>Cancelling on the booking day itself isn&apos;t possible; the downpayment is then kept.</li>
-            <li>How and when the remaining {100 - pct}% is collected: to be confirmed by the studio.</li>
+            <li>The remaining {100 - pct}% is paid <strong>after your rehearsal</strong>, in cash at the studio or by GCash.</li>
           </ul>
           {!compact && (
             <p className="mt-3 text-xs text-muted">

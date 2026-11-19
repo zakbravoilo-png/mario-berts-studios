@@ -94,13 +94,13 @@ function lessonText(event: NotificationEvent, l: LessonRequest, instructorName: 
       return {
         sms: `${STUDIO}: Lesson request ${head} received. Awaiting studio confirmation.`,
         subject: `Lesson request ${l.reference} received`,
-        email: `Hi ${l.customer.name},\n\nWe received your lesson request: ${head}, with ${instructorName}. Price: ${price} per session.\nWe'll confirm soon. Payment terms for lessons are to be confirmed by the studio.`,
+        email: `Hi ${l.customer.name},\n\nWe received your lesson request: ${head}, with ${instructorName}. Price: ${price} per session.\nWe'll confirm soon. You pay the full fee on the day, at the studio.`,
       }
     case 'lesson_confirmed':
       return {
-        sms: `${STUDIO}: Lesson CONFIRMED ${head} with ${instructorName}.`,
+        sms: `${STUDIO}: Lesson CONFIRMED ${head} with ${instructorName}. Pay ${price} on the day.`,
         subject: `Lesson ${l.reference} confirmed`,
-        email: `Hi ${l.customer.name},\n\nYour lesson is CONFIRMED: ${head}, with ${instructorName}. Price: ${price} per session.`,
+        email: `Hi ${l.customer.name},\n\nYour lesson is CONFIRMED: ${head}, with ${instructorName}. Price: ${price}, paid in full on the day at the studio.`,
       }
     case 'lesson_declined':
       return {

@@ -35,7 +35,7 @@ export function ContactDetails({ compact = false }: { compact?: boolean }) {
             ) : (
               <>
                 {c.messenger.label}
-                <span className="block text-xs text-muted">Page link to be provided by studio</span>
+                <span className="block text-xs text-muted">Message the studio on its Facebook page</span>
               </>
             )}
           </dd>
