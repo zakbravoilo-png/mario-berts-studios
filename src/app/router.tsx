@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router'
 import { PublicLayout } from './layouts/PublicLayout'
+import { RouteError } from './RouteError'
 import { PortalLayout } from './layouts/PortalLayout'
 import { AdminLayout } from './layouts/AdminLayout'
 import { HomePage } from '../pages/HomePage'
@@ -17,6 +18,7 @@ import { ContactPage } from '../pages/public/ContactPage'
 export const router = createBrowserRouter([
   {
     element: <PublicLayout />,
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'about', element: <AboutPage /> },
@@ -40,6 +42,7 @@ export const router = createBrowserRouter([
   {
     path: 'portal',
     element: <PortalLayout />,
+    errorElement: <RouteError />,
     children: [
       { index: true, lazy: async () => ({ Component: (await import('../pages/portal/PortalDashboard')).PortalDashboard }) },
       { path: 'book/rehearsal', lazy: async () => ({ Component: (await import('../features/booking/RehearsalBookingFlow')).RehearsalBookingFlow }) },
@@ -52,10 +55,11 @@ export const router = createBrowserRouter([
       { path: '*', element: <NotFoundPage /> },
     ],
   },
-  { path: 'admin/login', lazy: async () => ({ Component: (await import('../pages/admin/AdminLoginPage')).AdminLoginPage }) },
+  { path: 'admin/login', errorElement: <RouteError />, lazy: async () => ({ Component: (await import('../pages/admin/AdminLoginPage')).AdminLoginPage }) },
   {
     path: 'admin',
     element: <AdminLayout />,
+    errorElement: <RouteError />,
     children: [
       { index: true, lazy: async () => ({ Component: (await import('../pages/admin/AdminOverview')).AdminOverview }) },
       { path: 'bookings', lazy: async () => ({ Component: (await import('../pages/admin/AdminBookings')).AdminBookings }) },

@@ -12,6 +12,9 @@ import '@fontsource/permanent-marker/400.css'
 import '@fontsource/rubik-dirt/latin-400.css'
 import './styles/index.css'
 import { router } from './app/router'
+import { installStaleBuildHandler } from './app/staleBuild'
+
+installStaleBuildHandler()
 
 const root = document.getElementById('root')
 if (!root) throw new Error('Root element #root not found')
