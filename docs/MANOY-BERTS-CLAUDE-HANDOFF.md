@@ -1225,6 +1225,11 @@ These override earlier sections where they conflict.
     number matches, otherwise it's a guest booking.
 -   **Admin schedule:** booked cells link to booking details; lesson
     cells to lesson requests.
+-   **Homepage tone (user, 2026-11-19):** no "50% downpayment" wording on
+    the homepage (felt too harsh). It shows a friendly "Good to know" note
+    instead. The full payment terms are still disclosed before the customer
+    commits: booking review step + confirmation prompt, Rates and Rehearsal
+    pages.
 -   **Booking confirmations by SMS and email:** every booking event
     produces an SMS to the contact number and an email if one was given.
     In the prototype these are **simulated** (demo outbox, admin

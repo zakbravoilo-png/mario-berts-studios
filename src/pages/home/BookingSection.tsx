@@ -1,15 +1,14 @@
 import { Link } from 'react-router'
-import { AlertTriangle, ArrowRight } from 'lucide-react'
+import { ArrowRight, CalendarCheck } from 'lucide-react'
 import { Grain, Receipt, TapeLabel, TicketStub } from '../../components/grunge'
 import { priceRehearsal } from '../../features/booking/pricing'
-import { defaultSettings } from '../../data/settings'
 import { formatPHP } from '../../utils/money'
 
 const steps = [
   { n: '01', title: 'Pick a date & time', body: 'See which of the three rooms are free, 9 AM to 9 PM.' },
   { n: '02', title: 'Choose your room', body: 'Every room has the same standard kit included.' },
   { n: '03', title: 'Add extra gear', body: 'Optional rentals, charged once per booking, limited by shared stock.' },
-  { n: '04', title: 'Pay 50% via GCash', body: 'Send the downpayment and your reference. The studio verifies it, then confirms.' },
+  { n: '04', title: 'Confirm with GCash', body: 'Send your GCash reference and the studio confirms your booking.' },
 ]
 
 /** Worked example from the handoff (§5B): must total 970 / 485 / 485. */
@@ -20,7 +19,6 @@ const example = priceRehearsal(3, [
 ])
 
 export function BookingSection() {
-  const pct = Math.round(defaultSettings.downpaymentRate * 100)
   return (
     <section aria-labelledby="booking-title" className="wall relative overflow-hidden">
       <Grain fine={0.2} coarse={0.32} />
@@ -49,24 +47,21 @@ export function BookingSection() {
               ))}
             </ol>
 
-            {/* Policy disclosure — plain panel, icon + text, not colour alone. */}
-            <div role="note" aria-labelledby="policy-title" className="mt-8 border-2 border-paper bg-ink p-5">
+            {/* Friendly summary. Full payment terms are shown in the booking flow before anyone commits. */}
+            <div role="note" aria-labelledby="policy-title" className="mt-8 border border-slate bg-ink p-5">
               <div className="flex items-start gap-3">
-                <AlertTriangle aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-rust-light" />
+                <CalendarCheck aria-hidden="true" className="mt-0.5 size-6 shrink-0 text-rust-light" />
                 <div>
                   <h3 id="policy-title" className="font-display text-xl tracking-wide text-paper">
-                    Read before you book
+                    Good to know
                   </h3>
                   <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-paper/90 marker:text-rust-light">
                     <li>
-                      A <strong>{pct}% downpayment via GCash</strong> is required when you book.
-                    </li>
-                    <li>
-                      Cancel <strong>before the day</strong> of your booking (Asia/Manila time) and your downpayment is{' '}
+                      Plans changed? Cancel any time <strong>before the day</strong> of your booking and your payment is{' '}
                       <strong>returned via GCash</strong>.
                     </li>
-                    <li>Cancelling on the booking day itself isn&apos;t possible; the downpayment is then kept.</li>
-                    <li>How and when the remaining {pct}% is collected: to be confirmed by the studio.</li>
+                    <li>Bookings can&apos;t be cancelled on the day itself.</li>
+                    <li>You&apos;ll see the full price and payment details before you confirm.</li>
                   </ul>
                   <p className="mt-3 text-xs text-muted">
                     Prototype: GCash is simulated. No payment is processed and no GCash number is shown until the studio
@@ -101,11 +96,7 @@ export function BookingSection() {
                   })),
                 ]}
                 total={example.total}
-                after={[
-                  { label: `Downpayment (${pct}%) · GCash`, amount: example.downpayment, emphasis: true },
-                  { label: 'Remaining balance', amount: example.balance },
-                ]}
-                footer={<>Cancel before the booking day for a downpayment refund. No cancellations on the day.</>}
+                footer={<>Extra gear is charged once, not per hour. Free cancellation before the booking day.</>}
               />
             </div>
 
@@ -119,7 +110,7 @@ export function BookingSection() {
                   { label: 'Time', value: '3 hrs' },
                   { label: 'Room', value: 'Room 2' },
                   { label: 'Total', value: formatPHP(example.total) },
-                  { label: 'Paid', value: `${formatPHP(example.downpayment)} (50%)` },
+                  { label: 'Extra gear', value: '4 items' },
                   { label: 'Status', value: 'Awaiting verification' },
                 ]}
                 footnote="This is what your reservation will look like in the customer portal."

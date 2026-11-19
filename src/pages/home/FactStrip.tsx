@@ -10,7 +10,7 @@ export function FactStrip() {
     `${formatPHP(defaultSettings.roomRatePerHour)} / hour / room`,
     'Open 9 AM – 9 PM',
     'Standard gear included',
-    '50% GCash downpayment',
+    `Lessons from ${formatPHP(defaultSettings.lessonPrices.beginner ?? 0)}`,
   ]
   return (
     <div className="relative overflow-hidden bg-charcoal py-5 text-paper">
