@@ -4,6 +4,9 @@
   "name": "mario-berts-studios",
   // "account_id": "<personal-account-id>",  // set this before any `wrangler deploy` so it can't go to a work account
   "compatibility_date": "2026-11-01",
+  // Staging URL (*.workers.dev) and per-version preview URLs, set explicitly.
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     // Serve index.html for client-side routes like /portal or /admin/bookings

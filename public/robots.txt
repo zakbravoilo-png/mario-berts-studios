@@ -1,0 +1,3 @@
+# Prototype / staging — not for search engines yet
+User-agent: *
+Disallow: /
