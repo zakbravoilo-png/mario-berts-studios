@@ -20,7 +20,7 @@ export function AdminOverview() {
   return (
     <>
       <PortalHeader title="Admin overview" eyebrow={`Today · ${formatDate(today, true)}`} />
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 xl:grid-cols-4">
         <Stat label="Payments to verify" value={awaiting.length} hint={<Link className="underline" to="/admin/bookings?status=awaiting_verification">Review</Link>} />
         <Stat label="Rehearsals today" value={todays.length} />
         <Stat label="Lesson requests" value={lessonReqs.length} hint={<Link className="underline" to="/admin/lessons">Open</Link>} />

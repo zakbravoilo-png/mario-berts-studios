@@ -30,10 +30,10 @@ export function Td({ children, className = '', ...rest }: TdHTMLAttributes<HTMLT
 
 export function Stat({ label, value, hint }: { label: string; value: ReactNode; hint?: ReactNode }) {
   return (
-    <div className="border border-slate bg-surface p-4">
-      <p className="text-xs text-muted">{label}</p>
-      <p className="mt-1 font-mono text-2xl font-bold">{value}</p>
-      {hint && <p className="mt-1 text-xs text-muted">{hint}</p>}
+    <div className="flex flex-col border border-slate bg-surface p-3 sm:p-4">
+      <p className="text-xs leading-snug text-muted">{label}</p>
+      <p className="mt-1 font-mono text-xl font-bold sm:text-2xl">{value}</p>
+      {hint && <p className="mt-auto pt-1 text-xs text-muted">{hint}</p>}
     </div>
   )
 }
