@@ -87,7 +87,8 @@ export function AdminLayout() {
       <div className="lg:grid lg:grid-cols-[15rem_1fr]">
         <aside className="hidden border-r border-slate bg-surface lg:sticky lg:top-0 lg:block lg:h-dvh lg:overflow-y-auto">
           <div className="flex items-baseline gap-2 px-5 py-4">
-            <Link to="/admin" className="font-display text-xl no-underline">
+            <Link to="/admin" className="inline-flex items-center gap-2 font-display text-xl no-underline">
+              <img src="/brand/mbs-mark.svg" alt="" width={594} height={610} className="h-8 w-auto" />
               MBS Admin
             </Link>
           </div>
@@ -96,7 +97,8 @@ export function AdminLayout() {
 
         <div className="min-w-0">
           <div className="flex h-12 items-center justify-between border-b border-slate bg-surface px-4 lg:hidden">
-            <Link to="/admin" className="font-display text-lg no-underline">
+            <Link to="/admin" className="inline-flex items-center gap-2 font-display text-lg no-underline">
+              <img src="/brand/mbs-mark.svg" alt="" width={594} height={610} className="h-7 w-auto" />
               MBS Admin
             </Link>
             <button
