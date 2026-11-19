@@ -20,7 +20,7 @@ export function Logo({ to = '/', size = 'md', suffix }: LogoProps) {
         alt=""
         width={636}
         height={656}
-        className={`${size === 'md' ? 'h-11' : 'h-9'} w-auto shrink-0 transition-transform group-hover:-rotate-6`}
+        className={`${size === 'md' ? 'relative z-10 -my-4 h-[4.75rem] translate-y-3' : 'h-9'} w-auto shrink-0 transition-transform group-hover:-rotate-6`}
       />
       <span className="inline-flex items-end gap-1.5 whitespace-nowrap">
         <span className={`display leading-none text-paper ${size === 'md' ? 'text-[1.9rem]' : 'text-2xl'}`}>
