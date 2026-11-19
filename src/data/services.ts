@@ -49,7 +49,7 @@ export const studioContact: {
   mapUrl: 'https://www.bing.com/maps?cp=10.7273924781~122.56593&lvl=17',
   phone: '0921 265 1898',
   phoneHref: 'tel:+639212651898',
-  email: 'mario.bertstudios@gmail.com',
+  email: 'manoybartstudio@gmail.com',
   // User (2026-11-19): contact through the Facebook page manually for now; no link on the site.
   messenger: { label: 'Facebook Messenger', url: null },
   socials: [],

@@ -1130,7 +1130,7 @@ prototype unless necessary:
 1.  ~~What is the studio's address, contact number, email, and social
     media?~~ **Partly answered (user, 2026-11-16):** address L40 Blk 2
     Dama De Noche St., Don Francisco Village, Jaro, Iloilo City,
-    Philippines 5000; email mario.bertstudios@gmail.com; preferred
+    Philippines 5000; email manoybartstudio@gmail.com; preferred
     contact is Facebook Messenger. Phone 0921 265 1898. Still open: the
     Facebook/Messenger page link — **decided 2026-11-19:** customers
     contact the studio through its Facebook page manually for now; no
@@ -1192,7 +1192,7 @@ These override earlier sections where they conflict.
 -   **Name:** Manoy Bart's Studio (real name, owner's permission 2026-11-19).
 -   **Contact:** address L40 Blk 2 Dama De Noche St., Don Francisco
     Village, Jaro, Iloilo City 5000; phone 0921 265 1898; email
-    mario.bertstudios@gmail.com; preferred channel Facebook Messenger
+    manoybartstudio@gmail.com; preferred channel Facebook Messenger
     (page link TBD).
 -   **Lessons:** beginner PHP 500 / 30 min; intermediate PHP 750 / 1 hour.
 -   **Shop:** Kuting-Kuting Music City Strings — acoustic PHP 200,
@@ -1210,7 +1210,7 @@ These override earlier sections where they conflict.
     sign in with contact number + one-time code (code shown on screen;
     new numbers create an account; guest bookings with the same number
     appear in the account). Admin signs in with email
-    mario.bertstudios@gmail.com + a **published demo password** (user
+    manoybartstudio@gmail.com + a **published demo password** (user
     asked for email + password, 2026-11-19). Never put a real password in
     the static site; real protection needs a server or Cloudflare Access.
 -   **GCash stays manual (user, 2026-11-19):** the customer pays in their

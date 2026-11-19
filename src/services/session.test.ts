@@ -25,7 +25,7 @@ describe('demo one-time codes', () => {
     expect(checkCode(null, target, ch.code, 2_000)).toBe('mismatch')
   })
   it('allows only the studio email into the demo admin', () => {
-    expect(ADMIN_EMAILS).toEqual(['mario.bertstudios@gmail.com'])
+    expect(ADMIN_EMAILS).toEqual(['manoybartstudio@gmail.com'])
   })
 })
 
@@ -50,10 +50,10 @@ describe('customer ownership', () => {
 
 describe('demo admin email + password', () => {
   it('accepts the studio email (any case) with the demo password', () => {
-    expect(checkAdminCredentials(' Mario.BertStudios@gmail.com ', DEMO_ADMIN_PASSWORD)).toBe('ok')
+    expect(checkAdminCredentials(' ManoyBartStudio@gmail.com ', DEMO_ADMIN_PASSWORD)).toBe('ok')
   })
   it('rejects a wrong password or another email', () => {
-    expect(checkAdminCredentials('mario.bertstudios@gmail.com', 'nope')).toBe('wrong_password')
+    expect(checkAdminCredentials('manoybartstudio@gmail.com', 'nope')).toBe('wrong_password')
     expect(checkAdminCredentials('someone@example.com', DEMO_ADMIN_PASSWORD)).toBe('unknown_email')
   })
 })
