@@ -1199,6 +1199,13 @@ These override earlier sections where they conflict.
     mario.bertstudios@gmail.com + a **published demo password** (user
     asked for email + password, 2026-11-19). Never put a real password in
     the static site; real protection needs a server or Cloudflare Access.
+-   **GCash stays manual (user, 2026-11-19):** the customer pays in their
+    GCash app, enters the reference (and optional receipt), and the studio
+    verifies it by hand in admin. The final booking button reads "Confirm
+    downpayment and proceed to book" and opens a confirmation prompt
+    (booking, downpayment, balance, non-refundable, cancel-before-the-day)
+    that replaces the acknowledgement checkbox. Automatic GCash
+    (PayMongo/Xendit) is a later phase.
 -   **Booking confirmations by SMS and email:** every booking event
     produces an SMS to the contact number and an email if one was given.
     In the prototype these are **simulated** (demo outbox, admin

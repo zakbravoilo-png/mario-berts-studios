@@ -19,7 +19,8 @@ import { useNow } from './useNow'
 import { ReservationTicket } from './ReservationTicket'
 import { DuotoneImage } from '../../components/grunge'
 import { Callout } from '../../components/ui/Callout'
-import { Checkbox, TextField } from '../../components/ui/Field'
+import { TextField } from '../../components/ui/Field'
+import { ConfirmDialog } from '../../components/ui/ConfirmDialog'
 import { QtyStepper } from '../../components/ui/QtyStepper'
 import { includedEquipment, roomName } from '../../data/rooms'
 import type { PhotoKey } from '../../data/photos'
@@ -36,7 +37,6 @@ interface Draft {
   hours: number
   equipment: Partial<Record<RentalEquipmentId, number>>
   details: CustomerForm
-  ack: boolean
   gcashRef: string
   proofFileName: string | null
   bookingId: string | null
@@ -58,7 +58,6 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
       hours: 1,
       equipment: {},
       details: guest || !me ? emptyCustomer() : { name: me.name, email: me.email, phone: me.phone, bandName: me.bandName ?? '', notes: '' },
-      ack: false,
       gcashRef: '',
       proofFileName: null,
       bookingId: null,
@@ -70,6 +69,8 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
   const [errors, setErrors] = useState<CustomerErrors>({})
   const [stepError, setStepError] = useState<string | null>(null)
   const [submitErrors, setSubmitErrors] = useState<string[]>([])
+  /** Which confirmation prompt is open on the review step. */
+  const [confirming, setConfirming] = useState<null | 'pay' | 'later'>(null)
 
   const today = todayManila(now)
   const startAt = d.startMin !== null ? manilaIso(d.date, minutesToHhmm(d.startMin)) : null
@@ -129,10 +130,18 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
     update({ hours, equipment: eq })
   }
 
-  function submit(withPayment: boolean) {
+  /** Open the confirmation prompt (payment needs a GCash reference first). */
+  function askToConfirm(kind: 'pay' | 'later') {
     setSubmitErrors([])
-    if (!d.ack) return setStepError('Please confirm you have read the payment and cancellation policy.')
-    if (withPayment && !d.gcashRef.trim()) return setStepError('Enter the GCash reference number (demo), or choose “Save and pay later”.')
+    if (kind === 'pay' && !d.gcashRef.trim()) return setStepError('Enter your GCash reference number first, or choose “Save and pay later”.')
+    setStepError(null)
+    setConfirming(kind)
+  }
+
+  /** Called only from the confirmation prompt — confirming it is the customer's acknowledgement of the policy. */
+  function submit(withPayment: boolean) {
+    setConfirming(null)
+    setSubmitErrors([])
     if (!d.roomId || !startAt) return
     const r = createRehearsalBooking({
       roomId: d.roomId,
@@ -321,25 +330,25 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
         </dl>
         <div className="max-w-sm lg:hidden"><PriceReceipt price={price} roomLabel={roomName(d.roomId)} /></div>
         <PolicyNotice downpaymentRate={s.settings.downpaymentRate} />
-        <Checkbox
-          checked={d.ack}
-          onChange={(e) => update({ ack: e.target.checked })}
-          label={<>I understand the <strong>{formatPHP(price.downpayment)} downpayment is non-refundable</strong> and that I can only cancel before the day of the booking.</>}
-        />
         <section aria-labelledby="gcash-title" className="border-2 border-dashed border-slate p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 id="gcash-title" className="font-display text-xl tracking-wide">Pay the downpayment via GCash</h3>
-            <span className="demo-chip">Demo — simulated</span>
+            <span className="demo-chip">Checked manually by the studio</span>
           </div>
           <p className="mt-2 text-sm">Amount: <strong className="font-mono">{formatPHP(price.downpayment)}</strong> (50% of {formatPHP(price.total)})</p>
           <div className="mt-3 border border-slate bg-ink p-3 text-sm">
             {gcash ? <p className="whitespace-pre-line">{gcash}</p> : <p className="font-semibold">GCash details to be provided by studio.</p>}
           </div>
-          <p className="mt-3 text-sm text-muted">There is no real GCash connection. Enter any made-up reference to try the flow — never a real one.</p>
+          <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-paper/90">
+            <li>Send <strong className="font-mono">{formatPHP(price.downpayment)}</strong> using your GCash app.</li>
+            <li>Enter the GCash reference number below (and attach the receipt if you can).</li>
+            <li>The studio checks the payment by hand and confirms your booking.</li>
+          </ol>
+          <p className="mt-3 text-xs text-muted">Prototype: nothing is sent or charged here. Enter a made-up reference to try the flow — never a real one.</p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <TextField label="GCash reference number (demo)" value={d.gcashRef} onChange={(e) => update({ gcashRef: e.target.value })} placeholder="e.g. DEMO-123456" autoComplete="off" />
+            <TextField label="GCash reference number" value={d.gcashRef} onChange={(e) => update({ gcashRef: e.target.value })} placeholder="e.g. DEMO-123456" autoComplete="off" />
             <TextField
-              label="Proof of payment (demo)"
+              label="GCash receipt screenshot"
               type="file"
               accept="image/*,.pdf"
               optional
@@ -409,9 +418,9 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
       </button>
     ) : d.step === 5 ? (
       <div className="flex flex-wrap gap-3">
-        <button type="button" className="btn btn-ghost" onClick={() => submit(false)}>Save and pay later</button>
-        <button type="button" className="btn btn-primary" onClick={() => submit(true)}>
-          Submit booking &amp; reference <ArrowRight aria-hidden="true" className="size-5" />
+        <button type="button" className="btn btn-ghost" onClick={() => askToConfirm('later')}>Save and pay later</button>
+        <button type="button" className="btn btn-primary" onClick={() => askToConfirm('pay')}>
+          Confirm downpayment and proceed to book <ArrowRight aria-hidden="true" className="size-5" />
         </button>
       </div>
     ) : null
@@ -433,6 +442,36 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
         </p>
       )}
       {d.step < 6 && <FlowNav onBack={d.step > 0 ? () => go(d.step - 1) : undefined} next={nextButton} />}
+      {d.step === 5 && range && d.roomId && (
+        <ConfirmDialog
+          open={confirming !== null}
+          title={confirming === 'pay' ? 'Confirm your downpayment' : 'Save without paying?'}
+          confirmLabel={confirming === 'pay' ? 'Confirm and book' : 'Save booking'}
+          onCancel={() => setConfirming(null)}
+          onConfirm={() => submit(confirming === 'pay')}
+        >
+          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5">
+            <dt className="text-muted">Room</dt><dd className="m-0 font-semibold">{roomName(d.roomId)}</dd>
+            <dt className="text-muted">When</dt><dd className="m-0">{formatDate(range.startAt)}, {formatRange(range.startAt, range.endAt)}</dd>
+            <dt className="text-muted">Total</dt><dd className="m-0 font-mono">{formatPHP(price.total)}</dd>
+            <dt className="text-muted">Downpayment</dt><dd className="m-0 font-mono font-bold">{formatPHP(price.downpayment)} via GCash</dd>
+            {confirming === 'pay' && (<><dt className="text-muted">GCash ref.</dt><dd className="m-0 font-mono break-all">{d.gcashRef.trim()}</dd></>)}
+            <dt className="text-muted">Balance</dt><dd className="m-0 font-mono">{formatPHP(price.balance)} (collection to be confirmed)</dd>
+          </dl>
+          {confirming === 'pay' ? (
+            <ul className="mt-4 list-disc space-y-1 pl-5 marker:text-rust-light">
+              <li>The <strong>{formatPHP(price.downpayment)} downpayment is non-refundable.</strong></li>
+              <li>You can cancel only <strong>before the day</strong> of the booking.</li>
+              <li>Your booking is confirmed once the studio checks your GCash payment.</li>
+            </ul>
+          ) : (
+            <ul className="mt-4 list-disc space-y-1 pl-5 marker:text-rust-light">
+              <li>The room is <strong>not held</strong> until you send the {formatPHP(price.downpayment)} downpayment reference from your booking page.</li>
+              <li>The downpayment will be non-refundable, and you can cancel only before the day of the booking.</li>
+            </ul>
+          )}
+        </ConfirmDialog>
+      )}
     </FlowShell>
   )
 }
