@@ -155,7 +155,7 @@ export function PublicLayout() {
           </div>
           <div className="border-t border-slate">
             <p className="mx-auto max-w-7xl px-4 py-4 text-xs text-muted sm:px-6">
-              © {new Date().getFullYear()} Mario Bert&apos;s Studios. Prototype with demo data. Privacy notice: to be provided by studio.
+              © {new Date().getFullYear()} Mario Bert&apos;s Studios. Prototype with demo data. <Link className="underline hover:text-paper" to="/privacy">Privacy notice (draft)</Link>
             </p>
           </div>
         </div>

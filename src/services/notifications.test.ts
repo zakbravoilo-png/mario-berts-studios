@@ -27,6 +27,12 @@ describe('booking confirmations (simulated SMS + email)', () => {
     const [sms] = rehearsalNotifications('payment_submitted', booking, '2026-11-16T10:00:00+08:00')
     expect(sms!.body).toMatch(/before the booking day/)
   })
+
+  it('says the balance is paid after the rehearsal, by cash or GCash', () => {
+    const [sms, email] = rehearsalNotifications('booking_confirmed', booking, '2026-11-16T10:00:00+08:00')
+    expect(sms!.body).toMatch(/after your rehearsal/)
+    expect(email!.body).toMatch(/after your rehearsal, in cash at the studio or by GCash/)
+  })
 })
 
 describe('guest contact details', () => {

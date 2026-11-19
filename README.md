@@ -52,7 +52,7 @@ acoustic guitar and the extra bass amp are taken, and a lesson blocks Room 3 at 
 - Hours 9:00 AM – 9:00 PM, **Asia/Manila**; all times stored with `+08:00` and compared as instants (tests run with `TZ=UTC` to prove it).
 - 3 rooms, ₱250 per hour per room, standard kit included (never an add-on).
 - Optional rentals charged **once per booking** (not per hour), limited by **shared stock across all rooms** for overlapping times.
-- 50% GCash downpayment, checked manually by the studio. Cancel **before the booking day** (customer or studio) and the downpayment is returned manually via GCash; no customer cancellations on the day itself, and a studio cancellation on the day keeps the downpayment. Policy shown — and confirmed — before submitting.
+- 50% GCash downpayment, checked manually by the studio. Cancel **before the booking day** (customer or studio) and the downpayment is returned manually via GCash; no customer cancellations on the day itself, and a studio cancellation on the day keeps the downpayment. Policy shown — and confirmed — before submitting. The remaining 50% is paid after the rehearsal, in cash or by GCash.
 - Room overlap check covers rehearsals **and lessons**; adjacent bookings are allowed; no buffer invented.
 - Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free).
 - Booking statuses: awaiting payment → awaiting verification → confirmed → completed; cancelled; rejected (demo).
@@ -85,11 +85,11 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 
 Booking slot size and min/max duration (demo: 1-hour slots, 1-hour minimum) ·
 turnaround buffer · same-day booking · whether mic and keyboard rentals are kits ·
-when/how the remaining 50% is collected · lesson payment and cancellation terms
+lesson payment and cancellation terms
 (demo applies "before the day") · whether stock/rooms are held while awaiting
 verification or while a lesson is requested (demo: yes) · rescheduling · real
 instructors · streaming packages · string gauges, drumstick brand/size and stock · Messenger page link ·
-privacy notice (RA 10173) · rights to the photos in `public/images/` (see
+review of the draft privacy notice at `/privacy` (RA 10173) · rights to the photos in `public/images/` (see
 `public/images/CREDITS.md`).
 
 ## Project structure

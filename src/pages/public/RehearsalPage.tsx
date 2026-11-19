@@ -49,7 +49,7 @@ export function RehearsalPage() {
               size to be confirmed by the studio).
             </li>
             <li>Extra gear: each item&apos;s price is charged once per booking, not per hour.</li>
-            <li>Downpayment: 50% of the total, via GCash, when you book. The other 50% is the remaining balance.</li>
+            <li>Downpayment: 50% of the total, via GCash, when you book. The other 50% is paid after your rehearsal, in cash at the studio or by GCash.</li>
           </ul>
           <div className="relative mt-8 max-w-sm">
             <TapeLabel tone="rust" rotate={-3} className="absolute -top-3 left-4 z-10">

@@ -13,6 +13,7 @@ import { RoomsPage } from '../pages/public/RoomsPage'
 import { RatesPage } from '../pages/public/RatesPage'
 import { ShopPage } from '../pages/public/ShopPage'
 import { AboutPage } from '../pages/public/AboutPage'
+import { PrivacyPage } from '../pages/public/PrivacyPage'
 import { ContactPage } from '../pages/public/ContactPage'
 
 export const router = createBrowserRouter([
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'about', element: <AboutPage /> },
+      { path: 'privacy', element: <PrivacyPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'services/rehearsal', element: <RehearsalPage /> },
       { path: 'services/lessons', element: <LessonsPage /> },

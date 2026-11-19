@@ -10,6 +10,7 @@ import { roomName } from '../data/rooms'
 import { equipmentLabel, rentalEquipment } from '../data/rentalEquipment'
 import { lessonLabel, levelLabel, studioContact } from '../data/services'
 import { formatPHP } from '../utils/money'
+import { BALANCE_COLLECTION } from '../data/settings'
 import { formatDate, formatRange } from '../utils/time'
 
 const STUDIO = "Mario Bert's Studios"
@@ -25,7 +26,7 @@ function footer() {
 
 function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: string; subject: string; email: string } {
   const head = `${b.reference} · ${roomName(b.roomId)} · ${when(b.startAt, b.endAt)}`
-  const money = `Total ${formatPHP(b.total)}; 50% downpayment ${formatPHP(b.downpaymentRequired)} via GCash (returned if you cancel before the booking day); balance ${formatPHP(b.balance)}.`
+  const money = `Total ${formatPHP(b.total)}; 50% downpayment ${formatPHP(b.downpaymentRequired)} via GCash (returned if you cancel before the booking day); balance ${formatPHP(b.balance)}, ${BALANCE_COLLECTION}.`
   const policy = 'You may cancel only before the day of the booking.'
   const gear = b.selectedEquipment.length ? `Extra gear: ${b.selectedEquipment.map((e) => `${e.quantity}× ${equipmentLabel(e, rentalEquipment, true)}`).join(', ')}.` : 'No extra gear.'
   switch (event) {
@@ -43,9 +44,9 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
       }
     case 'booking_confirmed':
       return {
-        sms: `${STUDIO}: CONFIRMED ${head}. Downpayment verified. Balance ${formatPHP(b.balance)}. ${policy}`,
+        sms: `${STUDIO}: CONFIRMED ${head}. Downpayment verified. Balance ${formatPHP(b.balance)} after your rehearsal (cash or GCash). ${policy}`,
         subject: `Booking ${b.reference} confirmed`,
-        email: `Hi ${b.customer.name},\n\nYour booking is CONFIRMED: ${head}.\nDownpayment ${formatPHP(b.downpaymentRequired)} verified. Remaining balance ${formatPHP(b.balance)} (how and when it's collected: to be confirmed by the studio).\n\n${gear}\n${policy}`,
+        email: `Hi ${b.customer.name},\n\nYour booking is CONFIRMED: ${head}.\nDownpayment ${formatPHP(b.downpaymentRequired)} verified. Remaining balance ${formatPHP(b.balance)}, ${BALANCE_COLLECTION}.\n\n${gear}\n${policy}`,
       }
     case 'booking_cancelled': {
       const refund = b.payment.refund

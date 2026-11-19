@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { TextArea, TextField } from '../../components/ui/Field'
 import type { CustomerErrors, CustomerForm } from './customerSchema'
 
@@ -35,7 +36,7 @@ export function CustomerFields({
       {showBand && <TextField className="sm:col-span-2" label={bandLabel} optional value={value.bandName ?? ''} onChange={set('bandName')} error={errors.bandName} />}
       <TextArea className="sm:col-span-2" label={notesLabel} optional value={value.notes ?? ''} onChange={set('notes')} error={errors.notes} />
       <p className="text-sm text-muted sm:col-span-2">
-        Demo: details stay in this browser only. Privacy notice to be provided by the studio. Don&apos;t enter real personal data.
+        Demo: details stay in this browser only. Don&apos;t enter real personal data. See the <Link className="link" to="/privacy">privacy notice (draft)</Link>.
       </p>
     </div>
   )

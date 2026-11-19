@@ -116,7 +116,7 @@ export function RehearsalDetail({ booking: b, back }: { booking: RehearsalBookin
               <div><dt className="text-muted">Amount</dt><dd className="m-0 font-mono font-bold">{formatPHP(b.downpaymentRequired)}</dd></div>
               <div><dt className="text-muted">Reference (demo)</dt><dd className="m-0 font-mono">{b.payment.reference ?? '—'}</dd></div>
               <div><dt className="text-muted">Proof (demo)</dt><dd className="m-0">{b.payment.proofFileName ?? '—'}</dd></div>
-              <div><dt className="text-muted">Remaining balance</dt><dd className="m-0 font-mono">{formatPHP(b.balance)} · collection to be confirmed</dd></div>
+              <div><dt className="text-muted">Remaining balance</dt><dd className="m-0 font-mono">{formatPHP(b.balance)} · after rehearsal, cash or GCash</dd></div>
             </dl>
             {b.status === 'awaiting_payment' && (
               <div className="mt-5 space-y-4 border-t border-slate pt-5">

@@ -462,7 +462,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
             <dt className="text-muted">Total</dt><dd className="m-0 font-mono">{formatPHP(price.total)}</dd>
             <dt className="text-muted">Downpayment</dt><dd className="m-0 font-mono font-bold">{formatPHP(price.downpayment)} via GCash</dd>
             {confirming === 'pay' && (<><dt className="text-muted">GCash ref.</dt><dd className="m-0 font-mono break-all">{d.gcashRef.trim()}</dd></>)}
-            <dt className="text-muted">Balance</dt><dd className="m-0 font-mono">{formatPHP(price.balance)} (collection to be confirmed)</dd>
+            <dt className="text-muted">Balance</dt><dd className="m-0 font-mono">{formatPHP(price.balance)} after your rehearsal (cash or GCash)</dd>
           </dl>
           {confirming === 'pay' ? (
             <ul className="mt-4 list-disc space-y-1 pl-5 marker:text-rust-light">

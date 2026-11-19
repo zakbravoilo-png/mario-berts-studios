@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { useState, type FormEvent } from 'react'
 import { z } from 'zod'
 import { PageHeader, SectionTitle } from '../../components/ui/PageHeader'
@@ -51,7 +52,7 @@ export function ContactPage() {
           </dl>
           <p className="mt-6 text-paper/90">The quickest way to reach the studio is Facebook Messenger.</p>
           <Callout tone="info" title="Privacy notice" className="mt-8">
-            To be provided by the studio before real customer details are collected (Data Privacy Act of 2012, RA 10173).
+            A <Link className="link" to="/privacy">draft privacy notice</Link> is ready for the studio to review before real customer details are collected (Data Privacy Act of 2012, RA 10173).
           </Callout>
         </div>
 

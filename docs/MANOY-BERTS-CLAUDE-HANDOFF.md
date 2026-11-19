@@ -1140,7 +1140,9 @@ prototype unless necessary:
 7.  Is the keyboard and cable rental one kit?
 8.  Does the 50% downpayment rule apply to lessons and live gig
     streaming, or only rehearsal reservations?
-9.  When and how is the remaining 50% collected?
+9.  ~~When and how is the remaining 50% collected?~~ **Answered:**
+    after the rehearsal, in cash at the studio or by GCash (checked
+    manually).
 10. What is the process for rescheduling?
 11. Who are the instructors, which instruments and levels does each
     teach, and what are their schedules? (Prototype: demo
@@ -1167,7 +1169,9 @@ prototype unless necessary:
 18. What should the About page say (studio story, history, people)?
     (Prototype: labelled placeholder copy.)
 19. What privacy notice should be shown when collecting customer
-    details?
+    details? **Drafted** at `/privacy` (2026-11-19); the studio must
+    review it (ideally with a lawyer) and confirm the proposed retention
+    periods before real data is collected.
 
 ------------------------------------------------------------------------
 

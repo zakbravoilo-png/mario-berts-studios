@@ -8,6 +8,10 @@ import type { BusinessSettings } from '../types/domain'
  * 30-minute lesson start increments, stock held
  * while awaiting verification, room held while a lesson is requested.
  */
+/** Confirmed (user, 2026-11-19): how the remaining 50% is collected. */
+export const BALANCE_COLLECTION = 'paid after your rehearsal, in cash at the studio or by GCash'
+export const BALANCE_COLLECTION_SHORT = 'after rehearsal · cash or GCash'
+
 export const defaultSettings: BusinessSettings = {
   timezone: 'Asia/Manila',
   openTime: '09:00',

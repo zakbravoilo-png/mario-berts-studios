@@ -1,4 +1,5 @@
 import { Receipt } from '../../components/grunge'
+import { BALANCE_COLLECTION_SHORT } from '../../data/settings'
 import { formatPHP } from '../../utils/money'
 import type { RehearsalPrice } from './pricing'
 
@@ -14,7 +15,7 @@ export function PriceReceipt({ price, title = 'Booking summary', barcodeValue, r
       total={price.total}
       after={[
         { label: 'Downpayment (50%) · GCash', amount: price.downpayment, emphasis: true },
-        { label: 'Remaining balance', amount: price.balance },
+        { label: `Balance · ${BALANCE_COLLECTION_SHORT}`, amount: price.balance },
       ]}
       footer={<>Cancel before the booking day for a downpayment refund. No cancellations on the day.</>}
       barcodeValue={barcodeValue}
