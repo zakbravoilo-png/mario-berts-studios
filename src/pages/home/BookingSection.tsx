@@ -61,6 +61,7 @@ export function BookingSection() {
                       <strong>returned via GCash</strong>.
                     </li>
                     <li>Bookings can&apos;t be cancelled on the day itself.</li>
+                    <li>Need a different time? Reschedule <strong>before the day</strong> of your booking.</li>
                     <li>You&apos;ll see the full price and payment details before you confirm.</li>
                   </ul>
                   <p className="mt-3 text-xs text-muted">

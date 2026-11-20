@@ -500,7 +500,8 @@ Rules:
 -   Customer may request cancellation only before the booking day
     according to the stated policy.
 -   Clearly state the 50% downpayment is non-refundable.
--   Do not invent an automated rescheduling or refund workflow.
+-   Rescheduling is allowed before the booking day (confirmed
+    2026-11-20). Do not invent an automated refund workflow.
 
 ### G. Admin workflows
 
@@ -1168,7 +1169,11 @@ prototype unless necessary:
 9.  ~~When and how is the remaining 50% collected?~~ **Answered:**
     after the rehearsal, in cash at the studio or by GCash (checked
     manually).
-10. What is the process for rescheduling?
+10. ~~What is the process for rescheduling?~~ **Answered (2026-11-20):**
+    bands can reschedule before the booking day (same cut-off as
+    cancelling). Not on the day itself. The prototype states this in
+    the policy notice and asks customers to contact the studio; there
+    is no self-service reschedule yet.
 11. Who are the instructors, which instruments and levels does each
     teach, and what are their schedules? (Prototype: demo
     instructors.)

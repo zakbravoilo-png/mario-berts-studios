@@ -87,7 +87,7 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 
 Whether mic and keyboard rentals are kits ·
 whether stock/rooms are held while awaiting
-verification or while a lesson is requested (demo: yes) · rescheduling · real
+verification or while a lesson is requested (demo: yes) · real
 instructors · streaming packages · string gauges, drumstick brand/size and stock ·
 review of the draft privacy notice at `/privacy` (RA 10173) · whether visible
 brand logos in some photos are fine (photo rights themselves are confirmed; see
