@@ -232,6 +232,11 @@ describe('customer cancellation (before the booking day, Asia/Manila)', () => {
     expect(canCustomerCancel(start, toMs(at('00:01')))).toBe(false)
     expect(canCustomerCancel(start, toMs(at('17:00')))).toBe(false)
   })
+  it('applies the same rule to lessons: up to the day before, not on the lesson day', () => {
+    const lesson = at('10:00') // a 30-minute beginner lesson
+    expect(canCustomerCancel(lesson, toMs(manilaIso('2026-11-20', '21:00')))).toBe(true)
+    expect(canCustomerCancel(lesson, toMs(at('08:00')))).toBe(false)
+  })
   it('uses the Manila calendar, not UTC (UTC is still the previous day at 07:00 Manila)', () => {
     // 2026-11-20T23:30Z = 2026-11-21 07:30 Manila → booking day → refused.
     expect(canCustomerCancel(start, Date.parse('2026-11-20T23:30:00Z'))).toBe(false)

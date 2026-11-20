@@ -86,10 +86,11 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 ## Still to confirm with the studio
 
 Turnaround buffer · same-day booking · whether mic and keyboard rentals are kits ·
-lesson cancellation terms (demo applies "before the day") · whether stock/rooms are held while awaiting
+whether stock/rooms are held while awaiting
 verification or while a lesson is requested (demo: yes) · rescheduling · real
 instructors · streaming packages · string gauges, drumstick brand/size and stock ·
-review of the draft privacy notice at `/privacy` (RA 10173) · rights to the photos in `public/images/` (see
+review of the draft privacy notice at `/privacy` (RA 10173) · whether visible
+brand logos in some photos are fine (photo rights themselves are confirmed; see
 `public/images/CREDITS.md`).
 
 ## Project structure

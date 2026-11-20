@@ -52,7 +52,7 @@ export function ReservationDetailPage() {
   )
 }
 
-function CancelSection({ startAt, onCancel, refundAmount }: { startAt: string; onCancel: () => string[] | null; refundAmount?: number }) {
+function CancelSection({ startAt, onCancel, refundAmount, noun = 'booking' }: { startAt: string; onCancel: () => string[] | null; refundAmount?: number; noun?: 'booking' | 'lesson' }) {
   const now = useNow()
   const [confirming, setConfirming] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
@@ -62,15 +62,15 @@ function CancelSection({ startAt, onCancel, refundAmount }: { startAt: string; o
       <h2 id="cancel-title" className="font-display text-xl tracking-wide">Cancel</h2>
       {!allowed ? (
         <p className="mt-2 text-sm text-paper/90">
-          Cancellation is only possible <strong>before the day</strong> of the booking ({formatDate(startAt)}, Asia/Manila). It can no longer be cancelled here.
+          Cancellation is only possible <strong>before the day</strong> of the {noun} ({formatDate(startAt)}, Asia/Manila). It can no longer be cancelled here.
         </p>
       ) : !confirming ? (
         <>
           <p className="mt-2 text-sm text-paper/90">
-            You can cancel until the end of the day before ({formatDate(startAt)} is the booking day).
+            You can cancel until the end of the day before ({formatDate(startAt)} is the {noun} day).
             {refundAmount !== undefined && <> Your {formatPHP(refundAmount)} downpayment will be <strong>returned via GCash</strong>.</>}
           </p>
-          <button type="button" className="btn btn-ghost mt-4" onClick={() => setConfirming(true)}>Cancel this booking…</button>
+          <button type="button" className="btn btn-ghost mt-4" onClick={() => setConfirming(true)}>Cancel this {noun}…</button>
         </>
       ) : (
         <div className="mt-3 space-y-3">
@@ -79,7 +79,7 @@ function CancelSection({ startAt, onCancel, refundAmount }: { startAt: string; o
           </Callout>
           <div className="flex flex-wrap gap-3">
             <button type="button" className="btn btn-primary" onClick={() => setErrors(onCancel() ?? [])}>Yes, cancel</button>
-            <button type="button" className="btn btn-ghost" onClick={() => setConfirming(false)}>Keep booking</button>
+            <button type="button" className="btn btn-ghost" onClick={() => setConfirming(false)}>Keep {noun}</button>
           </div>
           {errors.length > 0 && <Callout tone="error" title="Could not cancel">{errors.join(' ')}</Callout>}
         </div>
@@ -171,6 +171,7 @@ export function LessonDetail({ lesson: l, instructorName, back }: { lesson: Less
         {live && (
           <CancelSection
             startAt={l.startAt}
+            noun="lesson"
             onCancel={() => {
               const r = cancelLesson(l.id)
               return r.ok ? null : r.errors
@@ -178,7 +179,7 @@ export function LessonDetail({ lesson: l, instructorName, back }: { lesson: Less
           />
         )}
         <SentMessages reference={l.reference} />
-        <p className="text-xs text-muted">Lesson cancellation terms have not been published; this demo applies the same &ldquo;before the day&rdquo; rule as rehearsals.</p>
+        <p className="text-xs text-muted">Lessons can be cancelled up to the day before, but not on the lesson day itself. Lessons are paid on the day, so there&rsquo;s nothing to refund.</p>
       </div>
     </>
   )

@@ -239,7 +239,7 @@ export function LessonBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'gues
           <div><dt className="text-muted">Contact</dt><dd className="m-0">{d.details.name} · {[d.details.email, d.details.phone].filter(Boolean).join(' · ')}</dd></div>
         </dl>
         <Callout tone="info" title="Request, not a confirmed booking">
-          The studio will confirm your lesson. You pay the full lesson fee on the day, at the studio. Nothing is paid online.
+          The studio will confirm your lesson. You pay the full lesson fee on the day, at the studio. Nothing is paid online. You can cancel up to the day before, but not on the lesson day.
         </Callout>
         {submitErrors.length > 0 && (
           <Callout tone="error" title="This lesson can't be requested">

@@ -834,9 +834,10 @@ Rules:
     (sources in `photo-sources/`, optimized to `public/images/` by
     `node scripts/optimize-images.mjs`) instead of illustrations. The
     hero uses the empty-room photo as a background with noise and
-    halftone. Before publishing, confirm each photo's source/licence,
-    consent from people shown, and whether visible brand logos (drum and
-    amp makers) are acceptable; see `public/images/CREDITS.md`.
+    halftone. **Rights confirmed (owner, 2026-11-20):** every photo is
+    either free to use or taken from the studio's own Facebook page.
+    Only visible brand logos (drum and amp makers) remain for the owner
+    to accept or not; see `public/images/CREDITS.md`.
 -   Unify photos with a duotone treatment in CSS (shadows `ink`
     `#141519`, highlights `paper` `#ECE7DE`, or `rust` `#A63726` as an
     occasional accent), plus halftone and grain, so they read as one set.
@@ -926,8 +927,8 @@ a real API can replace the mock implementation.
 
 Suggested repository name:
 
-`mario-berts-studios` (personal account `zakbravoilo-png`, private while photo
-rights are unconfirmed)
+`mario-berts-studios` (personal account `zakbravoilo-png`, photo rights confirmed
+2026-11-20)
 
 Suggested structure:
 
@@ -1246,6 +1247,10 @@ These override earlier sections where they conflict.
     longer non-refundable. Customer cancellations (only allowed before the
     booking day) also get the downpayment back via a manual GCash refund.
     This replaces the "non-refundable" rule in §3 and §5.
+-   **Lesson cancellation (studio, 2026-11-20):** customers can cancel a
+    lesson up to the day before (Asia/Manila), but not on the lesson day
+    itself. Lessons are paid in full on the day, so there is nothing to
+    refund.
 -   **Admin booking for a customer:** admin overview has "Book a room",
     the same flow; it links to the customer's account if the contact
     number matches, otherwise it's a guest booking.
@@ -1263,8 +1268,8 @@ These override earlier sections where they conflict.
     function plus SMS and email provider accounts chosen by the studio.
 -   **Look:** palette v3 (§8), off-white `band` #C6BFB2 for light
     sections, rust as accent only, mixed-case type with emphasised words
-    in capitals, torn-paper buttons, user-supplied photos (rights to
-    confirm, see `public/images/CREDITS.md`).
+    in capitals, torn-paper buttons, user-supplied photos (rights
+    confirmed 2026-11-20, see `public/images/CREDITS.md`).
 
 ## 15. Final instruction to Claude
 

@@ -313,6 +313,8 @@ export function cancelLesson(id: string): Result<null> {
   const l = getState().lessons.find((x) => x.id === id)
   if (!l) return { ok: false, errors: ['Lesson not found.'] }
   if (!['requested', 'confirmed'].includes(l.status)) return { ok: false, errors: ['This lesson can no longer be cancelled.'] }
+  // Confirmed by the studio (2026-11-20): lessons can be cancelled up to the day before, not on the lesson day.
+  if (!canCustomerCancel(l.startAt)) return { ok: false, errors: ['Lessons can be cancelled up to the day before, not on the lesson day itself.'] }
   setState((st) => ({ ...st, lessons: st.lessons.map((x) => (x.id === id ? { ...x, status: 'cancelled' } : x)) }))
   notifyLesson({ ...l, status: 'cancelled' }, 'lesson_cancelled')
   return { ok: true, value: null }

@@ -42,7 +42,7 @@ export function LessonsPage() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-sm text-muted">Same price for every instrument. Pay the full fee on the day, at the studio — no downpayment.</p>
+        <p className="mt-3 text-sm text-muted">Same price for every instrument. Pay the full fee on the day, at the studio — no downpayment. You can cancel up to the day before, but not on the lesson day.</p>
 
         <h3 className="display mt-12 text-2xl">Instruments</h3>
         <ul className="mt-4 flex flex-wrap gap-3" aria-label="Instruments taught">

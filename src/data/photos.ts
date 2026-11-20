@@ -2,8 +2,8 @@
  * Photos supplied by the user (2026-11-16). Optimized from `photo-sources/` by
  * `node scripts/optimize-images.mjs` into `public/images/<name>-<width>.webp`.
  *
- * RIGHTS TO CONFIRM before publishing: source/licence of each photo, consent of the
- * people shown, and visible brand logos (drum/amp makers). See public/images/CREDITS.md.
+ * Rights confirmed by the owner (2026-11-20): every photo is free to use or from the
+ * studio's own Facebook page. See public/images/CREDITS.md.
  */
 export interface Photo {
   name: string
