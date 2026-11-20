@@ -1,12 +1,12 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Image as ImageIcon } from 'lucide-react'
 import '@fontsource/shrikhand/latin-400.css'
 import '@fontsource/rubik-spray-paint/latin-400.css'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { useTitle } from '../../components/ui/useTitle'
 import { Callout } from '../../components/ui/Callout'
-import { DuotoneImage, Highlight, Tape } from '../../components/grunge'
+import { Grain, Highlight, Tape, TornEdge } from '../../components/grunge'
 
 /**
  * Design drafts (user request, 2026-11-20): alternative homepage directions shown next to the
@@ -74,11 +74,11 @@ function WavyStripes({ colors }: { colors: string[] }) {
 }
 
 function SunshineGrooveMock() {
-  const v = { cream: '#FFF4DC', glow: '#FFE29A', sun: '#FFC93C', tangerine: '#F7882F', rust: '#D2541F', brown: '#4A2511', avocado: '#7C8C2E', blush: '#F4A6A0' }
+  const v = { cream: '#E6D8B8', glow: '#D9C393', sun: '#C79A3A', tangerine: '#A85F2A', rust: '#7E3A1D', brown: '#33200F', avocado: '#5A6229', blush: '#B98A7A' }
   const groovy: CSSProperties = { fontFamily: "'Shrikhand', 'Cooper Black', Georgia, serif", textTransform: 'none', letterSpacing: 0 }
   const sans: CSSProperties = { fontFamily: 'Inter, system-ui, sans-serif', textTransform: 'none' }
   return (
-    <BrowserFrame bar="#F3E3BC">
+    <BrowserFrame bar="#CDBE9B">
       <div style={{ background: v.cream, color: v.brown, ...sans }}>
         <div className="flex items-center justify-between px-5 py-3">
           <span className="text-xl" style={groovy}>Manoy Bart&rsquo;s</span>
@@ -89,7 +89,7 @@ function SunshineGrooveMock() {
         </div>
 
         <div
-          className="relative overflow-hidden px-5 pt-8 pb-36 text-center"
+          className="relative z-10 overflow-hidden px-5 pt-8 pb-36 text-center"
           style={{ background: `repeating-conic-gradient(from 0deg at 50% 100%, ${v.glow} 0deg 6deg, ${v.cream} 6deg 12deg)` }}
         >
           {/* Rainbow arch rising like the sun */}
@@ -97,22 +97,23 @@ function SunshineGrooveMock() {
           <div aria-hidden="true" className="absolute -bottom-32 left-1/2 size-64 -translate-x-1/2 rounded-full" style={{ background: v.rust }} />
           <div aria-hidden="true" className="absolute -bottom-24 left-1/2 size-48 -translate-x-1/2 rounded-full" style={{ background: v.tangerine }} />
           <div aria-hidden="true" className="absolute -bottom-16 left-1/2 size-32 -translate-x-1/2 rounded-full" style={{ background: v.sun }} />
-          <Daisy petal="#FFFFFF" center={v.sun} className="absolute -top-3 -left-3 size-12 rotate-12 sm:top-4 sm:left-3 sm:size-14" />
+          <Daisy petal="#EDE3CC" center={v.sun} className="absolute -top-3 -left-3 size-12 rotate-12 sm:top-4 sm:left-3 sm:size-14" />
           <Daisy petal={v.blush} center={v.tangerine} className="absolute right-4 bottom-16 size-16 -rotate-12" />
+          <Grain fine={0.35} coarse={0.5} />
 
-          <p className="relative text-sm font-bold tracking-wide">☀ 3 rehearsal rooms · Jaro, Iloilo ☀</p>
-          <p className="relative mt-3 text-5xl leading-[1.05] sm:text-6xl" style={{ ...groovy, textShadow: `3px 3px 0 ${v.tangerine}` }}>
+          <p className="relative z-10 text-sm font-bold tracking-wide">☀ 3 rehearsal rooms · Jaro, Iloilo ☀</p>
+          <p className="relative z-10 mt-3 text-5xl leading-[1.05] sm:text-6xl" style={{ ...groovy, textShadow: `3px 3px 0 ${v.tangerine}` }}>
             Good vibes,<br />loud jams.
           </p>
-          <p className="relative mx-auto mt-4 max-w-xs text-sm font-medium">
+          <p className="relative z-10 mx-auto mt-4 max-w-xs text-sm font-medium">
             The gear&rsquo;s all set up. Just bring your band and your best grooves.
           </p>
-          <div className="relative mt-5 flex justify-center gap-3">
+          <div className="relative z-10 mt-5 flex justify-center gap-3">
             <span className="rounded-full px-5 py-2 text-sm font-bold" style={{ background: v.brown, color: v.cream }}>Book your jam ✿</span>
             <span className="rounded-full border-2 px-5 py-2 text-sm font-bold" style={{ borderColor: v.brown, background: v.cream }}>See rates</span>
           </div>
           <div
-            className="absolute bottom-4 left-3 grid size-20 rotate-12 place-items-center rounded-full text-center leading-tight sm:top-24 sm:right-8 sm:bottom-auto sm:left-auto sm:size-24"
+            className="absolute bottom-4 left-3 z-10 grid size-20 rotate-12 place-items-center rounded-full text-center leading-tight sm:top-24 sm:right-8 sm:bottom-auto sm:left-auto sm:size-24"
             style={{ background: v.avocado, color: v.cream, ...groovy }}
           >
             <span className="text-lg sm:text-xl">₱250<br /><span className="text-xs" style={sans}>per hour</span></span>
@@ -162,12 +163,12 @@ function SkateDeck({ deck, line, className = '' }: { deck: string; line: string;
 }
 
 function SkatePunkMock() {
-  const v = { concrete: '#CFCCC6', black: '#111111', lime: '#B8F400', magenta: '#E6007E', cyan: '#00B8D9', white: '#FAFAF7' }
+  const v = { concrete: '#8F8C86', black: '#141414', lime: '#8FA82A', magenta: '#8E2350', cyan: '#4E9AA3', white: '#DEDAD0' }
   const spray: CSSProperties = { fontFamily: "'Rubik Spray Paint', 'Permanent Marker', Impact, sans-serif", textTransform: 'none' }
   const stencil: CSSProperties = { fontFamily: "'Space Mono', 'Courier New', monospace", fontWeight: 700, textTransform: 'uppercase' }
   const wall: CSSProperties = {
     backgroundColor: v.concrete,
-    backgroundImage: `radial-gradient(rgba(17,17,17,0.18) 1px, transparent 1.4px), radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1.4px)`,
+    backgroundImage: `radial-gradient(rgba(17,17,17,0.35) 1px, transparent 1.4px), radial-gradient(rgba(222,218,208,0.25) 1px, transparent 1.4px)`,
     backgroundSize: '7px 7px, 11px 11px',
     backgroundPosition: '0 0, 3px 5px',
   }
@@ -183,7 +184,8 @@ function SkatePunkMock() {
         </div>
 
         <div className="relative overflow-hidden px-5 pt-6 pb-8" style={wall}>
-          <div className="relative grid gap-4 sm:grid-cols-[1.4fr_1fr] sm:items-center">
+          <Grain fine={0.25} coarse={0.35} />
+          <div className="relative z-10 grid gap-4 sm:grid-cols-[1.4fr_1fr] sm:items-center">
             <div className="relative">
               <p
                 className="relative -rotate-3 text-6xl leading-none sm:text-7xl"
@@ -223,7 +225,7 @@ function SkatePunkMock() {
         />
         <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4" style={{ background: v.black }}>
           <span className="text-xs" style={{ ...stencil, color: v.white }}>Open 9 AM – 9 PM · Jaro, Iloilo</span>
-          <span className="-rotate-2 border-4 px-4 py-1.5 text-sm shadow-[4px_4px_0_#E6007E]" style={{ ...stencil, background: v.lime, borderColor: v.white, color: v.black }}>
+          <span className="-rotate-2 border-4 px-4 py-1.5 text-sm shadow-[4px_4px_0_#8E2350]" style={{ ...stencil, background: v.lime, borderColor: v.white, color: v.black }}>
             Book a room →
           </span>
         </div>
@@ -252,10 +254,16 @@ function TapedWallMock() {
             </div>
           </div>
           <div className="relative rotate-2">
-            <DuotoneImage photo="bandRehearsalStudio" alt="" torn={11} tone="natural" halftone={false} className="aspect-[4/3] w-full" />
+            <div className="grid aspect-[4/3] w-full place-items-center border-2 border-dashed border-muted bg-charcoal text-center">
+              <span>
+                <ImageIcon className="mx-auto size-10 text-muted" />
+                <span className="mt-2 block text-sm text-muted">Photo placeholder</span>
+              </span>
+            </div>
             <Tape className="-top-3 left-6" rotate={-20} />
           </div>
         </div>
+        <TornEdge className="text-band" underClassName="text-slate" backClassName="bg-ink" seed={9} height={22} />
         <div className="bg-band px-5 py-4 text-ink">
           <p className="font-display text-xl">3 rooms · ₱250 / hour / room · Standard gear included</p>
         </div>
@@ -269,14 +277,14 @@ const drafts: Draft[] = [
     id: 'sunshine-groove',
     label: 'Draft 1 · sunshine groove',
     title: 'Sunshine and good vibes',
-    idea: 'A warm, sunny 70s look: cream and sunflower colours, a sunburst behind the headline, a rainbow arch rising like the sun, daisies, wavy stripes and a big rounded groovy font. It feels like a laid-back jam on a summer afternoon.',
+    idea: 'A warm 70s look, worn in like an old record sleeve: aged paper, mustard, clay and olive, a faded sunburst behind the headline, a rainbow arch rising like the sun, daisies, wavy stripes, film grain and a big rounded groovy font. It feels like a laid-back jam on a hot afternoon.',
     palette: [
-      { name: 'Cream', hex: '#FFF4DC' },
-      { name: 'Sunflower', hex: '#FFC93C' },
-      { name: 'Tangerine', hex: '#F7882F' },
-      { name: 'Burnt orange', hex: '#D2541F' },
-      { name: 'Avocado', hex: '#7C8C2E' },
-      { name: 'Cocoa', hex: '#4A2511' },
+      { name: 'Aged paper', hex: '#E6D8B8' },
+      { name: 'Mustard', hex: '#C79A3A' },
+      { name: 'Clay', hex: '#A85F2A' },
+      { name: 'Rust brown', hex: '#7E3A1D' },
+      { name: 'Olive', hex: '#5A6229' },
+      { name: 'Coffee', hex: '#33200F' },
     ],
     good: [
       'Warm and welcoming: friendly to beginners, kids taking lessons and their parents, not only seasoned bands.',
@@ -286,23 +294,23 @@ const drafts: Draft[] = [
     movedOn: [
       'Too mellow for the studio’s loud side: punk and metal bands might not see themselves here.',
       'The retro groovy style is a strong trend that can date quickly.',
-      'Sunny yellows and oranges clash with the real photos of the dark rehearsal rooms.',
+      'Even toned down, the mustards and clays pull away from the real photos of the dark rehearsal rooms.',
     ],
-    caption: 'Mock-up of draft 1: a cream and sunflower homepage with a striped sunburst, a brown, orange and yellow rainbow arch rising from the bottom, daisies, the groovy headline “Good vibes, loud jams.” with an orange shadow, rounded brown buttons, a green ₱250 per hour badge, and wavy stripes above a strip for rehearse, learn and stream.',
+    caption: 'Mock-up of draft 1: a grainy aged-paper homepage with a faded striped sunburst, a coffee, rust, clay and mustard rainbow arch rising from the bottom, muted daisies, the groovy headline “Good vibes, loud jams.” with a clay shadow, rounded dark brown buttons, an olive ₱250 per hour badge, and wavy stripes above a strip for rehearse, learn and stream.',
     mock: <SunshineGrooveMock />,
   },
   {
     id: 'skate-punk',
     label: 'Draft 2 · skate-punk graffiti',
     title: 'Skate-punk and spray paint',
-    idea: 'The studio as a graffiti wall at the skate park: speckled concrete, a spray-painted tag with paint drips, a skateboard deck, sticker-bombed prices, a checkerboard strip and stencil lettering, in acid lime and hot magenta.',
+    idea: 'The studio as a grimy graffiti wall at the skate park: dirty concrete, a spray-painted tag with paint drips, a skateboard deck, sticker-bombed prices, a checkerboard strip and stencil lettering, in faded moss lime, berry and teal.',
     palette: [
-      { name: 'Concrete', hex: '#CFCCC6' },
-      { name: 'Black', hex: '#111111' },
-      { name: 'Acid lime', hex: '#B8F400' },
-      { name: 'Magenta', hex: '#E6007E' },
-      { name: 'Cyan', hex: '#00B8D9' },
-      { name: 'White', hex: '#FAFAF7' },
+      { name: 'Concrete', hex: '#8F8C86' },
+      { name: 'Black', hex: '#141414' },
+      { name: 'Moss lime', hex: '#8FA82A' },
+      { name: 'Berry', hex: '#8E2350' },
+      { name: 'Teal', hex: '#4E9AA3' },
+      { name: 'Bone', hex: '#DEDAD0' },
     ],
     good: [
       'Loud, rebellious energy that speaks straight to young punk and rock bands.',
@@ -311,10 +319,10 @@ const drafts: Draft[] = [
     ],
     movedOn: [
       'Graffiti lettering is hard to read, so it only works for a word or two.',
-      'Acid lime and magenta shout over everything, including the booking button.',
+      'The tag and stickers still pull attention away from the booking button.',
       'It narrows the audience: lesson students and older bands might feel it isn’t for them.',
     ],
-    caption: 'Mock-up of draft 2: a speckled concrete wall with “Manoy Bart’s” spray-painted in lime with a black outline, magenta shadow and dripping paint, a black stencil label “No rules. Just riffs.”, a magenta skateboard deck with a cyan ₱250 per hour sticker and a “Loud zone” sticker, a black and white checkerboard strip, and a lime “Book a room” sticker button.',
+    caption: 'Mock-up of draft 2: a dirty grey concrete wall with “Manoy Bart’s” spray-painted in moss lime with a black outline, berry shadow and dripping paint, a black stencil label “No rules. Just riffs.”, a berry skateboard deck with a teal ₱250 per hour sticker and a “Loud zone” sticker, a black and bone checkerboard strip, and a lime “Book a room” sticker button.',
     mock: <SkatePunkMock />,
   },
   {
@@ -338,7 +346,7 @@ const drafts: Draft[] = [
       'Torn paper and tape feel like the local scene, and the texture fades out on forms, prices and the admin.',
       'Every colour pair has a measured contrast, and status always has a word or icon, not just a colour.',
     ],
-    caption: 'Mock-up of the current design: a grey homepage with “Got a band? Play it LOUD.”, a taped, torn-edge photo of a band rehearsing, a torn-paper button, and a light band of key facts.',
+    caption: 'Mock-up of the current design: a grey homepage with “Got a band? Play it LOUD.”, a taped photo placeholder, a torn-paper button, and a light paper strip of key facts with a torn top edge.',
     mock: <TapedWallMock />,
   },
 ]
