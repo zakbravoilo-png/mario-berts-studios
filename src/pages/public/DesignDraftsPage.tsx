@@ -131,7 +131,7 @@ function SunshineGrooveMock() {
 /* ---------- Draft 2: Skate-punk graffiti ---------- */
 
 function PaintDrips({ color, className = '' }: { color: string; className?: string }) {
-  const drips = [[18, 26], [44, 14], [70, 34], [112, 20], [150, 40], [196, 16], [232, 30], [268, 22]]
+  const drips: [number, number][] = [[18, 26], [44, 14], [70, 34], [112, 20], [150, 40], [196, 16], [232, 30], [268, 22]]
   return (
     <svg viewBox="0 0 300 50" className={className} aria-hidden="true">
       <rect x="6" y="0" width="288" height="8" rx="4" fill={color} />
