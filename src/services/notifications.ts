@@ -75,6 +75,22 @@ function rehearsalText(event: NotificationEvent, b: RehearsalBooking): { sms: st
         email: `Hi ${b.customer.name},\n\nWe've returned your ${amount} downpayment for booking ${b.reference} to your GCash${ref ? ` (GCash ref ${ref})` : ''}.`,
       }
     }
+    case 'items_added': {
+      const lines = b.selectedEquipment.filter((e) => e.addedAt)
+      const latest = lines.length ? lines[lines.length - 1]!.addedAt : null
+      const now = lines.filter((e) => e.addedAt === latest)
+      const list = now.map((e) => `${e.quantity}× ${equipmentLabel(e, rentalEquipment, true)}`).join(', ')
+      const cost = now.reduce((sum, e) => sum + e.quantity * e.unitPrice, 0)
+      return {
+        sms: `${STUDIO}: Added to ${b.reference}: ${list} (${formatPHP(cost)}). New balance ${formatPHP(b.balance)}, paid after your rehearsal (cash or GCash).`,
+        subject: `Items added to booking ${b.reference}`,
+        email: `Hi ${b.customer.name},
+
+We added these rental items to your booking ${head}: ${list} (${formatPHP(cost)}, charged once).
+
+New total ${formatPHP(b.total)}. Your downpayment stays ${formatPHP(b.downpaymentRequired)}; the remaining balance is now ${formatPHP(b.balance)}, ${BALANCE_COLLECTION}.`,
+      }
+    }
     case 'booking_rejected':
       return {
         sms: `${STUDIO}: Sorry — booking ${b.reference} could not be accepted.${b.adminNote ? ` Note: ${b.adminNote}` : ''} Please contact us.`,

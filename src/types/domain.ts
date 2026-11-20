@@ -26,7 +26,7 @@ export interface Room {
 export type RentalCategory = 'cable' | 'guitar' | 'bass' | 'keys' | 'mic' | 'amp'
 export type PricingUnit = 'per_item' | 'per_kit'
 
-/** Rental item id. Seed ids: guitar-cable, electric-guitar, bass-guitar, acoustic-guitar,
+/** Rental item id. Seed ids: guitar-cable, electric-guitar, bass-guitar (4-string), bass-guitar-5, acoustic-guitar,
  * mic-kit, keyboard-kit, extra-guitar-amp, extra-bass-amp. Admin can add more. */
 export type RentalEquipmentId = string
 
@@ -76,6 +76,9 @@ export interface BookingEquipmentItem {
   unitPrice: Peso
   /** Item name at the time of booking. */
   label?: string
+  /** Set when the item was added after booking (e.g. forgotten cables on the day). Billed on the balance. */
+  addedAt?: string
+  addedBy?: 'customer' | 'studio'
 }
 
 export type PaymentStatus = 'not_submitted' | 'submitted' | 'verified' | 'rejected'
@@ -226,6 +229,7 @@ export type NotificationEvent =
   | 'booking_cancelled'
   | 'booking_rejected'
   | 'refund_sent'
+  | 'items_added'
   | 'lesson_requested'
   | 'lesson_confirmed'
   | 'lesson_declined'

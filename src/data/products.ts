@@ -11,6 +11,8 @@ const BRAND = 'Kuting-Kuting Music City Strings'
 export const seedProducts: ShopProduct[] = [
   { id: 'str-acoustic', name: 'Acoustic guitar strings', brand: BRAND, category: 'acoustic-strings', description: 'Gauge to be confirmed by the studio.', price: 200, stock: null, isDemo: false, active: true, outOfStock: false },
   { id: 'str-electric', name: 'Electric guitar strings', brand: BRAND, category: 'electric-strings', description: 'Gauge to be confirmed by the studio.', price: 200, stock: null, isDemo: false, active: true, outOfStock: false },
-  { id: 'str-bass', name: 'Bass guitar strings', brand: BRAND, category: 'bass-strings', description: 'Gauge to be confirmed by the studio.', price: 600, stock: null, isDemo: false, active: true, outOfStock: false },
+  { id: 'str-bass', name: 'Bass strings, 4-string set', brand: BRAND, category: 'bass-strings', description: 'Gauge to be confirmed by the studio.', price: 600, stock: null, isDemo: false, active: true, outOfStock: false },
+  // Added 2026-11-20 (user): 5-string bass set at PHP 1,000.
+  { id: 'str-bass-5', name: 'Bass strings, 5-string set', brand: BRAND, category: 'bass-strings', description: 'Gauge to be confirmed by the studio.', price: 1000, stock: null, isDemo: false, active: true, outOfStock: false },
   { id: 'drumsticks', name: 'Drumsticks', brand: null, category: 'drumsticks', description: 'Brand and size to be confirmed by the studio.', price: 300, stock: null, isDemo: false, active: true, outOfStock: false },
 ]

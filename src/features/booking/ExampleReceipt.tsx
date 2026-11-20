@@ -10,7 +10,7 @@ export function PriceReceipt({ price, title = 'Booking summary', barcodeValue, r
       title={title}
       lines={[
         { label: `${roomLabel} · ${price.hours} hr${price.hours === 1 ? '' : 's'} × ${formatPHP(price.roomRate)}`, amount: price.roomSubtotal },
-        ...price.equipmentLines.map((l) => ({ label: `${l.label} × ${l.quantity}`, detail: 'once per booking', amount: l.lineTotal })),
+        ...price.equipmentLines.map((l) => ({ label: `${l.label} × ${l.quantity}`, detail: l.added ? 'added later · on the balance' : 'once per booking', amount: l.lineTotal })),
       ]}
       total={price.total}
       after={[

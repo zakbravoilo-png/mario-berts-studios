@@ -10,6 +10,7 @@ import { PriceReceipt } from '../../features/booking/ExampleReceipt'
 import { priceFromBooking } from '../../features/booking/pricing'
 import { AdminButton, adminInput } from '../../features/admin/adminUi'
 import { CancelPanel } from '../../features/admin/CancelPanel'
+import { AddItemsPanel } from '../../features/booking/AddItemsPanel'
 import { roomName } from '../../data/rooms'
 import { equipmentLabel } from '../../data/rentalEquipment'
 import { formatPHP } from '../../utils/money'
@@ -79,13 +80,15 @@ export function AdminBookingDetail() {
           </section>
           {msg && <Callout tone={msg.ok ? 'success' : 'error'} title={msg.text} />}
 
+          <AddItemsPanel booking={b} by="studio" />
+
           <CancelPanel booking={b} />
 
           <section aria-labelledby="gear-title" className="border border-slate p-4">
             <h2 id="gear-title" className="font-semibold">Extra gear held</h2>
             {b.selectedEquipment.length === 0 ? <p className="mt-2 text-sm text-muted">None</p> : (
               <ul className="mt-2 text-sm">
-                {b.selectedEquipment.map((e) => <li key={e.itemId}>{e.quantity} × {equipmentLabel(e, s.rentals)}</li>)}
+                {b.selectedEquipment.map((e, i) => <li key={i}>{e.quantity} × {equipmentLabel(e, s.rentals)}{e.addedAt && <span className="text-muted"> · added {formatDate(e.addedAt)} {formatTime(e.addedAt)}{e.addedBy === 'customer' ? ' by customer' : ' by studio'}</span>}</li>)}
               </ul>
             )}
           </section>

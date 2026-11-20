@@ -7,7 +7,9 @@ import type { RentalEquipment } from '../types/domain'
 export const rentalEquipment: RentalEquipment[] = [
   { id: 'guitar-cable', name: 'Guitar cable (mono)', shortName: 'Guitar cable', category: 'cable', unitPrice: 40, totalQuantity: 5, pricingUnit: 'per_item', active: true, outOfService: false },
   { id: 'electric-guitar', name: 'Electric guitar', shortName: 'Electric guitar', category: 'guitar', unitPrice: 100, totalQuantity: 5, pricingUnit: 'per_item', active: true, outOfService: false },
-  { id: 'bass-guitar', name: 'Bass guitar', shortName: 'Bass guitar', category: 'bass', unitPrice: 100, totalQuantity: 3, pricingUnit: 'per_item', active: true, outOfService: false },
+  { id: 'bass-guitar', name: 'Bass guitar (4-string)', shortName: 'Bass (4-string)', category: 'bass', unitPrice: 100, totalQuantity: 3, pricingUnit: 'per_item', active: true, outOfService: false },
+  // Added 2026-11-20 (user): one 5-string bass, same price as the 4-string basses.
+  { id: 'bass-guitar-5', name: 'Bass guitar (5-string)', shortName: 'Bass (5-string)', category: 'bass', unitPrice: 100, totalQuantity: 1, pricingUnit: 'per_item', active: true, outOfService: false },
   { id: 'acoustic-guitar', name: 'Acoustic guitar', shortName: 'Acoustic guitar', category: 'guitar', unitPrice: 100, totalQuantity: 1, pricingUnit: 'per_item', active: true, outOfService: false },
   { id: 'mic-kit', name: 'Extra microphone + mic cable', shortName: 'Extra mic + cable', category: 'mic', unitPrice: 40, totalQuantity: 5, pricingUnit: 'per_kit', note: 'Rented as one kit (owner to confirm)', active: true, outOfService: false },
   { id: 'keyboard-kit', name: 'Synth / keyboard + cables', shortName: 'Synth / keyboard', category: 'keys', unitPrice: 100, totalQuantity: 2, pricingUnit: 'per_kit', note: 'Rented as one kit (owner to confirm)', active: true, outOfService: false },

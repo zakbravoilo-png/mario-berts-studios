@@ -161,7 +161,8 @@ hours booked**.
   ------------------------------ --------------
   Guitar cable                      PHP 40 each
   Electric guitar                  PHP 100 each
-  Bass guitar                      PHP 100 each
+  Bass guitar (4-string)           PHP 100 each
+  Bass guitar (5-string)           PHP 100 each
   Acoustic guitar                  PHP 100 each
   Extra microphone + mic cable      PHP 40 each
   Synth / keyboard + cables             PHP 100
@@ -169,6 +170,15 @@ hours booked**.
   (guitar amp or bass amp)
 
 Do not multiply these add-on prices by the number of hours.
+
+**Adding items after booking (user, 2026-11-20):** musicians sometimes
+forget cables or an instrument. Customers can add rental items from their
+booking page until the session starts; studio staff can add them in the
+admin until the session ends. Added items must be free in shared stock for
+the booking's time, are charged once like any rental, and go onto the
+balance paid after the rehearsal. The 50% downpayment does not change.
+The 5-string bass (1 unit) was added on 2026-11-20, same price as the
+4-string basses.
 
 ### Shared additional rental inventory
 
@@ -178,7 +188,8 @@ per-room allocation.
   Item                              Studio-wide quantity
   ------------------------------- ----------------------
   Extra electric guitars                               5
-  Extra bass guitars                                   3
+  Extra bass guitars (4-string)                        3
+  Extra bass guitar (5-string)                         1
   Keyboards                                            2
   Extra microphones with cables                        5
   Extra guitar amplifiers                              2
@@ -301,7 +312,8 @@ inventing one.
 ### Retail shop
 
 The studio also sells: - Acoustic guitar strings. - Electric guitar
-strings. - Electric bass strings.
+strings. - Electric bass strings: 4-string set PHP 600 and 5-string set
+PHP 1,000 (user, 2026-11-20).
 
 Not yet provided: - Brand, product variants/gauges, prices, product
 descriptions, photos, stock quantities, online payment method,

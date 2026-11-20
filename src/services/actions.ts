@@ -25,6 +25,7 @@ import {
   validateRehearsalRequest,
 } from '../features/booking/availability'
 import { priceRehearsal } from '../features/booking/pricing'
+import { applyAddedItems, type AddedBy, type ItemAddition } from '../features/booking/addItems'
 import { getRental } from '../data/rentalEquipment'
 import { normalizePhone } from '../features/booking/customerSchema'
 import { lessonNotifications, rehearsalNotifications } from './notifications'
@@ -223,6 +224,21 @@ export function adminCancelBooking(bookingId: string, reason: string, now: numbe
     'booking_cancelled',
   )
   return { ok: true, value: outcome }
+}
+
+/**
+ * Add rental items to a booking after it was made (forgotten cables, an instrument left at
+ * home). Re-checks shared stock against the current store. Added items go onto the balance;
+ * the downpayment does not change. Customers until the session starts, staff until it ends.
+ */
+export function addBookingEquipment(bookingId: string, additions: ItemAddition[], by: AddedBy, now: number = Date.now()): Result<number> {
+  const s = getState()
+  const b = s.bookings.find((x) => x.id === bookingId)
+  if (!b) return { ok: false, errors: ['Booking not found.'] }
+  const r = applyAddedItems(b, additions, { by, now, at: toManilaIso(now), catalog: s.rentals, ctx: availabilityContext(s) })
+  if (!r.ok) return r
+  updateBooking(bookingId, () => r.booking, 'items_added')
+  return { ok: true, value: r.added }
 }
 
 /** The studio has returned the downpayment from its GCash. */

@@ -70,6 +70,10 @@ function load(): DemoState {
           parsed.notifications ??= []
           // Add catalog items introduced after this browser's data was saved.
           for (const p of seedProducts) if (!parsed.products.some((x) => x.id === p.id)) parsed.products = [...parsed.products, p]
+          for (const r of rentalEquipment) if (!parsed.rentals.some((x) => x.id === r.id)) parsed.rentals = [...parsed.rentals, r]
+          // 2026-11-20: 4-/5-string split. Rename the old seed names only if the studio hasn't edited them.
+          parsed.rentals = parsed.rentals.map((r) => (r.id === 'bass-guitar' && r.name === 'Bass guitar' ? { ...r, name: 'Bass guitar (4-string)', shortName: 'Bass (4-string)' } : r))
+          parsed.products = parsed.products.map((x) => (x.id === 'str-bass' && x.name === 'Bass guitar strings' ? { ...x, name: 'Bass strings, 4-string set' } : x))
           return refreshTimeStatuses(parsed, now)
         }
       }

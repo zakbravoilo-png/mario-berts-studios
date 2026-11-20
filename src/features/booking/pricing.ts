@@ -13,6 +13,8 @@ export interface PriceLine {
   quantity: number
   unitPrice: Peso
   lineTotal: Peso
+  /** Added after the booking was made (billed on the balance). */
+  added?: boolean
 }
 
 export interface RehearsalPrice {
@@ -86,7 +88,7 @@ export function priceFromBooking(b: {
   total: Peso
   downpaymentRequired: Peso
   balance: Peso
-  selectedEquipment: { itemId: RentalEquipmentId; quantity: number; unitPrice: Peso; label?: string }[]
+  selectedEquipment: { itemId: RentalEquipmentId; quantity: number; unitPrice: Peso; label?: string; addedAt?: string }[]
 }): RehearsalPrice {
   return {
     hours: b.durationHours,
@@ -98,6 +100,7 @@ export function priceFromBooking(b: {
       quantity: e.quantity,
       unitPrice: e.unitPrice,
       lineTotal: e.quantity * e.unitPrice,
+      added: Boolean(e.addedAt),
     })),
     equipmentSubtotal: b.equipmentSubtotal,
     total: b.total,
