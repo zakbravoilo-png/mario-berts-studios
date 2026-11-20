@@ -4,7 +4,7 @@ import { defaultSettings } from '../../data/settings'
 /**
  * The confirmed downpayment, cancellation and rescheduling policy, in plain language.
  * Shown before any commitment. Rescheduling (confirmed 2026-11-20): allowed before the booking
- * day. The site has no self-service reschedule yet, so customers contact the studio.
+ * day, from the booking page (same length and price).
  */
 export function PolicyNotice({ downpaymentRate = defaultSettings.downpaymentRate, compact = false, className = '' }: { downpaymentRate?: number; compact?: boolean; className?: string }) {
   const pct = Math.round(downpaymentRate * 100)
@@ -26,8 +26,8 @@ export function PolicyNotice({ downpaymentRate = defaultSettings.downpaymentRate
             </li>
             <li>Cancelling on the booking day itself isn&apos;t possible; the downpayment is then kept.</li>
             <li>
-              Need a different time? You can <strong>reschedule before the day</strong> of your booking. Contact the studio to
-              move it.
+              Need a different time? You can <strong>reschedule before the day</strong> of your booking from your booking page.
+              Same length, same price.
             </li>
             <li>The remaining {100 - pct}% is paid <strong>after your rehearsal</strong>, in cash at the studio or by GCash.</li>
           </ul>

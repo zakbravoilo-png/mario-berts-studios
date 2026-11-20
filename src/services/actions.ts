@@ -26,6 +26,7 @@ import {
 } from '../features/booking/availability'
 import { priceRehearsal } from '../features/booking/pricing'
 import { applyAddedItems, type AddedBy, type ItemAddition } from '../features/booking/addItems'
+import { applyReschedule, type RescheduledBy, type RescheduleTarget } from '../features/booking/reschedule'
 import { getRental } from '../data/rentalEquipment'
 import { normalizePhone } from '../features/booking/customerSchema'
 import { lessonNotifications, rehearsalNotifications } from './notifications'
@@ -239,6 +240,20 @@ export function addBookingEquipment(bookingId: string, additions: ItemAddition[]
   if (!r.ok) return r
   updateBooking(bookingId, () => r.booking, 'items_added')
   return { ok: true, value: r.added }
+}
+
+/**
+ * Move a booking to another time or room (same length, same price). Customers until the end of
+ * the day before the booking; staff until it starts. The customer gets a (simulated) message.
+ */
+export function rescheduleBooking(bookingId: string, target: RescheduleTarget, by: RescheduledBy, now: number = Date.now()): Result<null> {
+  const s = getState()
+  const b = s.bookings.find((x) => x.id === bookingId)
+  if (!b) return { ok: false, errors: ['Booking not found.'] }
+  const r = applyReschedule(b, target, { by, now, at: toManilaIso(now), ctx: availabilityContext(s) })
+  if (!r.ok) return r
+  updateBooking(bookingId, () => r.booking, 'booking_rescheduled')
+  return { ok: true, value: null }
 }
 
 /** The studio has returned the downpayment from its GCash. */

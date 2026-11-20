@@ -1171,9 +1171,12 @@ prototype unless necessary:
     manually).
 10. ~~What is the process for rescheduling?~~ **Answered (2026-11-20):**
     bands can reschedule before the booking day (same cut-off as
-    cancelling). Not on the day itself. The prototype states this in
-    the policy notice and asks customers to contact the studio; there
-    is no self-service reschedule yet.
+    cancelling). Not on the day itself. Built 2026-11-20: a Reschedule
+    panel on the customer booking page (until the end of the day
+    before) and in admin Booking details (until the session starts).
+    The length stays the same, so the price, downpayment and balance
+    don't change; the new slot must pass the room, hours and shared
+    stock checks. The customer gets a (simulated) SMS/email.
 11. Who are the instructors, which instruments and levels does each
     teach, and what are their schedules? (Prototype: demo
     instructors.)

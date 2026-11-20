@@ -133,6 +133,8 @@ export interface RehearsalBooking {
   cancelledBy?: 'customer' | 'studio'
   cancelReason?: string
   adminNote?: string
+  /** Earlier times this booking was moved from (newest last). */
+  reschedules?: { fromRoomId: string; fromStartAt: string; fromEndAt: string; at: string; by: 'customer' | 'studio' }[]
 }
 
 export type LessonType = 'drums' | 'guitar' | 'bass' | 'keyboard' | 'piano' | 'voice'
@@ -230,6 +232,7 @@ export type NotificationEvent =
   | 'booking_rejected'
   | 'refund_sent'
   | 'items_added'
+  | 'booking_rescheduled'
   | 'lesson_requested'
   | 'lesson_confirmed'
   | 'lesson_declined'

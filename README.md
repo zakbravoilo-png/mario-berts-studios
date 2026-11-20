@@ -56,6 +56,7 @@ acoustic guitar and the extra bass amp are taken, and a lesson blocks Room 3 at 
 - Room overlap check covers rehearsals **and lessons**; back-to-back bookings are allowed (no gap needed, confirmed by the studio).
 - Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free). Students pay the full fee on the day; admin splits each fee 70% instructor / 30% studio and shows payout totals (`src/features/lessons/split.ts`).
 - Forgotten something? Customers can add rental items from their booking page until the session starts; staff can add them in the admin booking page until it ends. Same shared-stock check; added items go onto the balance and the downpayment stays the same (`src/features/booking/addItems.ts`).
+- Rescheduling: customers can move a booking from their booking page until the end of the day before it; staff can move it in the admin until it starts. Same length and price; the new slot must pass the room, hours and shared-stock checks (`src/features/booking/reschedule.ts`).
 - Basses: 4-string (3) and 5-string (1), both ₱100. Shop bass strings: 4-string set ₱600, 5-string set ₱1,000.
 - Booking statuses: awaiting payment → awaiting verification → confirmed → completed; cancelled; rejected (demo).
 - Example from the brief is unit-tested: ₱970 total, ₱485 down, ₱485 balance.

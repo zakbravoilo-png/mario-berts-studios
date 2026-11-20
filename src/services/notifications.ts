@@ -91,6 +91,15 @@ We added these rental items to your booking ${head}: ${list} (${formatPHP(cost)}
 New total ${formatPHP(b.total)}. Your downpayment stays ${formatPHP(b.downpaymentRequired)}; the remaining balance is now ${formatPHP(b.balance)}, ${BALANCE_COLLECTION}.`,
       }
     }
+    case 'booking_rescheduled': {
+      const last = b.reschedules?.[b.reschedules.length - 1]
+      const from = last ? `${roomName(last.fromRoomId)} · ${when(last.fromStartAt, last.fromEndAt)}` : 'the old time'
+      return {
+        sms: `${STUDIO}: Booking ${b.reference} moved to ${roomName(b.roomId)}, ${when(b.startAt, b.endAt)} (was ${from}). Price and payments unchanged.`,
+        subject: `Booking ${b.reference} rescheduled`,
+        email: `Hi ${b.customer.name},\n\nYour booking has been moved.\n\nNew: ${head}\nWas: ${from}\n\nThe price, downpayment and balance stay the same. You can reschedule or cancel up to the day before your booking.`,
+      }
+    }
     case 'booking_rejected':
       return {
         sms: `${STUDIO}: Sorry — booking ${b.reference} could not be accepted.${b.adminNote ? ` Note: ${b.adminNote}` : ''} Please contact us.`,

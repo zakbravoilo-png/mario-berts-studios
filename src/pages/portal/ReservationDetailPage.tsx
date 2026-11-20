@@ -11,6 +11,7 @@ import { PriceReceipt } from '../../features/booking/ExampleReceipt'
 import { PolicyNotice } from '../../features/booking/PolicyNotice'
 import { SentMessages } from '../../features/booking/SentMessages'
 import { AddItemsPanel } from '../../features/booking/AddItemsPanel'
+import { ReschedulePanel } from '../../features/booking/ReschedulePanel'
 import { priceFromBooking } from '../../features/booking/pricing'
 import { PortalHeader } from '../../components/ui/PortalHeader'
 import { Callout } from '../../components/ui/Callout'
@@ -146,6 +147,7 @@ export function RehearsalDetail({ booking: b, back }: { booking: RehearsalBookin
               </p>
             )}
           </section>
+          {live && <ReschedulePanel booking={b} by="customer" />}
           {live && <AddItemsPanel booking={b} by="customer" />}
           {live && <CancelSection startAt={b.startAt} refundAmount={b.payment.status === 'submitted' || b.payment.status === 'verified' ? b.downpaymentRequired : undefined} onCancel={() => { const r = cancelBooking(b.id); return r.ok ? null : r.errors }} />}
           <SentMessages reference={b.reference} />

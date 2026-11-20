@@ -11,6 +11,7 @@ import { priceFromBooking } from '../../features/booking/pricing'
 import { AdminButton, adminInput } from '../../features/admin/adminUi'
 import { CancelPanel } from '../../features/admin/CancelPanel'
 import { AddItemsPanel } from '../../features/booking/AddItemsPanel'
+import { ReschedulePanel } from '../../features/booking/ReschedulePanel'
 import { roomName } from '../../data/rooms'
 import { equipmentLabel } from '../../data/rentalEquipment'
 import { formatPHP } from '../../utils/money'
@@ -45,7 +46,7 @@ export function AdminBookingDetail() {
               <div><dt className="text-muted">Customer</dt><dd className="m-0">{b.customer.name}{b.customer.bandName ? ` · ${b.customer.bandName}` : ''}</dd></div>
               <div><dt className="text-muted">Contact</dt><dd className="m-0">{[b.customer.email, b.customer.phone].filter(Boolean).join(' · ') || '—'}</dd></div>
               <div><dt className="text-muted">Room</dt><dd className="m-0">{roomName(b.roomId)}</dd></div>
-              <div><dt className="text-muted">When</dt><dd className="m-0">{formatDate(b.startAt)}, {formatRange(b.startAt, b.endAt)}</dd></div>
+              <div><dt className="text-muted">When</dt><dd className="m-0">{formatDate(b.startAt)}, {formatRange(b.startAt, b.endAt)}</dd>{b.reschedules?.map((r) => (<dd key={r.at} className="m-0 text-xs text-muted">Moved from {roomName(r.fromRoomId)}, {formatDate(r.fromStartAt)}, {formatRange(r.fromStartAt, r.fromEndAt)} by {r.by === 'studio' ? 'the studio' : 'the customer'}</dd>))}</div>
               <div><dt className="text-muted">Created</dt><dd className="m-0">{formatDate(b.createdAt)} {formatTime(b.createdAt)}</dd></div>
               {b.customer.notes && <div className="sm:col-span-2"><dt className="text-muted">Notes</dt><dd className="m-0">{b.customer.notes}</dd></div>}
             </dl>
@@ -80,6 +81,7 @@ export function AdminBookingDetail() {
           </section>
           {msg && <Callout tone={msg.ok ? 'success' : 'error'} title={msg.text} />}
 
+          <ReschedulePanel booking={b} by="studio" />
           <AddItemsPanel booking={b} by="studio" />
 
           <CancelPanel booking={b} />
