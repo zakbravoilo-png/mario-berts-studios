@@ -13,6 +13,8 @@ const WIDTHS = {
   'room-1': [640, 1200, 1600],
   'room-2': [640, 1200, 1600],
   'room-3': [640, 1200, 1600],
+  // About page photo: the source is only 720 px wide, so don't upscale.
+  'about-mixing-desk': [640, 720],
 }
 const DEFAULT_WIDTHS = [640, 1200]
 

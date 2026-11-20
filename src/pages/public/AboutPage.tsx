@@ -32,7 +32,7 @@ export function AboutPage() {
           </p>
         </div>
         <div className="relative rotate-2 drop-shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
-          <DuotoneImage photo="liveBlue" torn={88} className="aspect-[3/2] w-full" />
+          <DuotoneImage photo="aboutMixingDesk" torn={88} tone="natural" halftone={false} className="aspect-[3/2] w-full" />
           <Tape className="-top-3 left-8" rotate={-8} />
         </div>
       </section>
