@@ -57,7 +57,7 @@ export function AdminRooms() {
           </tbody>
         </Table>
       </div>
-      <p className="mt-3 text-xs text-muted">Room descriptions are placeholders to be provided by the studio. Turnaround buffers between bookings: none (not specified).</p>
+      <p className="mt-3 text-xs text-muted">Room descriptions are placeholders to be provided by the studio. No gap is needed between bookings (confirmed).</p>
     </>
   )
 }

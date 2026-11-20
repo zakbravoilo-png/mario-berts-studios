@@ -36,7 +36,8 @@ export interface AvailabilityContext {
 
 /**
  * Standard interval overlap: existing.start < requested.end AND requested.start < existing.end.
- * Adjacent ranges (one ends exactly when the other starts) do not overlap. No buffer is invented.
+ * Adjacent ranges (one ends exactly when the other starts) do not overlap. The studio confirmed
+ * (2026-11-20) that no gap is needed between bookings.
  */
 export function overlaps(a: TimeRange, b: TimeRange): boolean {
   return toMs(a.startAt) < toMs(b.endAt) && toMs(b.startAt) < toMs(a.endAt)

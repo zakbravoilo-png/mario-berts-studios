@@ -115,11 +115,9 @@ The platform supports:
 -   Studio operating hours: **9:00 AM to 9:00 PM**.
 -   Do not allow a booking to start before 9:00 AM or finish after 9:00
     PM.
--   The exact time-slot increments, minimum booking duration, maximum
-    booking duration and setup/teardown buffers are **not specified**.
-    Same-day booking is allowed when a room is vacant (confirmed
-    2026-11-20). Do not invent them. Make these
-    configurable or clearly label prototype assumptions.
+-   Bookings are whole hours with a 1-hour minimum, up to closing time.
+    No gap is needed between bookings, and same-day booking is allowed
+    when a room is vacant (both confirmed 2026-11-20).
 -   **Timezone:** all dates and times use **Asia/Manila (UTC+8)**. This
     includes the 9 AM--9 PM limits and the "before the day of booking"
     cancellation rule. Store timestamps as ISO strings with offset and
@@ -529,8 +527,8 @@ Use the standard interval overlap test:
 `existing.start < requested.end AND requested.start < existing.end`
 
 Treat adjacent bookings (one ends exactly when another starts) as
-non-overlapping unless the owner later specifies a turnaround buffer. Do
-not invent a buffer.
+non-overlapping. **Confirmed (2026-11-20):** no gap is needed between
+bookings for setup or teardown.
 
 ### Shared equipment conflict rule
 
@@ -1152,7 +1150,9 @@ prototype unless necessary:
 2.  What are the exact booking slot increments and minimum/maximum
     rehearsal durations? **Answered:** whole hours, 1-hour minimum
     (current behaviour). Maximum: until closing time.
-3.  Is there any setup/teardown buffer between bookings?
+3.  ~~Is there any setup/teardown buffer between bookings?~~
+    **Answered (2026-11-20):** no gap is needed; bookings can run
+    back to back.
 4.  ~~Is same-day booking allowed?~~ **Answered (2026-11-20):** yes,
     bands can book on the day as long as a room is vacant.
 5.  ~~Is acoustic guitar rental available, and how many units?~~

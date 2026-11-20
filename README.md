@@ -53,7 +53,7 @@ acoustic guitar and the extra bass amp are taken, and a lesson blocks Room 3 at 
 - 3 rooms, ₱250 per hour per room, standard kit included (never an add-on).
 - Optional rentals charged **once per booking** (not per hour), limited by **shared stock across all rooms** for overlapping times.
 - 50% GCash downpayment, checked manually by the studio. Cancel **before the booking day** (customer or studio) and the downpayment is returned manually via GCash; no customer cancellations on the day itself, and a studio cancellation on the day keeps the downpayment. Policy shown — and confirmed — before submitting. The remaining 50% is paid after the rehearsal, in cash or by GCash.
-- Room overlap check covers rehearsals **and lessons**; adjacent bookings are allowed; no buffer invented.
+- Room overlap check covers rehearsals **and lessons**; back-to-back bookings are allowed (no gap needed, confirmed by the studio).
 - Lessons: drums, guitar, bass, keyboard, piano, voice. Beginner ₱500 / 30 min, intermediate ₱750 / 1 hour. A slot opens only when an instructor (who teaches that instrument + level, is scheduled, and isn't double-booked) **and** a room are free. Room auto-assigned (lowest free). Students pay the full fee on the day; admin splits each fee 70% instructor / 30% studio and shows payout totals (`src/features/lessons/split.ts`).
 - Forgotten something? Customers can add rental items from their booking page until the session starts; staff can add them in the admin booking page until it ends. Same shared-stock check; added items go onto the balance and the downpayment stays the same (`src/features/booking/addItems.ts`).
 - Basses: 4-string (3) and 5-string (1), both ₱100. Shop bass strings: 4-string set ₱600, 5-string set ₱1,000.
@@ -85,7 +85,7 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 
 ## Still to confirm with the studio
 
-Turnaround buffer (gap between bookings) · whether mic and keyboard rentals are kits ·
+Whether mic and keyboard rentals are kits ·
 whether stock/rooms are held while awaiting
 verification or while a lesson is requested (demo: yes) · rescheduling · real
 instructors · streaming packages · string gauges, drumstick brand/size and stock ·
