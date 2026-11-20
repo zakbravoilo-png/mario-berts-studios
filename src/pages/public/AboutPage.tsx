@@ -1,6 +1,6 @@
 import { PageHeader } from '../../components/ui/PageHeader'
 import { useTitle } from '../../components/ui/useTitle'
-import { DuotoneImage, Tape, TapeLabel } from '../../components/grunge'
+import { DuotoneImage, Tape } from '../../components/grunge'
 
 export function AboutPage() {
   useTitle('About')
@@ -8,18 +8,28 @@ export function AboutPage() {
     <>
       <PageHeader eyebrow="About" title="About the studio." photo="rehearsalFisheye" />
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_1fr]">
-        <div>
-          <TapeLabel rotate={-2}>Placeholder — to be written by studio</TapeLabel>
-          <div className="mt-6 space-y-4 text-lg text-paper/90">
-            <p>
-              Manoy Bart&apos;s Studio offers rehearsal rooms, one-on-one music lessons and live gig streaming. The
-              studio&apos;s story, history and people will be written here by the studio.
-            </p>
-            <p className="text-muted">
-              This prototype does not invent a history, founders or awards. Everything on this page apart from the
-              services is a placeholder.
-            </p>
-          </div>
+        {/* Studio story supplied by the user, 2026-11-20. */}
+        <div className="space-y-5 text-lg text-paper/90">
+          <p>
+            Since 2012, <strong className="text-paper">Manoy Bart&rsquo;s Studio</strong> has been making space for Iloilo&rsquo;s music and art
+            scene. It has become a place for local musicians looking for a stage, and people who believe the local music
+            and arts scene deserve to be seen and heard!
+          </p>
+          <p>
+            What started around music, has grown into more than just a rehearsal space. Over the years, Manoy Bart&rsquo;s
+            Studio has organized monthly gigs, events, and collaborations with both local and national brands.
+          </p>
+          <p>
+            Through these efforts, the studio has helped put local musicians and artists in the spotlight, creating an
+            outlet for them to share their craft and connect with more people who appreciate what they do.
+          </p>
+          <p>
+            We believe Iloilo&rsquo;s local music and arts scene deserves stages, spaces and people who give a damn.
+            That&rsquo;s what Manoy Bart&rsquo;s Studio is all about!
+          </p>
+          <p className="display text-3xl text-paper">
+            <strong>Manoy Padayon!</strong>
+          </p>
         </div>
         <div className="relative rotate-2 drop-shadow-[10px_10px_0_rgba(0,0,0,0.5)]">
           <DuotoneImage photo="liveBlue" torn={88} className="aspect-[3/2] w-full" />
