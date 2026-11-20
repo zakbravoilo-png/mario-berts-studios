@@ -137,6 +137,7 @@ export function PublicLayout() {
                 <li><Link className="hover:text-rust-light" to="/rooms">Rooms</Link></li>
                 <li><Link className="hover:text-rust-light" to="/rates">Rates</Link></li>
                 <li><Link className="hover:text-rust-light" to="/shop">Shop: strings &amp; sticks</Link></li>
+                <li><Link className="hover:text-rust-light" to="/design-drafts">Design drafts</Link></li>
               </ul>
             </nav>
             <nav aria-label="Bookings">
