@@ -94,9 +94,9 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
 
   // ── step validation ──
   function next() {
-    if (d.step === 0 && (d.startMin === null || !d.roomId)) return setStepError('Pick a free time slot in the grid to continue.')
+    if (d.step === 0 && (d.startMin === null || !d.roomId)) return setStepError('Pick a vacant time slot in the grid to continue.')
     if (d.step === 1 && (!d.roomId || !startAt || !isRoomFree(d.roomId, { startAt, endAt: addMinutes(startAt, s.settings.slotMinutes) }, ctx)))
-      return setStepError('Choose a room that is free at your start time.')
+      return setStepError('Choose a room that is vacant at your start time.')
     if (d.step === 2 && (d.hours < 1 || d.hours > maxHours)) return setStepError(`Choose between 1 and ${maxHours} hour(s).`)
     if (d.step === 3 && range) {
       const over = selections.find((x) => x.quantity > availableQty(x.itemId, range, ctx))
@@ -188,7 +188,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
     const dates = Array.from({ length: 7 }, (_, i) => addDays(today, i))
     body = (
       <>
-        <p className="text-muted">Choose a date, then a free start time in any room. Times are Asia/Manila; the studio is open 9:00 AM – 9:00 PM.</p>
+        <p className="text-muted">Choose a date, then a vacant start time in any room. Times are Asia/Manila; the studio is open 9:00 AM – 9:00 PM.</p>
         <div className="mt-5 flex flex-wrap items-end gap-3">
           <div role="group" aria-label="Quick date picks" className="flex flex-wrap gap-2">
             {dates.map((dk, i) => (
@@ -245,7 +245,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
                   <span className="flex flex-col gap-1">
                     <span className="font-display text-2xl tracking-wide whitespace-nowrap">{room.name}</span>
                     <span className="flex items-center gap-1 text-sm font-semibold">
-                      {sel ? (<><Check aria-hidden="true" className="size-4" /> Selected</>) : free ? 'Free' : 'Taken at this time'}
+                      {sel ? (<><Check aria-hidden="true" className="size-4" /> Selected</>) : free ? 'Vacant' : 'Taken at this time'}
                     </span>
                   </span>
                 </span>
@@ -291,7 +291,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
     body = (
       <>
         <Callout tone="info" title="Charged once per reservation, not per hour">
-          Extra gear is shared by all three rooms, so the numbers below are what&apos;s free for {formatRange(range.startAt, range.endAt)} on {formatDate(range.startAt)}. Mock data, not live inventory.
+          Extra gear is shared by all three rooms, so the numbers below are what&apos;s available for {formatRange(range.startAt, range.endAt)} on {formatDate(range.startAt)}. Mock data, not live inventory.
         </Callout>
         <ul className="mt-5 divide-y divide-slate border-y border-slate">
           {rentals.map((r) => {
@@ -303,7 +303,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
                   <p className="font-semibold">{r.name}</p>
                   <p className="text-sm text-muted">
                     <span className="font-mono text-paper">{formatPHP(r.unitPrice)}</span> {r.pricingUnit === 'per_kit' ? 'per kit' : 'each'} ·{' '}
-                    {r.outOfService ? <strong className="text-paper">Out of service</strong> : free === 0 ? <strong className="text-paper">None free at this time</strong> : `${free} of ${r.totalQuantity ?? '?'} free`}
+                    {r.outOfService ? <strong className="text-paper">Out of service</strong> : free === 0 ? <strong className="text-paper">None available at this time</strong> : `${free} of ${r.totalQuantity ?? '?'} available`}
                   </p>
                 </div>
                 <QtyStepper label={r.shortName} value={q} max={free} onChange={(n) => update({ equipment: { ...d.equipment, [r.id]: n } })} />

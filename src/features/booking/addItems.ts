@@ -75,7 +75,7 @@ export function applyAddedItems(
     }
     const free = addableQty(b, item, opts.ctx)
     if (quantity > free) {
-      errors.push(free === 0 ? `${item.name}: none free at this time.` : `${item.name}: only ${free} free at this time.`)
+      errors.push(free === 0 ? `${item.name}: none available at this time.` : `${item.name}: only ${free} available at this time.`)
       continue
     }
     lines.push({ itemId, quantity, unitPrice: item.unitPrice, label: item.name, addedAt: opts.at, addedBy: opts.by })

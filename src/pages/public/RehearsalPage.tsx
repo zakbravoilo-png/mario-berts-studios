@@ -64,7 +64,7 @@ export function RehearsalPage() {
           <SectionTitle eyebrow="Optional rentals" id="extras-title">
             Extra gear
           </SectionTitle>
-          <p className="mt-3 max-w-2xl text-paper/90">Stock is shared by all three rooms, so what&apos;s free depends on your time slot.</p>
+          <p className="mt-3 max-w-2xl text-paper/90">Stock is shared by all three rooms, so what&apos;s available depends on your time slot.</p>
           <div className="mt-6">
             <RentalTable />
           </div>

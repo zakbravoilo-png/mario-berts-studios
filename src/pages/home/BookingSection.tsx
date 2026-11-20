@@ -5,7 +5,7 @@ import { priceRehearsal } from '../../features/booking/pricing'
 import { formatPHP } from '../../utils/money'
 
 const steps = [
-  { n: '01', title: 'Pick a date & time', body: 'See which of the three rooms are free, 9 AM to 9 PM.' },
+  { n: '01', title: 'Pick a date & time', body: 'See which of the three rooms are vacant, 9 AM to 9 PM.' },
   { n: '02', title: 'Choose your room', body: 'Every room has the same standard kit included.' },
   { n: '03', title: 'Add extra gear', body: 'Optional rentals, charged once per booking, limited by shared stock.' },
   { n: '04', title: 'Confirm with GCash', body: 'Send your GCash reference and the studio confirms your booking.' },

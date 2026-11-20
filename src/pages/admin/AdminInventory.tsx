@@ -137,7 +137,7 @@ export function AdminInventory() {
 
       <div className="mt-4">
         <Table caption="Rental items: name, price, stock, availability and status" minWidth="60rem">
-          <thead><tr><Th>Item</Th><Th>Price / booking</Th><Th>Stock</Th><Th>Free in range</Th><Th>Status</Th><Th>Actions</Th></tr></thead>
+          <thead><tr><Th>Item</Th><Th>Price / booking</Th><Th>Stock</Th><Th>Available in range</Th><Th>Status</Th><Th>Actions</Th></tr></thead>
           <tbody>
             {active.map((r) => (
               <RentalRow key={`${r.id}-${r.unitPrice}-${r.totalQuantity}-${r.name}-${r.pricingUnit}`} r={r} free={valid ? availableQty(r.id, range, ctx) : null} />

@@ -77,7 +77,7 @@ describe('adding rental items to a booking', () => {
     const r = applyAddedItems(b, [{ itemId: 'bass-guitar-5', quantity: 1 }], opts([b, other], 'studio', toMs(at('14:30'))))
     expect(r.ok).toBe(false)
     if (r.ok) return
-    expect(r.errors[0]).toMatch(/none free/)
+    expect(r.errors[0]).toMatch(/none available/)
 
     // 4-string basses: 3 in stock, 1 already held by this booking → 2 more allowed, not 3.
     const withBass = booking('room-1', '14:00', '17:00', [['bass-guitar', 1]])

@@ -19,7 +19,7 @@ export function RentalsSection() {
           <div className="mt-6 flex max-w-md gap-3 border border-slate bg-ink p-4 text-sm">
             <Info aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-rust-light" />
             <p className="text-paper/90">
-              Rental stock is shared by all three rooms, so what&apos;s free depends on your time slot. You&apos;ll see live
+              Rental stock is shared by all three rooms, so what&apos;s available depends on your time slot. You&apos;ll see live
               availability (demo data in this prototype) when you book.
             </p>
           </div>

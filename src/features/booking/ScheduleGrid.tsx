@@ -5,7 +5,7 @@ import { cellFor, daySlots, type Cell, type CellState } from './scheduleCells'
 import { formatMinutes, type DateKey } from '../../utils/time'
 
 const STATE_UI: Record<CellState, { label: string; icon: typeof Circle; cls: string }> = {
-  free: { label: 'Free', icon: Circle, cls: 'border-slate bg-ink text-paper hover:border-paper' },
+  free: { label: 'Vacant', icon: Circle, cls: 'border-slate bg-ink text-paper hover:border-paper' },
   booked: { label: 'Booked', icon: Lock, cls: 'border-slate bg-[repeating-linear-gradient(135deg,var(--color-surface)_0_6px,var(--color-charcoal)_6px_12px)] text-muted' },
   lesson: { label: 'Lesson', icon: GraduationCap, cls: 'border-slate bg-[repeating-linear-gradient(45deg,var(--color-surface)_0_6px,var(--color-charcoal)_6px_12px)] text-muted' },
   past: { label: 'Past', icon: Minus, cls: 'border-transparent bg-charcoal text-muted' },

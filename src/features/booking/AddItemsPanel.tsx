@@ -49,7 +49,7 @@ export function AddItemsPanel({ booking: b, by }: { booking: RehearsalBooking; b
         <>
           <p className="mt-2 text-sm text-paper/90">
             {isStaff
-              ? 'For items asked for on the day. Charged once, added to the balance paid after the rehearsal; the downpayment stays the same. Only stock free across all rooms for this booking’s time can be added.'
+              ? 'For items asked for on the day. Charged once, added to the balance paid after the rehearsal; the downpayment stays the same. Only stock available across all rooms for this booking’s time can be added.'
               : 'Forgot a cable or an instrument? Add rental items until your session starts. They’re charged once and added to the balance you pay after the rehearsal (cash or GCash). On the day, ask the studio staff.'}
           </p>
           <table className="mt-4 w-full text-left text-sm">
@@ -58,7 +58,7 @@ export function AddItemsPanel({ booking: b, by }: { booking: RehearsalBooking; b
               <tr className="text-xs text-muted">
                 <th scope="col" className="py-1 pr-2 font-semibold">Item</th>
                 <th scope="col" className="py-1 pr-2 text-right font-semibold">Price</th>
-                <th scope="col" className="py-1 pr-2 text-right font-semibold">Free now</th>
+                <th scope="col" className="py-1 pr-2 text-right font-semibold">Available now</th>
                 <th scope="col" className="py-1 text-right font-semibold">Add</th>
               </tr>
             </thead>
