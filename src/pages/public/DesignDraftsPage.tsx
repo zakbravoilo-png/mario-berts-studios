@@ -1,18 +1,20 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { Link } from 'react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, CalendarDays, Check, Clock, GraduationCap, Music, Radio } from 'lucide-react'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { useTitle } from '../../components/ui/useTitle'
 import { Callout } from '../../components/ui/Callout'
 import { DuotoneImage, Highlight, Tape } from '../../components/grunge'
 
 /**
- * Design drafts (user request, 2026-11-20): the homepage looks we tried before settling on
- * the current design. The original drafts weren't saved, so these are RECREATED from the
- * build notes: palette v1 (#0E0426 / #1A1740), palette v2 (#181B26 / #1C2040), all-caps type
- * and drawn instrument pictures, then palette v3 (the current look).
+ * Design drafts (user request, 2026-11-20): alternative homepage directions shown next to the
+ * final look. The original early drafts weren't saved, and the user asked for drafts 1 and 2 to
+ * be clearly different from the final design, so they are ILLUSTRATIVE directions rebuilt for
+ * this page (a bright booking app and a risograph zine), not copies of saved files.
+ * Draft 1 borrows the purple-black of palette v1 (#0E0426) and draft 2 the navy of palette v2
+ * (#1C2040); the final is palette v3, the current site.
  * The mock-ups are pictures of a design, not working pages, so they are hidden from screen
- * readers and described in their captions instead.
+ * readers and described in their captions instead. Prices shown are the confirmed ones.
  */
 
 interface Swatch {
@@ -33,39 +35,6 @@ interface Draft {
   mock: ReactNode
 }
 
-/* ---------- Drawn instrument pictures (drafts used these before real photos) ---------- */
-
-function GuitarDrawing({ body, line, className = '' }: { body: string; line: string; className?: string }) {
-  return (
-    <svg viewBox="0 0 120 220" className={className} aria-hidden="true">
-      <rect x="49" y="2" width="22" height="22" rx="4" fill={line} />
-      <rect x="55" y="20" width="10" height="100" fill={line} />
-      <circle cx="60" cy="118" r="30" fill={body} stroke={line} strokeWidth="4" />
-      <circle cx="60" cy="168" r="42" fill={body} stroke={line} strokeWidth="4" />
-      <circle cx="60" cy="128" r="11" fill={line} />
-      <rect x="44" y="176" width="32" height="7" rx="2" fill={line} />
-      {[56, 59, 62, 65].map((x) => (
-        <line key={x} x1={x} y1="22" x2={x} y2="180" stroke={body} strokeWidth="1" opacity="0.7" />
-      ))}
-    </svg>
-  )
-}
-
-function DrumDrawing({ shell, line, className = '' }: { shell: string; line: string; className?: string }) {
-  return (
-    <svg viewBox="0 0 220 190" className={className} aria-hidden="true">
-      <line x1="40" y1="20" x2="105" y2="75" stroke={line} strokeWidth="6" strokeLinecap="round" />
-      <line x1="180" y1="20" x2="120" y2="75" stroke={line} strokeWidth="6" strokeLinecap="round" />
-      <rect x="30" y="90" width="160" height="70" fill={shell} stroke={line} strokeWidth="4" />
-      <ellipse cx="110" cy="160" rx="80" ry="18" fill={shell} stroke={line} strokeWidth="4" />
-      <ellipse cx="110" cy="90" rx="80" ry="18" fill={line} />
-      {[50, 80, 110, 140, 170].map((x) => (
-        <line key={x} x1={x} y1="104" x2={x} y2="172" stroke={line} strokeWidth="3" />
-      ))}
-    </svg>
-  )
-}
-
 /** A browser window around each mock-up so it reads as "a website", not part of this page. */
 function BrowserFrame({ children, bar }: { children: ReactNode; bar: string }) {
   return (
@@ -80,88 +49,144 @@ function BrowserFrame({ children, bar }: { children: ReactNode; bar: string }) {
   )
 }
 
-/* ---------- Draft 1: Midnight gig poster (palette v1) ---------- */
+/* ---------- Draft 1: Bright booking app ---------- */
 
-function MidnightPosterMock() {
-  const v = { ink: '#0E0426', surface: '#1A1740', rust: '#A63726', paper: '#ECE7DE', light: '#EE7360' }
+function BookingAppMock() {
+  const v = { bg: '#F6F5FB', card: '#FFFFFF', ink: '#0E0426', soft: '#55506B', primary: '#5B3FD9', lavender: '#E9E5FA', coral: '#FF7A59', line: '#DDD9EC' }
+  const font: CSSProperties = { fontFamily: 'Inter, system-ui, sans-serif', textTransform: 'none', letterSpacing: 0 }
   return (
-    <BrowserFrame bar={v.surface}>
-      <div style={{ background: v.ink, color: v.paper }} className="font-display uppercase">
-        <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: `2px solid ${v.surface}` }}>
-          <span className="text-lg tracking-wider">Manoy Bart&rsquo;s Studio</span>
-          <span className="hidden gap-4 text-sm tracking-widest sm:flex">
-            <span>Rooms</span><span>Rates</span><span>Lessons</span><span>Shop</span>
+    <BrowserFrame bar="#E4E1EF">
+      <div style={{ background: v.bg, color: v.ink, ...font }}>
+        <div className="flex items-center justify-between px-5 py-3" style={{ background: v.card, borderBottom: `1px solid ${v.line}` }}>
+          <span className="flex items-center gap-2 text-base font-bold">
+            <span className="grid size-7 place-items-center rounded-lg" style={{ background: v.primary, color: '#fff' }}>
+              <Music className="size-4" />
+            </span>
+            Manoy Bart&rsquo;s
           </span>
+          <span className="hidden gap-5 text-sm font-medium sm:flex" style={{ color: v.soft }}>
+            <span>Rooms</span><span>Lessons</span><span>Pricing</span>
+          </span>
+          <span className="rounded-full px-4 py-1.5 text-sm font-semibold" style={{ background: v.lavender, color: v.primary }}>Sign in</span>
         </div>
-        <div className="relative overflow-hidden px-5 pt-8 pb-10 text-center">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-40"
-            style={{ background: `radial-gradient(circle at 50% 30%, ${v.surface} 0%, transparent 60%)` }}
-          />
-          <p className="relative text-sm tracking-[0.3em]" style={{ color: v.light }}>★ Live every night ★ 3 rooms ★</p>
-          <p className="relative mt-3 text-5xl leading-[0.9] sm:text-6xl">Book a room.</p>
-          <p className="relative text-5xl leading-[0.9] sm:text-6xl" style={{ color: v.light }}>Play it loud.</p>
-          <div className="relative mx-auto mt-6 grid size-40 place-items-center rounded-full" style={{ background: v.rust }}>
-            <GuitarDrawing body={v.ink} line={v.paper} className="h-32 -rotate-12" />
+
+        <div className="grid gap-6 px-5 py-8 sm:grid-cols-[1fr_1.05fr] sm:items-center">
+          <div>
+            <span className="inline-block rounded-full px-3 py-1 text-xs font-semibold" style={{ background: v.lavender, color: v.primary }}>
+              Rehearsal rooms in Jaro, Iloilo
+            </span>
+            <p className="mt-4 text-[2rem] leading-tight font-bold">Book a rehearsal room in under a minute.</p>
+            <p className="mt-3 text-sm" style={{ color: v.soft }}>Pick a time, choose a room, pay the downpayment by GCash. Done.</p>
+            <ul className="mt-4 space-y-1.5 text-sm font-medium">
+              {['₱250 per hour, per room', 'Drums, amps and mics included', 'Open 9 AM – 9 PM'].map((t) => (
+                <li key={t} className="flex items-center gap-2">
+                  <span className="grid size-5 place-items-center rounded-full" style={{ background: v.primary, color: '#fff' }}><Check className="size-3" /></span>
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="relative mt-6 flex justify-center gap-3 text-base tracking-widest">
-            <span className="px-5 py-2" style={{ background: v.rust, color: v.paper }}>Book now</span>
-            <span className="px-5 py-2" style={{ border: `2px solid ${v.paper}` }}>See rates</span>
+
+          <div className="rounded-2xl p-5 shadow-[0_12px_32px_rgba(14,4,38,0.12)]" style={{ background: v.card }}>
+            <p className="text-sm font-bold">Find an open room</p>
+            <div className="mt-3 flex gap-2 text-xs font-semibold">
+              {['Today', 'Tomorrow', 'Sat'].map((d, i) => (
+                <span key={d} className="rounded-full px-3 py-1.5" style={i === 0 ? { background: v.primary, color: '#fff' } : { border: `1px solid ${v.line}`, color: v.soft }}>
+                  {d}
+                </span>
+              ))}
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+              <span className="flex items-center gap-1.5 rounded-xl px-3 py-2.5" style={{ border: `1px solid ${v.line}` }}><CalendarDays className="size-4" style={{ color: v.primary }} /> Sat, Nov 21</span>
+              <span className="flex items-center gap-1.5 rounded-xl px-3 py-2.5" style={{ border: `1px solid ${v.line}` }}><Clock className="size-4" style={{ color: v.primary }} /> 5:00 PM · 2 hrs</span>
+            </div>
+            <div className="mt-3 space-y-1.5 text-xs">
+              {[['Room 1', 'Open'], ['Room 2', 'Taken'], ['Room 3', 'Open']].map(([r, s]) => (
+                <div key={r} className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: v.bg }}>
+                  <span className="font-semibold">{r}</span>
+                  <span className="flex items-center gap-1 font-semibold" style={{ color: s === 'Open' ? v.primary : v.soft }}>
+                    {s === 'Open' ? <Check className="size-3.5" /> : <span aria-hidden="true">–</span>} {s}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <span className="mt-4 block rounded-xl py-3 text-center text-sm font-bold" style={{ background: v.primary, color: '#fff' }}>Check availability</span>
           </div>
         </div>
-        <div className="grid grid-cols-3 text-center text-sm tracking-widest" style={{ background: v.surface }}>
-          <span className="py-3">₱250 / hour</span>
-          <span className="py-3" style={{ borderInline: `2px solid ${v.ink}` }}>9 AM – 9 PM</span>
-          <span className="py-3">Gear included</span>
+
+        <div className="grid gap-3 px-5 pb-6 sm:grid-cols-3">
+          {[
+            [Music, 'Rehearsal', '₱250 / hour'],
+            [GraduationCap, 'Lessons', 'From ₱500'],
+            [Radio, 'Live streaming', 'Packages TBD'],
+          ].map(([Icon, t, p]) => {
+            const I = Icon as typeof Music
+            return (
+              <div key={t as string} className="flex items-center gap-3 rounded-2xl p-3" style={{ background: v.card }}>
+                <span className="grid size-9 place-items-center rounded-xl" style={{ background: v.coral, color: v.ink }}><I className="size-4" /></span>
+                <span>
+                  <span className="block text-sm font-bold">{t as string}</span>
+                  <span className="block text-xs" style={{ color: v.soft }}>{p as string}</span>
+                </span>
+              </div>
+            )
+          })}
         </div>
       </div>
     </BrowserFrame>
   )
 }
 
-/* ---------- Draft 2: Stage blue, structured (palette v2) ---------- */
+/* ---------- Draft 2: Risograph zine ---------- */
 
-function StageBlueMock() {
-  const v = { ink: '#181B26', surface: '#1C2040', slate: '#64656B', rust: '#A63726', paper: '#ECE7DE', light: '#EE7360', muted: '#A3A29D' }
+function RisoZineMock() {
+  const v = { paper: '#F3EEE3', blue: '#2340A8', navy: '#1C2040', pink: '#FF4FA3', yellow: '#FFD23F' }
   const dots: CSSProperties = {
-    backgroundImage: `radial-gradient(${v.slate} 1.5px, transparent 1.6px)`,
-    backgroundSize: '10px 10px',
+    backgroundImage: `radial-gradient(${v.blue} 1.6px, transparent 1.8px)`,
+    backgroundSize: '9px 9px',
   }
+  const mono: CSSProperties = { fontFamily: "'Space Mono', 'Courier New', monospace", textTransform: 'none' }
   return (
-    <BrowserFrame bar={v.surface}>
-      <div style={{ background: v.ink, color: v.paper }}>
-        <div className="flex items-center justify-between px-5 py-3" style={{ borderBottom: `1px solid ${v.slate}` }}>
-          <span className="font-display text-lg uppercase tracking-wider">Manoy Bart&rsquo;s Studio</span>
-          <span className="hidden gap-4 font-mono text-xs uppercase sm:flex" style={{ color: v.muted }}>
-            <span>01 Rooms</span><span>02 Rates</span><span>03 Lessons</span>
-          </span>
+    <BrowserFrame bar="#D9D2C4">
+      <div className="relative overflow-hidden" style={{ background: v.paper, color: v.navy }}>
+        <div className="flex items-center justify-between px-5 py-2 text-xs font-bold" style={{ ...mono, borderBottom: `3px solid ${v.navy}` }}>
+          <span>MANOY BART&rsquo;S STUDIO</span>
+          <span className="hidden sm:inline">ISSUE #01 · JARO, ILOILO</span>
+          <span>FREE</span>
         </div>
-        <div className="grid gap-6 px-5 py-8 sm:grid-cols-[1.2fr_1fr] sm:items-center">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-widest" style={{ color: v.muted }}>Rehearsal studio / 3 rooms / 9 AM – 9 PM</p>
-            <p className="mt-3 font-display text-5xl uppercase leading-[0.95]">Book a room.<br />Bring the band.</p>
-            <p className="mt-4 max-w-sm text-sm" style={{ color: v.muted }}>Drums, amps and mics in every room. ₱250 per hour, per room.</p>
-            <div className="mt-5 flex gap-3 text-sm font-semibold">
-              <span className="px-4 py-2" style={{ background: v.rust, color: v.paper }}>Book a room →</span>
-              <span className="px-4 py-2" style={{ border: `1px solid ${v.slate}` }}>See rates</span>
-            </div>
-          </div>
-          <div className="relative grid aspect-square place-items-center" style={{ background: v.surface, ...dots }}>
-            <DrumDrawing shell={v.surface} line={v.paper} className="w-3/4" />
+
+        <div className="relative px-5 pt-6 pb-8">
+          {/* Overlapping print shapes, slightly off-register like a riso print */}
+          <div aria-hidden="true" className="absolute top-4 -right-12 size-36 rounded-full opacity-90 mix-blend-multiply sm:top-6 sm:right-4 sm:size-56" style={{ background: v.pink }} />
+          <div aria-hidden="true" className="absolute top-20 right-20 hidden size-36 rounded-full mix-blend-multiply sm:block sm:size-44" style={{ ...dots }} />
+          <div
+            aria-hidden="true"
+            className="absolute right-24 bottom-6 hidden size-24 mix-blend-multiply sm:block"
+            style={{ background: v.yellow, clipPath: 'polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)' }}
+          />
+
+          <p className="relative text-xs font-bold" style={mono}>→ a zine about where bands get loud</p>
+          <p
+            className="relative mt-2 font-bold leading-[0.85]"
+            style={{ ...mono, fontSize: 'clamp(3.4rem, 9vw, 5.5rem)', color: v.blue, textShadow: `5px 4px 0 ${v.pink}` }}
+          >
+            JAM<br />HERE.
+          </p>
+          <p className="marker relative mt-4 max-w-56 -rotate-2 text-lg" style={{ color: v.navy }}>
+            3 rooms. drums, amps &amp; mics already set up!
+          </p>
+
+          <div className="relative mt-5 inline-block -rotate-1 border-2 border-dashed px-4 py-3" style={{ borderColor: v.navy, background: v.paper }}>
+            <p className="text-xs font-bold" style={mono}>✂ CLIP &amp; BRING YOUR BAND</p>
+            <p className="text-3xl font-bold" style={{ ...mono, color: v.blue }}>₱250/HR</p>
+            <p className="text-xs" style={mono}>per room · 9 AM – 9 PM</p>
           </div>
         </div>
-        <div className="grid gap-px sm:grid-cols-3" style={{ background: v.slate }}>
-          {[
-            ['Rehearsal', '₱250 / hour'],
-            ['Lessons', 'From ₱500'],
-            ['Streaming', 'Packages TBD'],
-          ].map(([t, p]) => (
-            <div key={t} className="px-5 py-4" style={{ background: v.ink }}>
-              <p className="font-display text-xl uppercase">{t}</p>
-              <p className="font-mono text-xs" style={{ color: v.muted }}>{p}</p>
-            </div>
-          ))}
+
+        <div className="grid grid-cols-3 text-center text-xs font-bold" style={{ ...mono, borderTop: `3px solid ${v.navy}` }}>
+          <span className="py-3" style={{ background: v.yellow }}>REHEARSE</span>
+          <span className="py-3" style={{ background: v.pink, borderInline: `3px solid ${v.navy}` }}>LEARN</span>
+          <span className="py-3" style={{ background: v.blue, color: '#fff' }}>STREAM</span>
         </div>
       </div>
     </BrowserFrame>
@@ -202,53 +227,54 @@ function TapedWallMock() {
 
 const drafts: Draft[] = [
   {
-    id: 'midnight-poster',
-    label: 'Draft 1 · palette v1',
-    title: 'Midnight gig poster',
-    idea: 'Treat the homepage like a poster for a night show: deep purple-black, everything centred, all-caps type, and a drawn guitar in a red circle where a photo would go.',
+    id: 'booking-app',
+    label: 'Draft 1 · bright booking app',
+    title: 'Clean, bright booking app',
+    idea: 'Design it like a modern booking app instead of a band site: a light background, rounded cards, friendly sentence-case type, and the room search right in the hero so you can book without scrolling.',
     palette: [
       { name: 'Ink', hex: '#0E0426' },
-      { name: 'Surface', hex: '#1A1740' },
-      { name: 'Rust', hex: '#A63726' },
-      { name: 'Paper', hex: '#ECE7DE' },
+      { name: 'Violet', hex: '#5B3FD9' },
+      { name: 'Lavender', hex: '#E9E5FA' },
+      { name: 'Coral', hex: '#FF7A59' },
+      { name: 'Mist', hex: '#F6F5FB' },
     ],
     good: [
-      'Says “live music at night” in a second. The mood is unmistakable.',
-      'A centred poster layout has one clear message and one button to press.',
-      'Drawn instruments let us design before the studio had photos ready, with no photo-rights questions.',
+      'The fastest path to a booking: date, time and open rooms are visible the moment the page loads.',
+      'Familiar app patterns (chips, cards, one big button) need no explaining, even for first-time visitors.',
+      'Bright and welcoming, which suits parents booking lessons for their kids, not only bands.',
     ],
     movedOn: [
-      'The purple read more like a nightclub than a rehearsal studio.',
-      'All-caps text is tiring to read beyond a headline.',
-      'Rust text on the purple measured only about 2.6:1, too low to read, so rust became a fill colour only.',
+      'It could be any booking app: nothing says rehearsal studio or the local band scene.',
+      'Clean white screens fight the studio’s real photos, which are dark, sweaty and loud.',
+      'Bands are the main customers, and this felt more like a dentist’s booking page than a place to play.',
     ],
-    caption: 'Recreated mock-up of draft 1: a deep purple homepage with a centred all-caps headline, “Book a room. Play it loud.”, a drawn guitar in a red circle, and a strip with the price, hours and included gear.',
-    mock: <MidnightPosterMock />,
+    caption: 'Mock-up of draft 1: a light, app-style homepage with a violet logo, the headline “Book a rehearsal room in under a minute.”, a rounded booking card with date chips and open or taken rooms, and three small service cards.',
+    mock: <BookingAppMock />,
   },
   {
-    id: 'stage-blue',
-    label: 'Draft 2 · palette v2',
-    title: 'Stage blue, built on a grid',
-    idea: 'Calm it down: a cooler blue-black like a room under stage lights, a left-aligned grid, numbered typewriter labels, and halftone dots behind a drawn drum kit.',
+    id: 'riso-zine',
+    label: 'Draft 2 · risograph zine',
+    title: 'Risograph gig zine',
+    idea: 'Make the site feel like a photocopied zine from the local scene: warm paper, two-colour blue and pink print that’s slightly off-register, a typewriter font, handwritten notes, and a clip-out coupon for the price.',
     palette: [
-      { name: 'Ink', hex: '#181B26' },
-      { name: 'Surface', hex: '#1C2040' },
-      { name: 'Slate', hex: '#64656B' },
-      { name: 'Rust', hex: '#A63726' },
-      { name: 'Paper', hex: '#ECE7DE' },
+      { name: 'Paper', hex: '#F3EEE3' },
+      { name: 'Riso blue', hex: '#2340A8' },
+      { name: 'Fluoro pink', hex: '#FF4FA3' },
+      { name: 'Sunflower', hex: '#FFD23F' },
+      { name: 'Navy', hex: '#1C2040' },
     ],
     good: [
-      'Easier on the eyes for longer visits: the booking flow and prices read clearly.',
-      'The grid and numbered labels make it obvious where everything is.',
-      'Rust used only on the main button, so “Book a room” stands out on every screen.',
+      'Memorable and joyful: it stands out from every other dark “rock” website.',
+      'Ties the studio to DIY gig flyers and zines, which fits its monthly gigs and local events.',
+      'Playful details (the coupon, the handwriting) make the price feel friendly, not salesy.',
     ],
     movedOn: [
-      'Still tinted blue; the studio wanted honest greys and a warm off-white.',
-      'Tidy, but it lost the scrappy, hand-made feel of the local band scene.',
-      'Drawn pictures can’t show the real rooms, which is what bands want to see.',
+      'The bright pink and yellow feel cute, which clashes with heavy rehearsals and loud sets.',
+      'Strong colours compete with the real photos of the rooms, which bands want to see.',
+      'Off-register print effects and pink and yellow fills can’t be used for text, so forms and prices would need a separate, plainer style anyway.',
     ],
-    caption: 'Recreated mock-up of draft 2: a blue-black homepage with an all-caps headline, “Book a room. Bring the band.”, a drawn drum kit on a halftone dot panel, and three service boxes for rehearsal, lessons and streaming.',
-    mock: <StageBlueMock />,
+    caption: 'Mock-up of draft 2: a cream paper homepage styled like a printed zine, with “JAM HERE.” in big blue typewriter letters with a pink offset shadow, overlapping pink, dotted-blue and yellow star shapes, a handwritten note, a dashed clip-out coupon reading ₱250 per hour, and a three-colour strip for rehearse, learn and stream.',
+    mock: <RisoZineMock />,
   },
   {
     id: 'taped-wall',
@@ -266,8 +292,8 @@ const drafts: Draft[] = [
     ],
     good: [],
     chosen: [
+      'Takes the best of both drafts: the clear booking path of draft 1 and the local-scene character of draft 2.',
       'Neutral greys let the real photos and the rust buttons do the talking.',
-      'Mixed-case text is easy to read; capitals are kept for the words that should shout.',
       'Torn paper and tape feel like the local scene, and the texture fades out on forms, prices and the admin.',
       'Every colour pair has a measured contrast, and status always has a word or icon, not just a colour.',
     ],
@@ -306,12 +332,13 @@ export function DesignDraftsPage() {
   return (
     <>
       <PageHeader eyebrow="Behind the site" title="Design drafts." photo="roomBwWide">
-        The homepage looks we tried before landing on the one you see now, and what each one taught us.
+        Three very different directions for the homepage, and why the one you see now won.
       </PageHeader>
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-        <Callout tone="info" title="Recreated from our notes">
-          The original drafts weren&rsquo;t saved, so these mock-ups were rebuilt from the build notes: the colours are the
-          exact ones we used, while the layouts and wording are close recreations. The studio name is shown as it is today.
+        <Callout tone="info" title="Rebuilt for this page">
+          The original early drafts weren&rsquo;t saved. Drafts 1 and 2 are rebuilt as clearly different directions, to show
+          the range of looks a studio site could take; their layouts, colours and wording are illustrations. The final
+          design is the one on this site.
         </Callout>
 
         <div className="mt-14 space-y-20">
