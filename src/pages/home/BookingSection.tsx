@@ -105,11 +105,12 @@ export function BookingSection() {
                 reference="MBS-0000-0000"
                 title="Room 2 · Sample"
                 status={<span className="tape-label tape-label--rust">Sample ticket</span>}
+                amount={{ label: 'Total', value: formatPHP(example.total) }}
                 fields={[
                   { label: 'Date', value: 'Your date' },
                   { label: 'Time', value: '3 hrs' },
                   { label: 'Room', value: 'Room 2' },
-                  { label: 'Total', value: formatPHP(example.total) },
+                  { label: 'Balance', value: `${formatPHP(example.balance)} · after rehearsal` },
                   { label: 'Extra gear', value: '4 items' },
                   { label: 'Status', value: 'Awaiting verification' },
                 ]}

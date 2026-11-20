@@ -13,6 +13,8 @@ interface TicketStubProps {
   fields: TicketField[]
   /** Status label shown on the stub — must be text, never colour alone. */
   status?: ReactNode
+  /** Headline amount shown large on the stub, above the reference (e.g. the total). */
+  amount?: { label: string; value: ReactNode }
   /** Small print under the perforation. */
   footnote?: ReactNode
   className?: string
@@ -23,10 +25,10 @@ interface TicketStubProps {
  * perforated edge with notches, monospace reference, decorative barcode.
  * Horizontal on ≥sm screens, stacked on mobile.
  */
-export function TicketStub({ reference, title, fields, status, footnote, className = '' }: TicketStubProps) {
+export function TicketStub({ reference, title, fields, status, amount, footnote, className = '' }: TicketStubProps) {
   return (
     <article
-      className={`ticket sm:ticket-h [--perf:calc(100%-6rem)] sm:[--perf:calc(100%-12rem)] flex flex-col sm:flex-row ${className}`}
+      className={`ticket sm:ticket-h ${amount ? '[--perf:calc(100%-8.5rem)]' : '[--perf:calc(100%-6rem)]'} sm:[--perf:calc(100%-12rem)] flex flex-col sm:flex-row ${className}`}
       aria-label={`Reservation ${reference}`}
     >
       <div className="flex-1 p-5 sm:p-6">
@@ -45,8 +47,14 @@ export function TicketStub({ reference, title, fields, status, footnote, classNa
         </dl>
         {footnote && <p className="mt-4 text-xs text-ink/80">{footnote}</p>}
       </div>
-      <div className="ticket-perf sm:perf-v flex h-24 flex-row items-center gap-4 px-5 sm:h-auto sm:py-5 sm:w-48 sm:flex-col sm:justify-center">
+      <div className={`ticket-perf sm:perf-v flex ${amount ? 'h-34' : 'h-24'} flex-row items-center gap-4 px-5 sm:h-auto sm:py-5 sm:w-48 sm:flex-col sm:justify-center`}>
         <div className="min-w-0 flex-1 sm:w-full sm:flex-none">
+          {amount && (
+            <div className="mb-3">
+              <p className="eyebrow text-[0.65rem] text-ink/75">{amount.label}</p>
+              <p className="display text-4xl leading-none text-rust">{amount.value}</p>
+            </div>
+          )}
           <p className="eyebrow text-[0.65rem] text-ink/75">Ref</p>
           <p className="font-mono text-sm font-bold tracking-wide whitespace-nowrap text-ink">{reference}</p>
         </div>

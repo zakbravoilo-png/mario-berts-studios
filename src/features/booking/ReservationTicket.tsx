@@ -20,11 +20,12 @@ export function ReservationTicket({ booking: b, className = '' }: { booking: Reh
       reference={b.reference}
       title={`${roomName(b.roomId)} · ${b.durationHours} hr${b.durationHours === 1 ? '' : 's'}`}
       status={<StatusLabel status={b.status} />}
+      amount={{ label: 'Total', value: formatPHP(b.total) }}
       fields={[
         { label: 'Date', value: formatDate(b.startAt) },
         { label: 'Time', value: formatRange(b.startAt, b.endAt) },
         { label: 'Band', value: b.customer.bandName || b.customer.name },
-        { label: 'Total', value: formatPHP(b.total) },
+        { label: 'Balance', value: `${formatPHP(b.balance)} · after rehearsal` },
         { label: 'Downpayment', value: paid },
         { label: 'Extra gear', value: b.selectedEquipment.length ? `${b.selectedEquipment.reduce((n, e) => n + e.quantity, 0)} item(s)` : 'None' },
       ]}
@@ -41,12 +42,13 @@ export function LessonTicket({ lesson: l, instructorName, className = '' }: { le
       reference={l.reference}
       title={`${lessonLabel(l.lessonType)} lesson · ${levelLabel(l.level)}`}
       status={<StatusLabel status={l.status} />}
+      amount={{ label: 'Price', value: l.sessionPrice === null ? 'TBD' : formatPHP(l.sessionPrice) }}
       fields={[
         { label: 'Date', value: formatDate(l.startAt) },
         { label: 'Time', value: formatRange(l.startAt, l.endAt) },
         { label: 'Room', value: roomName(l.roomId) },
         { label: 'Instructor', value: `${instructorName} (demo)` },
-        { label: 'Price', value: l.sessionPrice === null ? 'TBD' : formatPHP(l.sessionPrice) },
+        { label: 'Payment', value: 'In full, on the day' },
         { label: 'Length', value: `${l.durationMinutes} min` },
       ]}
       footnote="Demo lesson request — awaiting studio response until confirmed."
