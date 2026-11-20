@@ -224,7 +224,7 @@ export function RehearsalBookingFlow({ mode = 'portal' }: { mode?: 'portal' | 'g
             caption={`Room availability for ${formatDate(d.date, true)}`}
           />
         </div>
-        <p className="mt-3 text-xs text-muted">Bookings start on the hour, 1 hour minimum. Demo: same-day booking allowed (to be confirmed); availability is mock data, not live.</p>
+        <p className="mt-3 text-xs text-muted">Bookings start on the hour, 1 hour minimum. You can book on the day if a room is vacant. Demo: availability is mock data, not live.</p>
       </>
     )
   } else if (d.step === 1 && startAt) {

@@ -85,7 +85,7 @@ call an SMS provider and an email provider from it with secrets set in Cloudflar
 
 ## Still to confirm with the studio
 
-Turnaround buffer · same-day booking · whether mic and keyboard rentals are kits ·
+Turnaround buffer (gap between bookings) · whether mic and keyboard rentals are kits ·
 whether stock/rooms are held while awaiting
 verification or while a lesson is requested (demo: yes) · rescheduling · real
 instructors · streaming packages · string gauges, drumstick brand/size and stock ·

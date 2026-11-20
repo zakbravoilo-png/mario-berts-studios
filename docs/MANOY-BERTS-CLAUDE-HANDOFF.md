@@ -116,8 +116,9 @@ The platform supports:
 -   Do not allow a booking to start before 9:00 AM or finish after 9:00
     PM.
 -   The exact time-slot increments, minimum booking duration, maximum
-    booking duration, setup/teardown buffers, and same-day booking
-    cutoff are **not specified**. Do not invent them. Make these
+    booking duration and setup/teardown buffers are **not specified**.
+    Same-day booking is allowed when a room is vacant (confirmed
+    2026-11-20). Do not invent them. Make these
     configurable or clearly label prototype assumptions.
 -   **Timezone:** all dates and times use **Asia/Manila (UTC+8)**. This
     includes the 9 AM--9 PM limits and the "before the day of booking"
@@ -1152,7 +1153,8 @@ prototype unless necessary:
     rehearsal durations? **Answered:** whole hours, 1-hour minimum
     (current behaviour). Maximum: until closing time.
 3.  Is there any setup/teardown buffer between bookings?
-4.  Is same-day booking allowed?
+4.  ~~Is same-day booking allowed?~~ **Answered (2026-11-20):** yes,
+    bands can book on the day as long as a room is vacant.
 5.  ~~Is acoustic guitar rental available, and how many units?~~
     **Answered:** yes, 1 unit.
 6.  Are extra microphone and cable always a single rental kit?

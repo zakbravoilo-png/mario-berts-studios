@@ -138,6 +138,13 @@ describe('room conflicts', () => {
     const c = ctx([], [lesson('room-3', 'g1', '10:30', 30)])
     expect(codes(validateRehearsalRequest(req('room-3', '10:00', '11:00'), c))).toContain('room_taken')
   })
+  it('allows same-day booking when a room is vacant (confirmed 2026-11-20), not in the past', () => {
+    const now = toMs(at('13:30'))
+    const c = ctx([booking('room-1', '15:00', '17:00')])
+    expect(validateRehearsalRequest(req('room-2', '15:00', '17:00'), c, { now })).toEqual([])
+    expect(codes(validateRehearsalRequest(req('room-1', '15:00', '16:00'), c, { now }))).toContain('room_taken')
+    expect(codes(validateRehearsalRequest(req('room-2', '13:00', '14:00'), c, { now }))).toContain('in_past')
+  })
   it('caps the duration at closing time and at the next booking', () => {
     const c = ctx([booking('room-1', '15:00', '17:00')])
     expect(maxHoursFrom('room-1', at('12:00'), c)).toBe(3)

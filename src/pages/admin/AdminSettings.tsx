@@ -43,7 +43,7 @@ export function AdminSettings() {
         <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
           <div><dt className="text-muted">Lesson start increments</dt><dd className="m-0">{st.lessonSlotMinutes} min</dd></div>
           <div><dt className="text-muted">Turnaround buffer</dt><dd className="m-0">None (not specified)</dd></div>
-          <div><dt className="text-muted">Same-day booking</dt><dd className="m-0">Allowed (not specified)</dd></div>
+          <div><dt className="text-muted">Same-day booking</dt><dd className="m-0">Allowed when a room is vacant (confirmed)</dd></div>
         </dl>
         <div className="mt-5 space-y-3 text-sm">
           <label className="flex items-start gap-2">
